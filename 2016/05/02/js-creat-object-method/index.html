@@ -1,0 +1,975 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="IXY1ltSsL1oyUWlv3qViZpamDEWmbGCw36A85yMmcuw" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="javascript中创建对象有几种方式,工厂模式,构造函数模式,原型模式,构造函数+原型混合模式,动态原型模式,寄生构造函数模式,稳妥构造函数模式.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javacript中创建对象的几种方式">
+<meta property="og:url" content="http://blog.linxiaodong.com.com/2016/05/02/js-creat-object-method/index.html">
+<meta property="og:site_name" content="林晓东的个人博客">
+<meta property="og:description" content="javascript中创建对象有几种方式,工厂模式,构造函数模式,原型模式,构造函数+原型混合模式,动态原型模式,寄生构造函数模式,稳妥构造函数模式.">
+<meta property="og:updated_time" content="2016-05-02T15:41:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javacript中创建对象的几种方式">
+<meta name="twitter:description" content="javascript中创建对象有几种方式,工厂模式,构造函数模式,原型模式,构造函数+原型混合模式,动态原型模式,寄生构造函数模式,稳妥构造函数模式.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '3697207',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.linxiaodong.com.com/2016/05/02/js-creat-object-method/"/>
+
+
+
+
+
+  <title> javacript中创建对象的几种方式 | 林晓东的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3e7b56b0f58d33e75fcd47aa74857ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">林晓东的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">一个走在前端的后端人</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'zeKsTcmzcvMmFP7m5Ud2','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2016/05/02/js-creat-object-method/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="林晓东">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/author.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="林晓东的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="林晓东的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                javacript中创建对象的几种方式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-02T23:36:26+08:00">
+                2016-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/02/js-creat-object-method/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/02/js-creat-object-method/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/05/02/js-creat-object-method/" class="leancloud_visitors" data-flag-title="javacript中创建对象的几种方式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>javascript中创建对象有几种方式,工厂模式,构造函数模式,原型模式,构造函数+原型混合模式,动态原型模式,寄生构造函数模式,稳妥构造函数模式.<br><a id="more"></a><br>针对前几种,记录一下自己的书写笔记,有时间再来整理一下文字版.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>对象<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="comment">//工厂方法 缺点:对象识别问题.</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">CreatPerson</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>;</div><div class="line">		obj.name = name;</div><div class="line">		obj.age = age;</div><div class="line">		obj.fav = [<span class="string">"苹果"</span>,<span class="string">"葡萄"</span>];</div><div class="line">		obj.run = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.age+<span class="string">"正在运行中..."</span>;</div><div class="line">		&#125;;</div><div class="line">		<span class="keyword">return</span> obj;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/*</span></div><div class="line">	var person1 = CreatPerson("lxd",23);</div><div class="line">	person1.fav.push("橙子");</div><div class="line">	var person2 = CreatPerson("tian",14);</div><div class="line">	person1.name = "xiaodong"; 	</div><div class="line">	console.log(person1.run());//xiaodong23正在运行中...</div><div class="line">	console.log(person1.fav);// ["苹果", "葡萄", "橙子"] 引用对象不共享</div><div class="line">	console.log(person2.run());//tian14正在运行中...</div><div class="line">	console.log(person2.fav);// ["苹果", "葡萄"]</div><div class="line">	console.log(person1 instanceof Object);//true</div><div class="line">	console.log(person1 instanceof CreatPerson);//false 不能获得对象标识</div><div class="line">	console.log(person1.run == person2.run);//false</div><div class="line">	*/</div><div class="line">	<span class="comment">//构造函数模式 缺点:里面相同任务的function也会被实例化</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">		<span class="keyword">this</span>.fav = [<span class="string">"苹果"</span>,<span class="string">"葡萄"</span>];</div><div class="line">		<span class="keyword">this</span>.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//这里的方法也会被实例化,等同于this.run = new Function("return this.name+this.age+'正在运行中...';")</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.age+<span class="string">"正在运行中..."</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">"lxd"</span>,<span class="number">23</span>);</div><div class="line">		person1.fav.push(<span class="string">"橙子"</span>);</div><div class="line">	<span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">"tian"</span>,<span class="number">14</span>);</div><div class="line">	person1.name = <span class="string">"xiaodong"</span>; 	</div><div class="line">	<span class="built_in">console</span>.log(person1.run());<span class="comment">//xiaodong23正在运行中...</span></div><div class="line">	<span class="built_in">console</span>.log(person1.fav);<span class="comment">// ["苹果", "葡萄", "橙子"] 引用对象不共享</span></div><div class="line">	<span class="built_in">console</span>.log(person2.run());<span class="comment">//tian14正在运行中...</span></div><div class="line">	<span class="built_in">console</span>.log(person2.fav);<span class="comment">// ["苹果", "葡萄"]</span></div><div class="line">	<span class="built_in">console</span>.log(person1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>);<span class="comment">//true</span></div><div class="line">	<span class="built_in">console</span>.log(person1 <span class="keyword">instanceof</span> Person);<span class="comment">//true 可以获得对象标识</span></div><div class="line">	<span class="built_in">console</span>.log(person1.run == person2.run);<span class="comment">//false 实例化对象,里面的方法也会实例化</span></div><div class="line"></div><div class="line">	Person(<span class="string">"window"</span>,<span class="number">100</span>);<span class="comment">//当作普通函数使用 添加到window对象中</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="built_in">window</span>.run());<span class="comment">//window100正在运行中...</span></div><div class="line">	<span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>;</div><div class="line">	Person.call(o,<span class="string">"oooo"</span>,<span class="number">99</span>);<span class="comment">//在另外一个对象的作用域中调用</span></div><div class="line">	<span class="built_in">console</span>.log(o.run());<span class="comment">//oooo99正在运行中...</span></div><div class="line"></div><div class="line">	<span class="comment">//针对构造函数的缺点,进行改造,把函数提取出来 缺点:暴躁在全局变量中的方法,却只能在对象中使用,而且如果方法很多,会创建很多这样的全局方法.</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">NewPerson</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">		<span class="keyword">this</span>.fav = [<span class="string">"苹果"</span>,<span class="string">"葡萄"</span>];</div><div class="line">		<span class="keyword">this</span>.run = run;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.age+<span class="string">"正在运行中..."</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> newperson1 = <span class="keyword">new</span> NewPerson(<span class="string">"xiaodong"</span>,<span class="number">13</span>);</div><div class="line">	<span class="keyword">var</span> newperson2 = <span class="keyword">new</span> NewPerson(<span class="string">"tian"</span>,<span class="number">22</span>);</div><div class="line">	<span class="built_in">console</span>.log(newperson1.run == newperson2.run);<span class="comment">//true 访问的是同一个方法</span></div><div class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>prototype<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="comment">//原型模式</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">	Person.prototype.name = <span class="string">"xiaodong"</span>;</div><div class="line">	Person.prototype.age = <span class="number">23</span>;</div><div class="line">	Person.prototype.job = <span class="string">"do software"</span>;</div><div class="line">	Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> person1 = <span class="keyword">new</span> Person();</div><div class="line">	<span class="keyword">var</span> person2 = <span class="keyword">new</span> Person();</div><div class="line">	<span class="built_in">console</span>.log(person1.sayName());<span class="comment">//"xiaodong"</span></div><div class="line">	<span class="built_in">console</span>.log(person2.sayName());<span class="comment">//"xiaodong"</span></div><div class="line">	<span class="built_in">console</span>.log(person1.sayName === person2.sayName);<span class="comment">//访问同一个对象指针</span></div><div class="line">	<span class="built_in">console</span>.log(Person.prototype.isPrototypeOf(person1));<span class="comment">//true person1中包含有指向Person.prototype的指针</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(person1) == Person.prototype);<span class="comment">//true page 149 返回prototype的值</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(person1).name);<span class="comment">//xiaodong</span></div><div class="line"></div><div class="line">	person1.name = <span class="string">"tiantian"</span>; <span class="comment">//只能添加到实例中,不能改变原型的值</span></div><div class="line">	<span class="built_in">console</span>.log(person1.name);<span class="comment">//"tiantian" 来自实例而非原型</span></div><div class="line">	<span class="built_in">console</span>.log(person2.name);<span class="comment">//"xiaodong" 来自原型而非实例</span></div><div class="line">	<span class="keyword">delete</span> person1.name;</div><div class="line">	<span class="built_in">console</span>.log(person1.name);<span class="comment">//"xiaodong" 来自原型</span></div><div class="line">	<span class="comment">/*</span></div><div class="line">	console.log(person1.hasOwnProperty("name"));//false 检测是实例属性还是原型属性</div><div class="line">	person1.name = "tian";</div><div class="line">	console.log(person1.hasOwnProperty("name"));//ture 实例中包含name属性</div><div class="line">	*/</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"name"</span> <span class="keyword">in</span> person1);<span class="comment">//true 可枚举原型中的属性 来自原型</span></div><div class="line">	person1.name = <span class="string">"okok"</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"name"</span> <span class="keyword">in</span> person1);<span class="comment">//true //来自实例</span></div><div class="line">	<span class="comment">//利用hasOwnProperty和in可以判断属性是来自实例还是原型例如</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">hasPrototypeProperty</span>(<span class="params">object,name</span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> !object.hasOwnProperty(name) &amp;&amp; (name <span class="keyword">in</span> object);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> person1.name;</div><div class="line">	<span class="built_in">console</span>.log(hasPrototypeProperty(person1,<span class="string">"name"</span>));<span class="comment">//ture</span></div><div class="line"></div><div class="line">	person1.name = <span class="string">"test"</span>;</div><div class="line">	<span class="built_in">console</span>.log(hasPrototypeProperty(person1,<span class="string">"name"</span>));<span class="comment">//false</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> person1)&#123;</div><div class="line">		<span class="keyword">if</span> (i == <span class="string">"age"</span>)&#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">"1234"</span>);<span class="comment">//"1234"</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> keys = <span class="built_in">Object</span>.keys(Person.prototype);</div><div class="line">	<span class="built_in">console</span>.log(keys);<span class="comment">//["name", "age", "job", "sayName"]</span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> keys = <span class="built_in">Object</span>.keys(person1);</div><div class="line">	<span class="built_in">console</span>.log(keys);<span class="comment">// ["name"] 实例属性</span></div><div class="line">	Person.prototype.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"ok"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> keys = <span class="built_in">Object</span>.getOwnPropertyNames(Person.prototype);</div><div class="line">	<span class="built_in">console</span>.log(keys);<span class="comment">//  ["constructor", "name", "age", "job", "sayName", "toString"] 包含不可枚举的 注意还有tostring;</span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> keys = <span class="built_in">Object</span>.getOwnPropertyNames(person1);</div><div class="line">	<span class="built_in">console</span>.log(keys);<span class="comment">//  ["name"] 证明只有构造函数才有constructor等方法</span></div><div class="line">	<span class="comment">//person1.prototype.name = "dfsa"; //TypeError: person1.prototype is undefined</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">NewPerson</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">	NewPerson.prototype = &#123;<span class="comment">//采用字面量的方式书写;</span></div><div class="line">		name:<span class="string">"xiaodong"</span>,</div><div class="line">		<span class="attr">age</span>: <span class="number">23</span>,</div><div class="line">		<span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">var</span> newperson = <span class="keyword">new</span> NewPerson();</div><div class="line">	<span class="built_in">console</span>.log(newperson <span class="keyword">instanceof</span> <span class="built_in">Object</span>);<span class="comment">//ture</span></div><div class="line">	<span class="built_in">console</span>.log(newperson <span class="keyword">instanceof</span> NewPerson);<span class="comment">//ture</span></div><div class="line">	<span class="built_in">console</span>.log(newperson.constructor == NewPerson);<span class="comment">//false 重写了默认的prototype,所以其constructor属性变成了新对象的constructor属性(指向Object);</span></div><div class="line">	<span class="built_in">console</span>.log(newperson.constructor == <span class="built_in">Object</span>);<span class="comment">//ture</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">NewPerson2</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">	NewPerson2.prototype = &#123;<span class="comment">//采用字面量的方式书写;</span></div><div class="line">		<span class="keyword">constructor</span>:NewPerson2,//显式指定</div><div class="line">		name:"xiaodong",</div><div class="line">		age: 23,</div><div class="line">		sayName: function()&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">var</span> newperson2 = <span class="keyword">new</span> NewPerson2();</div><div class="line">	<span class="built_in">console</span>.log(newperson2.constructor == NewPerson2);<span class="comment">//ture;</span></div><div class="line"></div><div class="line">	NewPerson2.prototype.name = <span class="string">"tiantian"</span>;</div><div class="line">	<span class="built_in">console</span>.log(newperson2.name);<span class="comment">//原型的动态性 对其修改会在所有的对象实例中反映出来</span></div><div class="line"></div><div class="line">	NewPerson2.prototype = &#123;<span class="comment">//但如果重写的话,就会切断构造函数与最初原型的关系 page156 实例中的指针仅指向原型,而不是构造函数</span></div><div class="line">		name : <span class="string">"other"</span></div><div class="line">	&#125;;</div><div class="line">	<span class="built_in">console</span>.log(newperson2.name);<span class="comment">//tiantian</span></div><div class="line">	<span class="built_in">console</span>.log(newperson2.constructor === NewPerson2)<span class="comment">//true</span></div><div class="line"></div><div class="line">	<span class="comment">//原型模式的缺点:所有的属性都是共享的.</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">Friend</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">	Friend.prototype=&#123;</div><div class="line">		<span class="attr">name</span>:<span class="string">"jack"</span>,</div><div class="line">		<span class="attr">fav</span>:[<span class="string">"苹果"</span>,<span class="string">"葡萄"</span>],</div><div class="line">		<span class="attr">run</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.fav;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">var</span> friend1 = <span class="keyword">new</span> Friend();</div><div class="line">	<span class="keyword">var</span> friend2 = <span class="keyword">new</span> Friend();</div><div class="line">	friend1.fav.push(<span class="string">"梨子"</span>);<span class="comment">//引用类型</span></div><div class="line">	<span class="built_in">console</span>.log(friend1.fav);<span class="comment">// ["苹果", "葡萄", "梨子"] 引用类型</span></div><div class="line">	<span class="built_in">console</span>.log(friend2.fav);<span class="comment">// ["苹果", "葡萄", "梨子"] 引用类型</span></div><div class="line"></div><div class="line">	<span class="comment">//组合使用构造函数模式和原型模式 目前最常用的方式</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">Base</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;;</div><div class="line">	Base.prototype.run =  <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">var</span> base1 = <span class="keyword">new</span> Base(<span class="string">"xiaodong"</span>,<span class="number">23</span>);</div><div class="line">	<span class="keyword">var</span> base2 = <span class="keyword">new</span> Base(<span class="string">"tiantian"</span>,<span class="number">22</span>);</div><div class="line">	<span class="built_in">console</span>.log(base1.run());<span class="comment">//"xiaodong"</span></div><div class="line">	<span class="built_in">console</span>.log(base2.run());<span class="comment">//"tiantian"</span></div><div class="line">	<span class="built_in">console</span>.log(base1.run === base2.run);<span class="comment">//true</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>文章对您有用？打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechatpay.png" alt="林晓东 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay.png" alt="林晓东 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/02/js-function-arguments/" rel="next" title="理解js中函数参数是按值传递而非按引用传递">
+                <i class="fa fa-chevron-left"></i> 理解js中函数参数是按值传递而非按引用传递
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/03/js-extend-method/" rel="prev" title="javascript中继承的几种方式">
+                javascript中继承的几种方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/02/js-creat-object-method/"
+     data-title="javacript中创建对象的几种方式"
+     data-content=""
+     data-url="http://blog.linxiaodong.com.com/2016/05/02/js-creat-object-method/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/02/js-creat-object-method/"
+           data-title="javacript中创建对象的几种方式" data-url="http://blog.linxiaodong.com.com/2016/05/02/js-creat-object-method/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/author.jpg"
+               alt="林晓东" />
+          <p class="site-author-name" itemprop="name">林晓东</p>
+          <p class="site-description motion-element" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/buxuku" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xiaodong5959" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/42031633/" target="_blank" title="douban">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  douban
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiaodong5959" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.zhangxinxu.com/wordpress/" title="张鑫旭" target="_blank">张鑫旭</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林晓东</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buxuku"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz", "P0QeN4CeSm3RRLghin8m0BbA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

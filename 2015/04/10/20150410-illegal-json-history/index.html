@@ -1,0 +1,1014 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="IXY1ltSsL1oyUWlv3qViZpamDEWmbGCw36A85yMmcuw" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="json,javascript,cookie," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="实例应用：汽车点修网违章查询应用地址：http://www.car91.cn实现效果：对接聚合数据，实现违章查询功能，并对查询记录通过cookie保存，方便下次直接点击查询">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实例 通过违章查询 优化json数据应用及实现历史记录功能">
+<meta property="og:url" content="http://blog.linxiaodong.com.com/2015/04/10/20150410-illegal-json-history/index.html">
+<meta property="og:site_name" content="林晓东的个人博客">
+<meta property="og:description" content="实例应用：汽车点修网违章查询应用地址：http://www.car91.cn实现效果：对接聚合数据，实现违章查询功能，并对查询记录通过cookie保存，方便下次直接点击查询">
+<meta property="og:updated_time" content="2016-03-17T10:54:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实例 通过违章查询 优化json数据应用及实现历史记录功能">
+<meta name="twitter:description" content="实例应用：汽车点修网违章查询应用地址：http://www.car91.cn实现效果：对接聚合数据，实现违章查询功能，并对查询记录通过cookie保存，方便下次直接点击查询">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '3697207',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.linxiaodong.com.com/2015/04/10/20150410-illegal-json-history/"/>
+
+
+
+
+
+  <title> 实例 通过违章查询 优化json数据应用及实现历史记录功能 | 林晓东的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3e7b56b0f58d33e75fcd47aa74857ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">林晓东的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">一个走在前端的后端人</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'zeKsTcmzcvMmFP7m5Ud2','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2015/04/10/20150410-illegal-json-history/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="林晓东">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/author.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="林晓东的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="林晓东的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                实例 通过违章查询 优化json数据应用及实现历史记录功能
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-10T13:58:32+08:00">
+                2015-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/04/10/20150410-illegal-json-history/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/10/20150410-illegal-json-history/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/04/10/20150410-illegal-json-history/" class="leancloud_visitors" data-flag-title="实例 通过违章查询 优化json数据应用及实现历史记录功能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实例应用：汽车点修网违章查询<br>应用地址：<a href="http://www.car91.cn" target="_blank" rel="external">http://www.car91.cn</a><br>实现效果：对接聚合数据，实现违章查询功能，并对查询记录通过cookie保存，方便下次直接点击查询<br><a id="more"></a></p>
+<h3 id="code-v1代码："><a href="#code-v1代码：" class="headerlink" title="code-v1代码："></a>code-v1代码：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div></pre></td><td class="code"><pre><div class="line">define([<span class="string">"jquery"</span>, <span class="string">'config'</span>, <span class="string">'jquery.cookie'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">$, config</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">wzInit</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> history = $.cookie(<span class="string">"queryHistory"</span>);</div><div class="line">            <span class="keyword">if</span> (history) &#123;</div><div class="line">                <span class="keyword">var</span> historyJson = <span class="built_in">eval</span>(<span class="string">"("</span> + history + <span class="string">")"</span>);</div><div class="line">                <span class="keyword">if</span> (historyJson.length &gt; <span class="number">0</span>) &#123;<span class="comment">//因为是采用前置插入的方式，所以在插入前先判断是否已经插入过，避免多次运行重复生成的情况</span></div><div class="line">                    <span class="keyword">if</span> ($(<span class="string">".quick-wz"</span>).length &gt; <span class="number">0</span>) &#123;</div><div class="line">                        $(<span class="string">".quick-wz"</span>).remove();</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">var</span> list = <span class="string">"&lt;div class='quick-wz'&gt;&lt;p class='quick-wz__tit'&gt;快速查询&lt;/p&gt;&lt;ul class='quick-wz__list clearfix'&gt;"</span>;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; historyJson.length; i++) &#123;</div><div class="line">                        list = list + <span class="string">"&lt;li class='query' data-index='"</span> + i + <span class="string">"'&gt;"</span> + <span class="built_in">decodeURIComponent</span>(historyJson[i].hphm) + <span class="string">" "</span> + <span class="built_in">decodeURIComponent</span>(historyJson[i].cityName) + <span class="string">"&lt;/li&gt;"</span>;</div><div class="line">                    &#125;</div><div class="line">                    list = list + <span class="string">"&lt;/ul&gt;&lt;/div&gt;"</span></div><div class="line">                    $(<span class="string">"#wzForm"</span>).before(list);</div><div class="line">                    $(<span class="string">".query"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                        <span class="keyword">var</span> index = $(<span class="keyword">this</span>).data(<span class="string">"index"</span>);</div><div class="line">                        $.ajax(&#123;</div><div class="line">                            <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                            <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                            <span class="attr">url</span>: config.wzQuery,</div><div class="line">                            <span class="attr">data</span>: &#123;</div><div class="line">                                <span class="string">"city"</span>: historyJson[index].city,</div><div class="line">                                <span class="string">"hpzl"</span>: historyJson[index].hpzl,</div><div class="line">                                <span class="string">"car_province"</span>: historyJson[index].car_province,</div><div class="line">                                <span class="string">"hphm2"</span>: historyJson[index].hphm2,</div><div class="line">                                <span class="string">"engineno"</span>: historyJson[index].engineno,</div><div class="line">                                <span class="string">"classno"</span>: historyJson[index].classno,</div><div class="line">                                <span class="string">"registno"</span>: historyJson[index].registno,</div><div class="line">                                <span class="string">"hphm"</span>: historyJson[index].hphm</div><div class="line">                            &#125;,</div><div class="line">                            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                                <span class="comment">//var e=eval("("+e+")");</span></div><div class="line">                                <span class="keyword">var</span> resultcode = e.resultcode;</div><div class="line">                                <span class="keyword">var</span> info = e.reason;</div><div class="line">                                <span class="keyword">if</span> (resultcode == <span class="string">'200'</span>) &#123;</div><div class="line">                                    <span class="keyword">var</span> html = <span class="string">'&lt;table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2"&gt;'</span>;</div><div class="line">                                    html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40"&gt;&amp;nbsp;时间&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;地点&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章事项&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章代码&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;扣分&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;罚款&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;是否处理&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                                    <span class="keyword">var</span> list = e.result.lists;</div><div class="line">                                    <span class="keyword">if</span> (list.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                                        <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> list) &#123;</div><div class="line">                                            html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40" width="120"&gt;&amp;nbsp;'</span> + list[i].date + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="150"&gt;&amp;nbsp;'</span> + list[i].area + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="280"&gt;&amp;nbsp;'</span> + list[i].act + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="60"&gt;&amp;nbsp;'</span> + list[i].code + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].fen + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].money + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].handled + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                                        &#125;</div><div class="line">                                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                        html += <span class="string">'&lt;tr&gt;&lt;td colspan=7 height="40"&gt;查询不到该车辆的违章记录&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">                                    &#125;</div><div class="line">                                    html += <span class="string">'&lt;/table&gt;'</span>;</div><div class="line">                                    $(<span class="string">".wz-result"</span>).html(html);</div><div class="line">                                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (resultcode == <span class="string">'210'</span>) &#123;</div><div class="line">                                    alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                    alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                                &#125;</div><div class="line">                                $(<span class="string">".wz-btn"</span>).val(<span class="string">'违章查询'</span>).removeAttr(<span class="string">"disabled"</span>);</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">                    &#125;)</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">var</span> queryHistory = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    <span class="keyword">var</span> city = $(<span class="string">"select[name='city']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> hpzl = $(<span class="string">"select[name='hpzl']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> car_province = $(<span class="string">"select[name='car_province']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> hphm2 = $(<span class="string">"input[name='hphm2']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> engineno = $(<span class="string">"input[name='engineno']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> classno = $(<span class="string">"input[name='classno']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> registno = $(<span class="string">"input[name='registno']"</span>).val();</div><div class="line">                    <span class="keyword">var</span> hphm = $(<span class="string">"#hphm"</span>).val();</div><div class="line">                    <span class="keyword">var</span> cityName = $(<span class="string">".selectCitys option:selected"</span>).text();</div><div class="line">                    cityName = <span class="built_in">encodeURIComponent</span>(cityName);</div><div class="line">                    <span class="keyword">var</span> len = <span class="number">0</span>;</div><div class="line">                    <span class="keyword">var</span> canAdd = <span class="literal">true</span>;</div><div class="line">                    <span class="keyword">if</span> (history) &#123;</div><div class="line">                        len = historyJson.length;</div><div class="line">                        $(historyJson).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                            <span class="keyword">if</span> (<span class="keyword">this</span>.city == city &amp;&amp; <span class="keyword">this</span>.hphm == hphm) &#123;<span class="comment">//判断相同车牌号及相同城市的查询</span></div><div class="line">                                canAdd = <span class="literal">false</span>;</div><div class="line">                                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span> (canAdd == <span class="literal">true</span>) &#123;</div><div class="line">                        <span class="keyword">var</span> newCookie = <span class="string">"["</span>;</div><div class="line">                        <span class="keyword">var</span> start = <span class="number">0</span>;</div><div class="line">                        <span class="keyword">if</span> (len &gt; <span class="number">2</span>) &#123;<span class="comment">//最多记录三条历史记录</span></div><div class="line">                            start = <span class="number">1</span>;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">for</span> (<span class="keyword">var</span> i = start; i &lt; len; i++) &#123;</div><div class="line">                            newCookie = newCookie + <span class="string">"&#123;\"city\":\""</span> + historyJson[i].city + <span class="string">"\",\"hpzl\":\""</span> + historyJson[i].hpzl + <span class="string">"\",\"car_province\":\""</span> + historyJson[i].car_province + <span class="string">"\",\"hphm2\":\""</span> + historyJson[i].hphm2 + <span class="string">"\",\"engineno\":\""</span> + historyJson[i].engineno + <span class="string">"\",\"classno\":\""</span> + historyJson[i].classno + <span class="string">"\",\"registno\":\""</span> + historyJson[i].registno + <span class="string">"\",\"hphm\":\""</span> + historyJson[i].hphm + <span class="string">"\",\"cityName\":\""</span> + historyJson[i].cityName + <span class="string">"\"&#125;,"</span>;</div><div class="line">                        &#125;</div><div class="line">                        newCookie = newCookie + <span class="string">"&#123;\"city\":\""</span> + city + <span class="string">"\",\"hpzl\":\""</span> + hpzl + <span class="string">"\",\"car_province\":\""</span> + car_province + <span class="string">"\",\"hphm2\":\""</span> + hphm2 + <span class="string">"\",\"engineno\":\""</span> + engineno + <span class="string">"\",\"classno\":\""</span> + classno + <span class="string">"\",\"registno\":\""</span> + registno + <span class="string">"\",\"hphm\":\""</span> + hphm + <span class="string">"\",\"cityName\":\""</span> + cityName + <span class="string">"\"&#125;]"</span>;</div><div class="line">                        $.cookie(<span class="string">"queryHistory"</span>, newCookie, &#123;</div><div class="line">                            <span class="attr">expires</span>: <span class="number">1</span>,</div><div class="line">                            <span class="attr">path</span>: <span class="string">"/"</span></div><div class="line">                        &#125;);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            $.ajax(&#123;</div><div class="line">                <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                <span class="attr">url</span>: config.wzCity,</div><div class="line">                <span class="attr">data</span>: <span class="string">""</span>,</div><div class="line">                <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                    $(<span class="string">".selectProvince"</span>).empty();</div><div class="line">                    <span class="keyword">var</span> html = <span class="string">'&lt;option value=""&gt;请选择城市&lt;/option&gt;'</span>;</div><div class="line">                    <span class="keyword">var</span> ev = e[<span class="string">'result'</span>];</div><div class="line">                    <span class="keyword">for</span> (i <span class="keyword">in</span> ev) &#123;</div><div class="line">                        html += <span class="string">"&lt;option value='"</span> + ev[i].province_code + <span class="string">"'&gt;"</span> + ev[i].province + <span class="string">"&lt;/option&gt;"</span>;</div><div class="line">                        <span class="comment">//alert(e[i].city_name);</span></div><div class="line">                        <span class="comment">//$(".selectCitys").append("&lt;option value='"+e[i].city_code+"'&gt;"+e[i].city_name+"&lt;/option&gt;");</span></div><div class="line">                    &#125;</div><div class="line">                    $(<span class="string">".selectProvince"</span>).append(html);</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">            <span class="keyword">var</span> evc;</div><div class="line">            $(<span class="string">"#selectProvince"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> province = $(<span class="string">".selectProvince"</span>).val();</div><div class="line">                $(<span class="string">".selectCitys"</span>).empty().append(<span class="string">"&lt;option&gt;loading...&lt;/option&gt;"</span>);</div><div class="line">                $.ajax(&#123;</div><div class="line">                    <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                    <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                    <span class="attr">url</span>: config.wzCity,</div><div class="line">                    <span class="attr">data</span>: <span class="string">"province="</span> + <span class="built_in">encodeURIComponent</span>(province),</div><div class="line">                    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                        $(<span class="string">".selectCitys"</span>).empty();</div><div class="line">                        <span class="keyword">var</span> html = <span class="string">'&lt;option value=""&gt;请选择城市&lt;/option&gt;'</span>;</div><div class="line">                        ev = e[<span class="string">'result'</span>];</div><div class="line">                        $.each(ev, <span class="function"><span class="keyword">function</span>(<span class="params">k, v</span>) </span>&#123;</div><div class="line">                            evc=v;</div><div class="line">                            $.each(v[<span class="string">'citys'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">kk, vv</span>) </span>&#123;</div><div class="line">                                html += <span class="string">"&lt;option value='"</span> + vv.city_code + <span class="string">"' engine='"</span>+vv.engine+<span class="string">"' engineno='"</span>+vv.engineno+<span class="string">"' abbr='"</span> + vv.abbr + <span class="string">"' eclass='"</span> + vv.class + <span class="string">"' eclassno='"</span> + vv.classno + <span class="string">"'&gt;"</span> + vv.city_name + <span class="string">"&lt;/option&gt;"</span>;</div><div class="line">                            &#125;)</div><div class="line">                            $(<span class="string">".selectCitys"</span>).append(html);</div><div class="line">                        &#125;)</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">            &#125;)</div><div class="line">            $(<span class="string">".selectCitys"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> province = $(<span class="string">".selectProvince"</span>).val();</div><div class="line">                <span class="keyword">var</span> index=$(<span class="keyword">this</span>).get(<span class="number">0</span>).selectedIndex<span class="number">-1</span>;</div><div class="line">                <span class="built_in">console</span>.log(evc[<span class="string">'citys'</span>][index]);</div><div class="line">                <span class="keyword">var</span> qinfo=evc[<span class="string">'citys'</span>][index];</div><div class="line">                <span class="built_in">console</span>.log(qinfo.abbr);</div><div class="line">                <span class="keyword">var</span> city = $(<span class="keyword">this</span>).val();</div><div class="line">                <span class="keyword">var</span> abbr = $(<span class="string">".selectCitys"</span>).find(<span class="string">"option:selected"</span>).attr(<span class="string">"abbr"</span>);</div><div class="line">                <span class="keyword">var</span> engine = $(<span class="string">".selectCitys"</span>).find(<span class="string">"option:selected"</span>).attr(<span class="string">"engine"</span>);</div><div class="line">                <span class="keyword">var</span> engineno = $(<span class="string">".selectCitys"</span>).find(<span class="string">"option:selected"</span>).attr(<span class="string">"engineno"</span>);</div><div class="line">                <span class="keyword">var</span> eclass = $(<span class="string">".selectCitys"</span>).find(<span class="string">"option:selected"</span>).attr(<span class="string">"eclass"</span>);</div><div class="line">                <span class="keyword">var</span> eclassno = $(<span class="string">".selectCitys"</span>).find(<span class="string">"option:selected"</span>).attr(<span class="string">"eclassno"</span>);</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">typeof</span>(abbr) != <span class="string">"undefined"</span>) &#123;</div><div class="line">                    $(<span class="string">"#car_province"</span>).val(abbr);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (engine == <span class="string">'1'</span>) &#123;</div><div class="line">                    <span class="keyword">if</span> (engineno == <span class="string">'0'</span>) &#123;</div><div class="line">                        <span class="keyword">var</span> engineinfo = <span class="string">'全部发动机号'</span>;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="keyword">var</span> engineinfo = <span class="string">'发动机号后'</span> + engineno + <span class="string">'位'</span>;</div><div class="line">                    &#125;</div><div class="line">                    $(<span class="string">"input[name=engineno]"</span>).attr(<span class="string">"placeholder"</span>, engineinfo);</div><div class="line">                    $(<span class="string">"#engineno"</span>).css(&#123;</div><div class="line">                        <span class="attr">display</span>: <span class="string">""</span></div><div class="line">                    &#125;);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $(<span class="string">"#engineno"</span>).css(&#123;</div><div class="line">                        <span class="attr">display</span>: <span class="string">"none"</span></div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (eclass == <span class="string">'1'</span>) &#123;</div><div class="line">                    <span class="keyword">if</span> (eclassno == <span class="string">'0'</span>) &#123;</div><div class="line">                        <span class="keyword">var</span> classinfo = <span class="string">'全部车架号'</span>;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="keyword">var</span> classinfo = <span class="string">'车架号后'</span> + eclassno + <span class="string">'位'</span>;</div><div class="line">                    &#125;</div><div class="line">                    $(<span class="string">"input[name=classno]"</span>).attr(<span class="string">"placeholder"</span>, classinfo);</div><div class="line">                    $(<span class="string">"#classno"</span>).css(&#123;</div><div class="line">                        <span class="attr">display</span>: <span class="string">""</span></div><div class="line">                    &#125;);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $(<span class="string">"#classno"</span>).css(&#123;</div><div class="line">                        <span class="attr">display</span>: <span class="string">"none"</span></div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">            $(<span class="string">".wz-btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                $(<span class="string">".wz-btn"</span>).val(<span class="string">'查询中...'</span>).attr(<span class="string">"disabled"</span>, <span class="string">"disabled"</span>);</div><div class="line">                $(<span class="string">".wz-result"</span>).html(<span class="string">'正在查询中....'</span>);</div><div class="line">                <span class="keyword">var</span> hphm = $(<span class="string">"#car_province"</span>).val() + $(<span class="string">".onlyhm"</span>).val();</div><div class="line">                hphm = <span class="built_in">encodeURIComponent</span>(hphm);</div><div class="line">                $(<span class="string">"#hphm"</span>).val(hphm);</div><div class="line">                queryHistory();</div><div class="line">                $.ajax(&#123;</div><div class="line">                    <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                    <span class="comment">//用POST方式传输</span></div><div class="line">                    dataType: <span class="string">"jsonp"</span>,</div><div class="line">                    <span class="comment">//数据格式:JSON</span></div><div class="line">                    url: config.wzQuery,</div><div class="line">                    <span class="comment">//目标地址</span></div><div class="line">                    data: &#123;</div><div class="line">                        <span class="string">"city"</span>: $(<span class="string">"select[name='city']"</span>).val(),</div><div class="line">                        <span class="string">"hpzl"</span>: $(<span class="string">"select[name='hpzl']"</span>).val(),</div><div class="line">                        <span class="string">"car_province"</span>: $(<span class="string">"select[name='car_province']"</span>).val(),</div><div class="line">                        <span class="string">"hphm2"</span>: $(<span class="string">"input[name='hphm2']"</span>).val(),</div><div class="line">                        <span class="string">"engineno"</span>: $(<span class="string">"input[name='engineno']"</span>).val(),</div><div class="line">                        <span class="string">"classno"</span>: $(<span class="string">"input[name='classno']"</span>).val(),</div><div class="line">                        <span class="string">"registno"</span>: $(<span class="string">"input[name='registno']"</span>).val(),</div><div class="line">                        <span class="string">"hphm"</span>: hphm</div><div class="line">                    &#125;,</div><div class="line">                    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                        <span class="comment">//var e=eval("("+e+")");</span></div><div class="line">                        <span class="built_in">console</span>.log(<span class="string">"ok"</span>);</div><div class="line">                        <span class="keyword">var</span> resultcode = e.resultcode;</div><div class="line">                        <span class="keyword">var</span> info = e.reason;</div><div class="line">                        <span class="keyword">if</span> (resultcode == <span class="string">'200'</span>) &#123;</div><div class="line">                            <span class="keyword">var</span> html = <span class="string">'&lt;table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2"&gt;'</span>;</div><div class="line">                            html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40"&gt;&amp;nbsp;时间&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;地点&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章事项&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章代码&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;扣分&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;罚款&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;是否处理&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                            <span class="keyword">var</span> list = e.result.lists;</div><div class="line">                            <span class="keyword">if</span> (list.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                                <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> list) &#123;</div><div class="line">                                    html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40" width="120"&gt;&amp;nbsp;'</span> + list[i].date + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="150"&gt;&amp;nbsp;'</span> + list[i].area + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="280"&gt;&amp;nbsp;'</span> + list[i].act + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="60"&gt;&amp;nbsp;'</span> + list[i].code + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].fen + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].money + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].handled + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                                &#125;</div><div class="line">                            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                html += <span class="string">'&lt;tr&gt;&lt;td colspan=6 height="40"&gt;查询不到该车辆的违章记录&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">                            &#125;</div><div class="line">                            html += <span class="string">'&lt;/table&gt;'</span>;</div><div class="line">                            $(<span class="string">".wz-result"</span>).html(html);</div><div class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (resultcode == <span class="string">'210'</span>) &#123;</div><div class="line">                            alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                        &#125;</div><div class="line">                        $(<span class="string">".wz-btn"</span>).val(<span class="string">'违章查询'</span>).removeAttr(<span class="string">"disabled"</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h2><p>1.该模块加载了jquery.cookie插件，主要是为了方便把json数据保存在cookie中。模块加载进来后，首先判断是存在历史记录，存在的话就进行相应的显示，在最开始书写的时间，生成历史记录图标，我是把所有需要的参数都通过data标签生成在DOM元素上的，例如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list = list + "<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">'query'</span> <span class="attr">data-city</span>=<span class="string">'"+historyJson[i].city+"'</span>&gt;</span>" + decodeURIComponent(historyJson[i].hphm) + " " + decodeURIComponent(historyJson[i].cityName) + "<span class="tag">&lt;/<span class="name">li</span>&gt;</span>";</div></pre></td></tr></table></figure></p>
+<p>然后在接下来的ajax发送数据的时候，则通过<code>$(this).data(&#39;city&#39;)</code>来获取数据，后来发现这样标签内容非常多，而我们在点击时候，其实只需要知道是点击的第一个标签，然后从原始的json数据中去获取对应的值就可以了，于是就产生了上面的data-index的写法，在获取数据时，采用historyJson[index].city就可以了。</p>
+<h2 id="代码优化："><a href="#代码优化：" class="headerlink" title="代码优化："></a>代码优化：</h2><p>1.在<code>$(&quot;#selectProvince&quot;).change(function()</code>函数中，通过ajax获取到应用城市的json数据，数据为多层，示例如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div></pre></td><td class="code"><pre><div class="line">jQuery19103159100429620594_1428636651525(&#123;</div><div class="line">    <span class="string">"resultcode"</span>: <span class="string">"200"</span>,</div><div class="line">    <span class="string">"reason"</span>: <span class="string">"成功的返回"</span>,</div><div class="line">    <span class="string">"result"</span>: &#123;</div><div class="line">        <span class="string">"QH"</span>: &#123;</div><div class="line">            <span class="string">"province"</span>: <span class="string">"青海"</span>,</div><div class="line">            <span class="string">"province_code"</span>: <span class="string">"QH"</span>,</div><div class="line">            <span class="string">"citys"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"西宁"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_XN"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"海东"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_HAIDONG"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"海西"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_HAIXI"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"海南"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_HAINAN"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"玉树"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_YUSHU"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"黄南"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_HUANGNAN"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"海北"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_HAIBEI"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"city_name"</span>: <span class="string">"果洛"</span>,</div><div class="line">                    <span class="string">"city_code"</span>: <span class="string">"QH_GUOLUO"</span>,</div><div class="line">                    <span class="string">"abbr"</span>: <span class="string">"青"</span>,</div><div class="line">                    <span class="string">"engine"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"engineno"</span>: <span class="string">"6"</span>,</div><div class="line">                    <span class="string">"classa"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"class"</span>: <span class="string">"1"</span>,</div><div class="line">                    <span class="string">"classno"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"regist"</span>: <span class="string">"0"</span>,</div><div class="line">                    <span class="string">"registno"</span>: <span class="string">"0"</span></div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="string">"error_code"</span>: <span class="number">0</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>我需要获取到最底层每个城市的信息，原来的写法是通过<code>$.each</code>访求循环来获取，后来研究json格式时，明白了大括号表示对象，中括号表示数组，对象可以通过点的方式如obj.result或者key的方法如obj[result]的方法来获取，而数据则是通过下标来获取，如obj[0],上面的json中，每次选择一个省份后，只是返回一个该省份的数据，即result下面的对象只有一个，而且对象名可以通过select的值来获取，因此，不需要通过循环，直接通过下标就可以获取到值了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ev = e[<span class="string">'result'</span>];</div><div class="line"><span class="keyword">var</span> evc=ev[province];</div></pre></td></tr></table></figure></p>
+<p>2.继续刚刚$.each里面的循环部分，我还是把返回的json数据写入到了dom标签中，这一步可以继续优化，因为我们可以通过<code>$(this).get(0).selectedIndex</code>获取到当前选中项的索引值，因为我们可以通过该索引值再去读取json中对应的值就可以了。于是有了上面代码中的初步测试部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index=$(<span class="keyword">this</span>).get(<span class="number">0</span>).selectedIndex<span class="number">-1</span>;</div><div class="line"><span class="built_in">console</span>.log(evc[<span class="string">'citys'</span>][index]);</div><div class="line"><span class="keyword">var</span> qinfo=evc[<span class="string">'citys'</span>][index];</div><div class="line"><span class="built_in">console</span>.log(qinfo.abbr);</div></pre></td></tr></table></figure>
+<p>3.再来优化，上面第2条中的返回json数据我是通过定义一个全局变量<code>evc</code>来方便下面的<code>$(&quot;.selectCitys&quot;).change(function()</code>方法访问，我们来继续优化减少全局变量，把<code>$(&quot;.selectCitys&quot;).change(function()</code>封装成一个函数，把json返回值通过传值的方式来传递，于是便有了如下写法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectCitys</span>(<span class="params">evc</span>)</span>&#123;</div><div class="line">    $(<span class="string">".selectCitys"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> province = $(<span class="string">".selectProvince"</span>).val();</div><div class="line">        <span class="keyword">var</span> city = $(<span class="keyword">this</span>).val();</div><div class="line">        <span class="keyword">var</span> index=$(<span class="keyword">this</span>).get(<span class="number">0</span>).selectedIndex<span class="number">-1</span>;</div><div class="line">        <span class="keyword">var</span> cityInfo=evc[<span class="string">'citys'</span>][index];</div><div class="line">        <span class="keyword">var</span> abbr = cityInfo.abbr;</div><div class="line">        <span class="keyword">var</span> engine = cityInfo.engine;</div><div class="line">        <span class="keyword">var</span> engineno = cityInfo.engineno;</div><div class="line">        <span class="keyword">var</span> eclass = cityInfo.class;</div><div class="line">        <span class="keyword">var</span> eclassno = cityInfo.classno;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span>(abbr) != <span class="string">"undefined"</span>) &#123;</div><div class="line">            $(<span class="string">"#car_province"</span>).val(abbr);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (engine == <span class="string">'1'</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (engineno == <span class="string">'0'</span>) &#123;</div><div class="line">                <span class="keyword">var</span> engineinfo = <span class="string">'全部发动机号'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">var</span> engineinfo = <span class="string">'发动机号后'</span> + engineno + <span class="string">'位'</span>;</div><div class="line">            &#125;</div><div class="line">            $(<span class="string">"input[name=engineno]"</span>).attr(<span class="string">"placeholder"</span>, engineinfo);</div><div class="line">            $(<span class="string">"#engineno"</span>).css(&#123;</div><div class="line">                <span class="attr">display</span>: <span class="string">""</span></div><div class="line">            &#125;);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            $(<span class="string">"#engineno"</span>).css(&#123;</div><div class="line">                <span class="attr">display</span>: <span class="string">"none"</span></div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (eclass == <span class="string">'1'</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (eclassno == <span class="string">'0'</span>) &#123;</div><div class="line">                <span class="keyword">var</span> classinfo = <span class="string">'全部车架号'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">var</span> classinfo = <span class="string">'车架号后'</span> + eclassno + <span class="string">'位'</span>;</div><div class="line">            &#125;</div><div class="line">            $(<span class="string">"input[name=classno]"</span>).attr(<span class="string">"placeholder"</span>, classinfo);</div><div class="line">            $(<span class="string">"#classno"</span>).css(&#123;</div><div class="line">                <span class="attr">display</span>: <span class="string">""</span></div><div class="line">            &#125;);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            $(<span class="string">"#classno"</span>).css(&#123;</div><div class="line">                <span class="attr">display</span>: <span class="string">"none"</span></div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4.优化继续，我们发现在上面的代码中，记录cookie及查询的时候，两次手动读取了一样的数据，于是我们可以把这部分先独立出来，接下来传值即可。如果优化如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">".wz-btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">".wz-btn"</span>).val(<span class="string">'查询中...'</span>).attr(<span class="string">"disabled"</span>, <span class="string">"disabled"</span>);</div><div class="line">    $(<span class="string">".wz-result"</span>).html(<span class="string">'正在查询中....'</span>);</div><div class="line">    <span class="keyword">var</span> hphm = $(<span class="string">"#car_province"</span>).val() + $(<span class="string">".onlyhm"</span>).val();</div><div class="line">    hphm = <span class="built_in">encodeURIComponent</span>(hphm);</div><div class="line">    $(<span class="string">"#hphm"</span>).val(hphm);</div><div class="line">    <span class="keyword">var</span> carInfo=&#123;</div><div class="line">            <span class="string">"city"</span>: $(<span class="string">"select[name='city']"</span>).val(),</div><div class="line">            <span class="string">"hpzl"</span>: $(<span class="string">"select[name='hpzl']"</span>).val(),</div><div class="line">            <span class="string">"car_province"</span>: $(<span class="string">"select[name='car_province']"</span>).val(),</div><div class="line">            <span class="string">"hphm2"</span>: $(<span class="string">"input[name='hphm2']"</span>).val(),</div><div class="line">            <span class="string">"engineno"</span>: $(<span class="string">"input[name='engineno']"</span>).val(),</div><div class="line">            <span class="string">"classno"</span>: $(<span class="string">"input[name='classno']"</span>).val(),</div><div class="line">            <span class="string">"registno"</span>: $(<span class="string">"input[name='registno']"</span>).val(),</div><div class="line">            <span class="string">"hphm"</span>: hphm</div><div class="line">        &#125;;</div><div class="line">    queryHistory(carInfo);</div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">        <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">        <span class="attr">url</span>: config.wzQuery,</div><div class="line">        <span class="attr">data</span>: carInfo,</div><div class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> resultcode = e.resultcode;</div><div class="line">            <span class="keyword">var</span> info = e.reason;</div><div class="line">            <span class="keyword">if</span> (resultcode == <span class="string">'200'</span>) &#123;</div><div class="line">                <span class="keyword">var</span> html = <span class="string">'&lt;table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2"&gt;'</span>;</div><div class="line">                html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40"&gt;&amp;nbsp;时间&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;地点&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章事项&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章代码&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;扣分&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;罚款&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;是否处理&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                <span class="keyword">var</span> list = e.result.lists;</div><div class="line">                <span class="keyword">if</span> (list.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> list) &#123;</div><div class="line">                        html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40" width="120"&gt;&amp;nbsp;'</span> + list[i].date + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="150"&gt;&amp;nbsp;'</span> + list[i].area + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="280"&gt;&amp;nbsp;'</span> + list[i].act + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="60"&gt;&amp;nbsp;'</span> + list[i].code + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].fen + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].money + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].handled + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    html += <span class="string">'&lt;tr&gt;&lt;td colspan=6 height="40"&gt;查询不到该车辆的违章记录&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">                &#125;</div><div class="line">                html += <span class="string">'&lt;/table&gt;'</span>;</div><div class="line">                $(<span class="string">".wz-result"</span>).html(html);</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (resultcode == <span class="string">'210'</span>) &#123;</div><div class="line">                alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">            &#125;</div><div class="line">            $(<span class="string">".wz-btn"</span>).val(<span class="string">'违章查询'</span>).removeAttr(<span class="string">"disabled"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>因此，最终优化完毕的全部代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div></pre></td><td class="code"><pre><div class="line">define([<span class="string">"jquery"</span>, <span class="string">'config'</span>, <span class="string">'jquery.cookie'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">$, config</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">wzInit</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> history = $.cookie(<span class="string">"queryHistory"</span>);</div><div class="line">            <span class="keyword">if</span> (history) &#123;</div><div class="line">                <span class="keyword">var</span> historyJson = <span class="built_in">eval</span>(<span class="string">"("</span> + history + <span class="string">")"</span>);</div><div class="line">                <span class="keyword">if</span> (historyJson.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">if</span> ($(<span class="string">".quick-wz"</span>).length &gt; <span class="number">0</span>) &#123;</div><div class="line">                        $(<span class="string">".quick-wz"</span>).remove();</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">var</span> list = <span class="string">"&lt;div class='quick-wz'&gt;&lt;p class='quick-wz__tit'&gt;快速查询&lt;/p&gt;&lt;ul class='quick-wz__list clearfix'&gt;"</span>;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; historyJson.length; i++) &#123;</div><div class="line">                        list = list + <span class="string">"&lt;li class='query' data-index='"</span> + i + <span class="string">"'&gt;"</span> + <span class="built_in">decodeURIComponent</span>(historyJson[i].hphm) + <span class="string">" "</span> + <span class="built_in">decodeURIComponent</span>(historyJson[i].cityName) + <span class="string">"&lt;/li&gt;"</span>;</div><div class="line">                    &#125;</div><div class="line">                    list = list + <span class="string">"&lt;/ul&gt;&lt;/div&gt;"</span></div><div class="line">                    $(<span class="string">"#wzForm"</span>).before(list);</div><div class="line">                    $(<span class="string">".query"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                        <span class="keyword">var</span> index = $(<span class="keyword">this</span>).data(<span class="string">"index"</span>);</div><div class="line">                        $.ajax(&#123;</div><div class="line">                            <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                            <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                            <span class="attr">url</span>: config.wzQuery,</div><div class="line">                            <span class="attr">data</span>: &#123;</div><div class="line">                                <span class="string">"city"</span>: historyJson[index].city,</div><div class="line">                                <span class="string">"hpzl"</span>: historyJson[index].hpzl,</div><div class="line">                                <span class="string">"car_province"</span>: historyJson[index].car_province,</div><div class="line">                                <span class="string">"hphm2"</span>: historyJson[index].hphm2,</div><div class="line">                                <span class="string">"engineno"</span>: historyJson[index].engineno,</div><div class="line">                                <span class="string">"classno"</span>: historyJson[index].classno,</div><div class="line">                                <span class="string">"registno"</span>: historyJson[index].registno,</div><div class="line">                                <span class="string">"hphm"</span>: historyJson[index].hphm</div><div class="line">                            &#125;,</div><div class="line">                            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                                <span class="keyword">var</span> resultcode = e.resultcode;</div><div class="line">                                <span class="keyword">var</span> info = e.reason;</div><div class="line">                                <span class="keyword">if</span> (resultcode == <span class="string">'200'</span>) &#123;</div><div class="line">                                    <span class="keyword">var</span> html = <span class="string">'&lt;table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2"&gt;'</span>;</div><div class="line">                                    html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40"&gt;&amp;nbsp;时间&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;地点&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章事项&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章代码&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;扣分&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;罚款&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;是否处理&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                                    <span class="keyword">var</span> list = e.result.lists;</div><div class="line">                                    <span class="keyword">if</span> (list.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                                        <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> list) &#123;</div><div class="line">                                            html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40" width="120"&gt;&amp;nbsp;'</span> + list[i].date + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="150"&gt;&amp;nbsp;'</span> + list[i].area + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="280"&gt;&amp;nbsp;'</span> + list[i].act + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="60"&gt;&amp;nbsp;'</span> + list[i].code + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].fen + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].money + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].handled + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                                        &#125;</div><div class="line">                                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                        html += <span class="string">'&lt;tr&gt;&lt;td colspan=7 height="40"&gt;查询不到该车辆的违章记录&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">                                    &#125;</div><div class="line">                                    html += <span class="string">'&lt;/table&gt;'</span>;</div><div class="line">                                    $(<span class="string">".wz-result"</span>).html(html);</div><div class="line">                                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (resultcode == <span class="string">'210'</span>) &#123;</div><div class="line">                                    alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                    alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                                &#125;</div><div class="line">                                $(<span class="string">".wz-btn"</span>).val(<span class="string">'违章查询'</span>).removeAttr(<span class="string">"disabled"</span>);</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">                    &#125;)</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">var</span> queryHistory = <span class="function"><span class="keyword">function</span>(<span class="params">carInfo</span>) </span>&#123;</div><div class="line">                    <span class="keyword">var</span> city = carInfo.city;</div><div class="line">                    <span class="keyword">var</span> hpzl = carInfo.hpzl;</div><div class="line">                    <span class="keyword">var</span> car_province = carInfo.car_province;</div><div class="line">                    <span class="keyword">var</span> hphm2 = carInfo.hphm2;</div><div class="line">                    <span class="keyword">var</span> engineno = carInfo.engineno;</div><div class="line">                    <span class="keyword">var</span> classno = carInfo.classno;</div><div class="line">                    <span class="keyword">var</span> registno = carInfo.registno;</div><div class="line">                    <span class="keyword">var</span> hphm = $(<span class="string">"#hphm"</span>).val();</div><div class="line">                    <span class="keyword">var</span> cityName = $(<span class="string">".selectCitys option:selected"</span>).text();</div><div class="line">                    cityName = <span class="built_in">encodeURIComponent</span>(cityName);</div><div class="line">                    <span class="keyword">var</span> len = <span class="number">0</span>;</div><div class="line">                    <span class="keyword">var</span> canAdd = <span class="literal">true</span>;</div><div class="line">                    <span class="keyword">if</span> (history) &#123;</div><div class="line">                        len = historyJson.length;</div><div class="line">                        $(historyJson).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                            <span class="keyword">if</span> (<span class="keyword">this</span>.city == city &amp;&amp; <span class="keyword">this</span>.hphm == hphm) &#123;</div><div class="line">                                canAdd = <span class="literal">false</span>;</div><div class="line">                                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span> (canAdd == <span class="literal">true</span>) &#123;</div><div class="line">                        <span class="keyword">var</span> newCookie = <span class="string">"["</span>;</div><div class="line">                        <span class="keyword">var</span> start = <span class="number">0</span>;</div><div class="line">                        <span class="keyword">if</span> (len &gt; <span class="number">2</span>) &#123;</div><div class="line">                            start = <span class="number">1</span>;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">for</span> (<span class="keyword">var</span> i = start; i &lt; len; i++) &#123;</div><div class="line">                            newCookie = newCookie + <span class="string">"&#123;\"city\":\""</span> + historyJson[i].city + <span class="string">"\",\"hpzl\":\""</span> + historyJson[i].hpzl + <span class="string">"\",\"car_province\":\""</span> + historyJson[i].car_province + <span class="string">"\",\"hphm2\":\""</span> + historyJson[i].hphm2 + <span class="string">"\",\"engineno\":\""</span> + historyJson[i].engineno + <span class="string">"\",\"classno\":\""</span> + historyJson[i].classno + <span class="string">"\",\"registno\":\""</span> + historyJson[i].registno + <span class="string">"\",\"hphm\":\""</span> + historyJson[i].hphm + <span class="string">"\",\"cityName\":\""</span> + historyJson[i].cityName + <span class="string">"\"&#125;,"</span>;</div><div class="line">                        &#125;</div><div class="line">                        newCookie = newCookie + <span class="string">"&#123;\"city\":\""</span> + city + <span class="string">"\",\"hpzl\":\""</span> + hpzl + <span class="string">"\",\"car_province\":\""</span> + car_province + <span class="string">"\",\"hphm2\":\""</span> + hphm2 + <span class="string">"\",\"engineno\":\""</span> + engineno + <span class="string">"\",\"classno\":\""</span> + classno + <span class="string">"\",\"registno\":\""</span> + registno + <span class="string">"\",\"hphm\":\""</span> + hphm + <span class="string">"\",\"cityName\":\""</span> + cityName + <span class="string">"\"&#125;]"</span>;</div><div class="line">                        $.cookie(<span class="string">"queryHistory"</span>, newCookie, &#123;</div><div class="line">                            <span class="attr">expires</span>: <span class="number">1</span>,</div><div class="line">                            <span class="attr">path</span>: <span class="string">"/"</span></div><div class="line">                        &#125;);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            $.ajax(&#123;</div><div class="line">                <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                <span class="attr">url</span>: config.wzCity,</div><div class="line">                <span class="attr">data</span>: <span class="string">""</span>,</div><div class="line">                <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                    $(<span class="string">".selectProvince"</span>).empty();</div><div class="line">                    <span class="keyword">var</span> html = <span class="string">'&lt;option value=""&gt;请选择城市&lt;/option&gt;'</span>;</div><div class="line">                    <span class="keyword">var</span> ev = e[<span class="string">'result'</span>];</div><div class="line">                    <span class="keyword">for</span> (i <span class="keyword">in</span> ev) &#123;</div><div class="line">                        html += <span class="string">"&lt;option value='"</span> + ev[i].province_code + <span class="string">"'&gt;"</span> + ev[i].province + <span class="string">"&lt;/option&gt;"</span>;</div><div class="line">                    &#125;</div><div class="line">                    $(<span class="string">".selectProvince"</span>).append(html);</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">            $(<span class="string">"#selectProvince"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> province = $(<span class="string">".selectProvince"</span>).val();</div><div class="line">                $(<span class="string">".selectCitys"</span>).empty().append(<span class="string">"&lt;option&gt;loading...&lt;/option&gt;"</span>);</div><div class="line">                $.ajax(&#123;</div><div class="line">                    <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                    <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                    <span class="attr">url</span>: config.wzCity,</div><div class="line">                    <span class="attr">data</span>: &#123;<span class="string">"province"</span> : <span class="built_in">encodeURIComponent</span>(province)&#125;,</div><div class="line">                    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                        $(<span class="string">".selectCitys"</span>).empty();</div><div class="line">                        <span class="keyword">var</span> html = <span class="string">'&lt;option value=""&gt;请选择城市&lt;/option&gt;'</span>;</div><div class="line">                        ev = e[<span class="string">'result'</span>];</div><div class="line">                        <span class="keyword">var</span> evc=ev[province];</div><div class="line">                        $.each(evc[<span class="string">'citys'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">kk, vv</span>) </span>&#123;</div><div class="line">                            html += <span class="string">"&lt;option value='"</span> + vv.city_code + <span class="string">"'&gt;"</span> + vv.city_name + <span class="string">"&lt;/option&gt;"</span>;</div><div class="line">                        &#125;)</div><div class="line">                        $(<span class="string">".selectCitys"</span>).append(html);</div><div class="line">                        selectCitys(evc);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">            &#125;)</div><div class="line">            <span class="function"><span class="keyword">function</span> <span class="title">selectCitys</span>(<span class="params">evc</span>)</span>&#123;</div><div class="line">                $(<span class="string">".selectCitys"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    <span class="keyword">var</span> province = $(<span class="string">".selectProvince"</span>).val();</div><div class="line">                    <span class="keyword">var</span> city = $(<span class="keyword">this</span>).val();</div><div class="line">                    <span class="keyword">var</span> index=$(<span class="keyword">this</span>).get(<span class="number">0</span>).selectedIndex<span class="number">-1</span>;</div><div class="line">                    <span class="keyword">var</span> cityInfo=evc[<span class="string">'citys'</span>][index];</div><div class="line">                    <span class="keyword">var</span> abbr = cityInfo.abbr;</div><div class="line">                    <span class="keyword">var</span> engine = cityInfo.engine;</div><div class="line">                    <span class="keyword">var</span> engineno = cityInfo.engineno;</div><div class="line">                    <span class="keyword">var</span> eclass = cityInfo.class;</div><div class="line">                    <span class="keyword">var</span> eclassno = cityInfo.classno;</div><div class="line">                    <span class="keyword">if</span> (<span class="keyword">typeof</span>(abbr) != <span class="string">"undefined"</span>) &#123;</div><div class="line">                        $(<span class="string">"#car_province"</span>).val(abbr);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span> (engine == <span class="string">'1'</span>) &#123;</div><div class="line">                        <span class="keyword">if</span> (engineno == <span class="string">'0'</span>) &#123;</div><div class="line">                            <span class="keyword">var</span> engineinfo = <span class="string">'全部发动机号'</span>;</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            <span class="keyword">var</span> engineinfo = <span class="string">'发动机号后'</span> + engineno + <span class="string">'位'</span>;</div><div class="line">                        &#125;</div><div class="line">                        $(<span class="string">"input[name=engineno]"</span>).attr(<span class="string">"placeholder"</span>, engineinfo);</div><div class="line">                        $(<span class="string">"#engineno"</span>).css(&#123;</div><div class="line">                            <span class="attr">display</span>: <span class="string">""</span></div><div class="line">                        &#125;);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        $(<span class="string">"#engineno"</span>).css(&#123;</div><div class="line">                            <span class="attr">display</span>: <span class="string">"none"</span></div><div class="line">                        &#125;);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span> (eclass == <span class="string">'1'</span>) &#123;</div><div class="line">                        <span class="keyword">if</span> (eclassno == <span class="string">'0'</span>) &#123;</div><div class="line">                            <span class="keyword">var</span> classinfo = <span class="string">'全部车架号'</span>;</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            <span class="keyword">var</span> classinfo = <span class="string">'车架号后'</span> + eclassno + <span class="string">'位'</span>;</div><div class="line">                        &#125;</div><div class="line">                        $(<span class="string">"input[name=classno]"</span>).attr(<span class="string">"placeholder"</span>, classinfo);</div><div class="line">                        $(<span class="string">"#classno"</span>).css(&#123;</div><div class="line">                            <span class="attr">display</span>: <span class="string">""</span></div><div class="line">                        &#125;);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        $(<span class="string">"#classno"</span>).css(&#123;</div><div class="line">                            <span class="attr">display</span>: <span class="string">"none"</span></div><div class="line">                        &#125;);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">            &#125;</div><div class="line">            $(<span class="string">".wz-btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                $(<span class="string">".wz-btn"</span>).val(<span class="string">'查询中...'</span>).attr(<span class="string">"disabled"</span>, <span class="string">"disabled"</span>);</div><div class="line">                $(<span class="string">".wz-result"</span>).html(<span class="string">'正在查询中....'</span>);</div><div class="line">                <span class="keyword">var</span> hphm = $(<span class="string">"#car_province"</span>).val() + $(<span class="string">".onlyhm"</span>).val();</div><div class="line">                hphm = <span class="built_in">encodeURIComponent</span>(hphm);</div><div class="line">                $(<span class="string">"#hphm"</span>).val(hphm);</div><div class="line">                <span class="keyword">var</span> carInfo=&#123;</div><div class="line">                        <span class="string">"city"</span>: $(<span class="string">"select[name='city']"</span>).val(),</div><div class="line">                        <span class="string">"hpzl"</span>: $(<span class="string">"select[name='hpzl']"</span>).val(),</div><div class="line">                        <span class="string">"car_province"</span>: $(<span class="string">"select[name='car_province']"</span>).val(),</div><div class="line">                        <span class="string">"hphm2"</span>: $(<span class="string">"input[name='hphm2']"</span>).val(),</div><div class="line">                        <span class="string">"engineno"</span>: $(<span class="string">"input[name='engineno']"</span>).val(),</div><div class="line">                        <span class="string">"classno"</span>: $(<span class="string">"input[name='classno']"</span>).val(),</div><div class="line">                        <span class="string">"registno"</span>: $(<span class="string">"input[name='registno']"</span>).val(),</div><div class="line">                        <span class="string">"hphm"</span>: hphm</div><div class="line">                    &#125;;</div><div class="line">                queryHistory(carInfo);</div><div class="line">                $.ajax(&#123;</div><div class="line">                    <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">                    <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">                    <span class="attr">url</span>: config.wzQuery,</div><div class="line">                    <span class="attr">data</span>: carInfo,</div><div class="line">                    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">                        <span class="keyword">var</span> resultcode = e.resultcode;</div><div class="line">                        <span class="keyword">var</span> info = e.reason;</div><div class="line">                        <span class="keyword">if</span> (resultcode == <span class="string">'200'</span>) &#123;</div><div class="line">                            <span class="keyword">var</span> html = <span class="string">'&lt;table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2"&gt;'</span>;</div><div class="line">                            html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40"&gt;&amp;nbsp;时间&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;地点&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章事项&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;违章代码&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;扣分&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;罚款&lt;/td&gt;'</span> + <span class="string">'&lt;td&gt;&amp;nbsp;是否处理&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                            <span class="keyword">var</span> list = e.result.lists;</div><div class="line">                            <span class="keyword">if</span> (list.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                                <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> list) &#123;</div><div class="line">                                    html += <span class="string">'&lt;tr&gt;'</span> + <span class="string">'&lt;td height="40" width="120"&gt;&amp;nbsp;'</span> + list[i].date + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="150"&gt;&amp;nbsp;'</span> + list[i].area + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="280"&gt;&amp;nbsp;'</span> + list[i].act + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="60"&gt;&amp;nbsp;'</span> + list[i].code + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].fen + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].money + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;td width="30"&gt;&amp;nbsp;'</span> + list[i].handled + <span class="string">'&lt;/td&gt;'</span> + <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">                                &#125;</div><div class="line">                            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                html += <span class="string">'&lt;tr&gt;&lt;td colspan=6 height="40"&gt;查询不到该车辆的违章记录&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">                            &#125;</div><div class="line">                            html += <span class="string">'&lt;/table&gt;'</span>;</div><div class="line">                            $(<span class="string">".wz-result"</span>).html(html);</div><div class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (resultcode == <span class="string">'210'</span>) &#123;</div><div class="line">                            alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            alert(resultcode + <span class="string">":"</span> + info);</div><div class="line">                        &#125;</div><div class="line">                        $(<span class="string">".wz-btn"</span>).val(<span class="string">'违章查询'</span>).removeAttr(<span class="string">"disabled"</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>文章对您有用？打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechatpay.png" alt="林晓东 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay.png" alt="林晓东 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/json/" rel="tag"># json</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/cookie/" rel="tag"># cookie</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/02/20150402-apache-status/" rel="next" title="apache开启status监控">
+                <i class="fa fa-chevron-left"></i> apache开启status监控
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/10/20150410-complaint-chagnkuan/" rel="prev" title="投诉之长城宽带">
+                投诉之长城宽带 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/04/10/20150410-illegal-json-history/"
+     data-title="实例 通过违章查询 优化json数据应用及实现历史记录功能"
+     data-content=""
+     data-url="http://blog.linxiaodong.com.com/2015/04/10/20150410-illegal-json-history/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/04/10/20150410-illegal-json-history/"
+           data-title="实例 通过违章查询 优化json数据应用及实现历史记录功能" data-url="http://blog.linxiaodong.com.com/2015/04/10/20150410-illegal-json-history/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/author.jpg"
+               alt="林晓东" />
+          <p class="site-author-name" itemprop="name">林晓东</p>
+          <p class="site-description motion-element" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/buxuku" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xiaodong5959" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/42031633/" target="_blank" title="douban">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  douban
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiaodong5959" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.zhangxinxu.com/wordpress/" title="张鑫旭" target="_blank">张鑫旭</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-v1代码："><span class="nav-number">1.</span> <span class="nav-text">code-v1代码：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码说明："><span class="nav-number"></span> <span class="nav-text">代码说明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码优化："><span class="nav-number"></span> <span class="nav-text">代码优化：</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林晓东</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buxuku"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz", "P0QeN4CeSm3RRLghin8m0BbA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

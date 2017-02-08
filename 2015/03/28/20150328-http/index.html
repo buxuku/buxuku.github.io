@@ -1,0 +1,1124 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="IXY1ltSsL1oyUWlv3qViZpamDEWmbGCw36A85yMmcuw" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html,http," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="简介园子里已经有不少介绍HTTP的的好文章。对HTTP的一些细节介绍的比较好，所以本篇文章不会对HTTP的细节进行深究，而是从够高和更结构化的角度将HTTP协议的元素进行分类讲解。
+HTTP的定义和历史在一个网络中。传输数据需要面临三个问题:
+
+1.客户端如何知道所求内容的位置？
+2.当客户端知道所求内容的位置后，如何获取所求内容？
+3.所求内容以何种形式组织以便被客户端所识别？
+
+对于WEB来说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转http协议漫谈">
+<meta property="og:url" content="http://blog.linxiaodong.com.com/2015/03/28/20150328-http/index.html">
+<meta property="og:site_name" content="林晓东的个人博客">
+<meta property="og:description" content="简介园子里已经有不少介绍HTTP的的好文章。对HTTP的一些细节介绍的比较好，所以本篇文章不会对HTTP的细节进行深究，而是从够高和更结构化的角度将HTTP协议的元素进行分类讲解。
+HTTP的定义和历史在一个网络中。传输数据需要面临三个问题:
+
+1.客户端如何知道所求内容的位置？
+2.当客户端知道所求内容的位置后，如何获取所求内容？
+3.所求内容以何种形式组织以便被客户端所识别？
+
+对于WEB来说">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/1.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/2.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/3.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/4.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/5.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/6.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/7.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/8.png">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/http/9.png">
+<meta property="og:updated_time" content="2016-03-01T08:05:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="转http协议漫谈">
+<meta name="twitter:description" content="简介园子里已经有不少介绍HTTP的的好文章。对HTTP的一些细节介绍的比较好，所以本篇文章不会对HTTP的细节进行深究，而是从够高和更结构化的角度将HTTP协议的元素进行分类讲解。
+HTTP的定义和历史在一个网络中。传输数据需要面临三个问题:
+
+1.客户端如何知道所求内容的位置？
+2.当客户端知道所求内容的位置后，如何获取所求内容？
+3.所求内容以何种形式组织以便被客户端所识别？
+
+对于WEB来说">
+<meta name="twitter:image" content="http://7te946.com1.z0.glb.clouddn.com/http/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '3697207',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.linxiaodong.com.com/2015/03/28/20150328-http/"/>
+
+
+
+
+
+  <title> 转http协议漫谈 | 林晓东的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3e7b56b0f58d33e75fcd47aa74857ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">林晓东的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">一个走在前端的后端人</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'zeKsTcmzcvMmFP7m5Ud2','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2015/03/28/20150328-http/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="林晓东">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/author.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="林晓东的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="林晓东的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                转http协议漫谈
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-28T11:05:34+08:00">
+                2015-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/03/28/20150328-http/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/28/20150328-http/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/03/28/20150328-http/" class="leancloud_visitors" data-flag-title="转http协议漫谈">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>园子里已经有不少介绍HTTP的的好文章。对HTTP的一些细节介绍的比较好，所以本篇文章不会对HTTP的细节进行深究，而是从够高和更结构化的角度将HTTP协议的元素进行分类讲解。</p>
+<h1 id="HTTP的定义和历史"><a href="#HTTP的定义和历史" class="headerlink" title="HTTP的定义和历史"></a>HTTP的定义和历史</h1><p>在一个网络中。传输数据需要面临三个问题:</p>
+<blockquote>
+<p>1.客户端如何知道所求内容的位置？</p>
+<p>2.当客户端知道所求内容的位置后，如何获取所求内容？</p>
+<p>3.所求内容以何种形式组织以便被客户端所识别？</p>
+</blockquote>
+<p>对于WEB来说，回答上面三种问题分别采用三种不同的技术，分别为:统一资源定位符(URIs),超文本传输协议(HTTP)和超文本标记语言(HTML)。对于大多数WEB开发人员来说URI和HTML都是非常的熟悉。而HTTP协议在很多WEB技术中都被封装的过多使得HTTP反而最不被熟悉。<br><a id="more"></a><br>HTTP作为一种传输协议，也是像HTML一样随着时间不断演进的，目前流行的HTTP1.1是HTTP协议的第三个版本。</p>
+<h4 id="HTTP-0-9"><a href="#HTTP-0-9" class="headerlink" title="HTTP 0.9"></a>HTTP 0.9</h4><p>HTTP 0.9作为HTTP协议的第一个版本。是非常弱的。请求(Request)只有一行,比如:</p>
+<p><code>GET www.cnblogs.com</code></p>
+<p>从如此简单的请求体，没有POST方法，没有HTTP 头可以看出，那个时代的HTTP客户端只能接收一种类型：纯文本。并且，如果得不到所求的信息，也没有404 500等错误出现。</p>
+<p>虽然HTTP 0.9看起来如此弱，但已经能满足那个时代的需求了。</p>
+<h4 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP 1.0"></a>HTTP 1.0</h4><p>随着1996年后,WEB程序的需求，HTTP 0.9已经不能满足需求。HTTP1.0最大的改变是引入了POST方法，使得客户端通过HTML表单向服务器发送数据成为可能,这也是WEB应用程序的一个基础。另一个巨大的改变是引入了HTTP头，使得HTTP不仅能返回错误代码，并且HTTP协议所传输的内容不仅限于纯文本，还可以是图片，动画等一系列格式。</p>
+<p>除此之外,还允许保持连接，既一次TCP连接后，可以多次通信，虽然HTTP1.0 默认是传输一次数据后就关闭。</p>
+<h4 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP 1.1"></a>HTTP 1.1</h4><p>2000年5月，HTTP1.1确立。HTTP1.1并不像HTTP1.0对于HTTP0.9那样的革命性。但是也有很多增强。</p>
+<p>首先，增加了<strong>Host头</strong>，比如访问我的博客:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /Careyson HTTP/1.1</div><div class="line">Host: www.cnblogs.com</div></pre></td></tr></table></figure></p>
+<p>Get后面仅仅需要相对路径即可。这看起来虽然仅仅类似语法糖的感觉，但实际上，这个提升使得在Web上的一台主机可以存在多个域。否则多个域名指向同一个IP会产生混淆。</p>
+<p>此外,还引入了Range头，使得客户端通过HTTP下载时只下载内容的一部分，这使得多线程下载也成为可能。</p>
+<p>还有值得一提的是HTTP1.1 默认连接是一直保持的，这个概念我会在下文中具体阐述。</p>
+<h1 id="HTTP的网络层次"><a href="#HTTP的网络层次" class="headerlink" title="HTTP的网络层次"></a>HTTP的网络层次</h1><p>在Internet中所有的传输都是通过TCP/IP进行的。HTTP协议作为TCP/IP模型中应用层的协议也不例外。HTTP在网络中的层次如图1所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/1.png" alt=""></p>
+<p> 图1.HTTP在TCP/IP中的层次</p>
+<p>可以看出，HTTP是基于传输层的TCP协议，而TCP是一个端到端的面向连接的协议。所谓的端到端可以理解为进程到进程之间的通信。所以HTTP在开始传输之前，首先需要建立TCP连接，而TCP连接的过程需要所谓的“三次握手”。概念如图2所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/2.png" alt=""></p>
+<p>图2.TCP连接的三次握手</p>
+<p>在TCP三次握手之后，建立了TCP连接，此时HTTP就可以进行传输了。一个重要的概念是面向连接，既HTTP在传输完成之间并不断开TCP连接。在HTTP1.1中(通过Connection头设置)这是默认行为。所谓的HTTP传输完成我们通过一个具体的例子来看。</p>
+<p>比如访问我的博客,使用Fiddler来截取对应的请求和响应。如图3所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/3.png" alt=""></p>
+<p>图3.用fiddler抓取请求和相应</p>
+<p>可以看出，虽然仅仅访问了我的博客，但锁获取的不仅仅是一个HTML而已，而是浏览器对HTML解析的过程中，如果发现需要获取的内容，会再次发起HTTP请求去服务器获取，比如图2中的那个common2.css。这上面19个HTTP请求，只依靠一个TCP连接就够了，这就是所谓的持久连接。也是所谓的一次HTTP请求完成。</p>
+<h1 id="HTTP请求-HTTP-Request"><a href="#HTTP请求-HTTP-Request" class="headerlink" title="HTTP请求(HTTP Request)"></a>HTTP请求(HTTP Request)</h1><p>所谓的HTTP请求，也就是Web客户端向Web服务器发送信息，这个信息由如下三部分组成：</p>
+<blockquote>
+<p>1.请求行</p>
+<p>2.HTTP头</p>
+<p>3.内容</p>
+</blockquote>
+<p>一个典型的请求行比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET www.cnblogs.com HTTP/1.1</div></pre></td></tr></table></figure></p>
+<p>请求行写法是固定的，由三部分组成，第一部分是请求方法，第二部分是请求网址，第三部分是HTTP版本。</p>
+<p>第二部分HTTP头在HTTP请求可以是3种HTTP头：1.请求头(request header)  2.普通头(general header)  3.实体头(entity header)</p>
+<p>通常来说，由于Get请求往往不包含内容实体，因此也不会有实体头。</p>
+<p>第三部分内容只在POST请求中存在，因为GET请求并不包含任何实体。</p>
+<p>我们截取一个具体的Post请求来看这三部分，我在一个普通的aspx页面放一个BUTTON,当提交后会产生一个Post请求，如图4所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/4.png" alt=""></p>
+<p>图4.HTTP请求由三部分组成</p>
+<h5 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h5><p>虽然我们所常见的只有Get和Post方法，但实际上HTTP请求方法还有很多，比如： PUT方法，DELETE方法，HEAD方法，CONNECT方法,TRACE方法。这里我就不细说了，自行Bing。</p>
+<p>这里重点说一下Get和Post方法，网上关于Get和Post的区别满天飞。但很多没有说到点子上。Get和Post最大的区别就是Post有上面所说的第三部分：内容。而Get不存在这个内容。因此就像Get和Post其名称所示那样，Get用于从服务器上取内容，虽然可以通过QueryString向服务器发信息，但这违背了Get的本意，QueryString中的信息在HTTP看来仅仅是获取所取得内容的一个参数而已。而Post是由客户端向服务器端发送内容的方式。因此具有请求的第三部分：内容。</p>
+<h1 id="HTTP响应-HTTP-Response"><a href="#HTTP响应-HTTP-Response" class="headerlink" title="HTTP响应(HTTP Response)"></a>HTTP响应(HTTP Response)</h1><p>当Web服务器收到HTTP请求后，会根据请求的信息做某些处理(这些处理可能仅仅是静态的返回页，或是包含Asp.net,PHP,Jsp等语言进行处理后返回)，相应的返回一个HTTP响应。HTTP响应在结构上很类似于HTTP请求,也是由三部分组成，分别为:</p>
+<blockquote>
+<p>1.状态行</p>
+<p>2.HTTP头</p>
+<p>3.返回内容</p>
+</blockquote>
+<p>首先来看状态行，一个典型的HTTP状态如下:</p>
+<p><code>HTTP/1.1 200 OK</code></p>
+<p>第一部分是HTTP版本，第二部分是响应状态码，第三部分是状态码的描述，因此也可以把第二和第三部分看成一个部分。</p>
+<p>对于HTTP版本没有什么好说的，而状态码值得说一下，网上对于每个具体的HTTP状态码所代表的含义都有解释，这里我说一下分类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">信息类 (100-199)</div><div class="line">响应成功 (200-299)</div><div class="line">重定向类 (300-399)</div><div class="line">客户端错误类 (400-499)</div><div class="line">服务端错误类 (500-599)</div></pre></td></tr></table></figure>
+<p>HTTP响应中包含的头包括1.响应头(response header) 2.普通头(general header) 3.实体头(entity header)。</p>
+<p>第三部分HTTP响应内容就是HTTP请求所请求的信息。这个信息可以是一个HTML，也可以是一个图片。比如我访问百度，HTTP Response如图5所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/5.png" alt=""></p>
+<p>图5.一个典型的HTTP响应</p>
+<p>图5中的响应是一个HTML，当然还可以是其它类型，比如图片，如图6所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/6.png" alt=""></p>
+<p>图6.HTTP响应内容是图片</p>
+<p>这里会有一个疑问，既然HTTP响应的内容不仅仅是HTML，还可以是其它类型，那么浏览器如何正确对接收到的信息进行处理？</p>
+<p>这是通过媒体类型确定的(Media Type),具体来说对应Content-Type这个HTTP头，比如图5中是text/html,图6是image/jpeg。</p>
+<p>媒体类型的格式为：大类/小类  比如图5中的html是小类，而text是大类。</p>
+<p>IANA(The Internet Assigned Numbers Authority，互联网数字分配机构)定义了8个大类的媒体类型，分别是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">application— (比如: application/vnd.ms-excel.)</div><div class="line">audio (比如: audio/mpeg.)</div><div class="line">image (比如: image/png.)</div><div class="line">message (比如,:message/http.)</div><div class="line">model(比如:model/vrml.)</div><div class="line">multipart (比如:multipart/form-data.)</div><div class="line">text(比如:text/html.)</div><div class="line">video(比如:video/quicktime.)</div></pre></td></tr></table></figure>
+<p>HTTP头<br>HTTP头仅仅是一个标签而已，比如我在Aspx中加入代码:</p>
+<p><code>Response.AddHeader(&quot;测试头&quot;,&quot;测试值&quot;);</code></p>
+<p>对应的我们可以在fiddler抓到的信息如图7所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/7.png" alt=""></p>
+<p>图7.HTTP头</p>
+<p>不难看出，HTTP头并不是严格要求的，仅仅是一个标签，如果浏览器可以解析就会按照某些标准（比如浏览器自身标准，W3C的标准）去解释这个头，否则不识别的头就会被浏览器无视。对服务器也是同理。假如你编写一个浏览器，你可以将上面的头解释成任何你想要的效果微笑</p>
+<p>下面我们说的HTTP头都是W3C标准的头，我不会对每个头的作用进行详细说明，关于HTTP头作用的文章在网上已经很多了，请自行Bing。HTTP头按照其不同的作用，可以分为四大类。</p>
+<h4 id="通用头-General-header"><a href="#通用头-General-header" class="headerlink" title="通用头(General header)"></a>通用头(General header)</h4><p>通用头即可以包含在HTTP请求中，也可以包含在HTTP响应中。通用头的作用是描述HTTP协议本身。比如描述HTTP是否持久连接的Connection头，HTTP发送日期的Date头，描述HTTP所在TCP连接时间的Keep-Alive头,用于缓存控制的Cache-Control头等。</p>
+<h4 id="实体头-Entity-header"><a href="#实体头-Entity-header" class="headerlink" title="实体头(Entity header)"></a>实体头(Entity header)</h4><p>实体头是那些描述HTTP信息的头。既可以出现在HTTP POST方法的请求中，也可以出现在HTTP响应中。比如图5和图6中的Content-Type和Content-length都是描述实体的类型和大小的头都属于实体头。其它还有用于描述实体的Content-Language,Content-MD5,Content-Encoding以及控制实体缓存的Expires和Last-Modifies头等。</p>
+<h4 id="请求头-HTTP-Request-Header"><a href="#请求头-HTTP-Request-Header" class="headerlink" title="请求头(HTTP Request Header)"></a>请求头(HTTP Request Header)</h4><p>请求头是那些由客户端发往服务端以便帮助服务端更好的满足客户端请求的头。请求头只能出现在HTTP请求中。比如告诉服务器只接收某种响应内容的Accept头，发送Cookies的Cookie头，显示请求主机域的HOST头,用于缓存的If-Match，If-Match-Since,If-None-Match头，用于只取HTTP响应信息中部分信息的Range头，用于附属HTML相关请求引用的Referer头等。</p>
+<h4 id="响应头-HTTP-Response-Header"><a href="#响应头-HTTP-Response-Header" class="headerlink" title="响应头(HTTP Response Header)"></a>响应头(HTTP Response Header)</h4><p>HTTP响应头是那些描述HTTP响应本身的头，这里面并不包含描述HTTP响应中第三部分也就是HTTP信息的头（这部分由实体头负责）。比如说定时刷新的Refresh头，当遇到503错误时自动重试的Retry-After头，显示服务器信息的Server头，设置COOKIE的Set-Cookie头，告诉客户端可以部分请求的Accept-Ranges头等。</p>
+<h4 id="状态保持"><a href="#状态保持" class="headerlink" title="状态保持"></a>状态保持</h4><p>还有一点值得注意的是，HTTP协议是无状态的，这意味着对于接收HTTP请求的服务器来说，并不知道每一次请求来自同一个客户端还是不同客户端，每一次请求对于服务器来说都是一样的。因此需要一些额外的手段来使得服务器在接收某个请求时知道这个请求来自于某个客户端。如图8所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/8.png" alt=""></p>
+<p>图8.服务器并不知道请求1和请求2来自同一个客户端</p>
+<h5 id="通过Cookies保持状态"><a href="#通过Cookies保持状态" class="headerlink" title="通过Cookies保持状态"></a>通过Cookies保持状态</h5><p>为了解决这个问题，HTTP协议通过Cookies来保持状态，对于图8中的请求，如果使用Cookies进行状态控制，则变成了如图9所示。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/http/9.png" alt=""></p>
+<p>图9.通过Cookies，服务器就可以清楚的知道请求2和请求1来自同一个客户端</p>
+<h5 id="通过表单变量保持状态"><a href="#通过表单变量保持状态" class="headerlink" title="通过表单变量保持状态"></a>通过表单变量保持状态</h5><p>除了Cookies之外，还可以使用表单变量来保持状态，比如Asp.net就通过一个叫ViewState的Input=“hidden”的框来保持状态,比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;hidden&quot; name=&quot;__VIEWSTATE&quot; id=&quot;__VIEWSTATE&quot; value=&quot;/wEPDwUKMjA0OTM4MTAwNGRkXUfhlDv1Cs7/qhBlyZROCzlvf5U=&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>这个原理和Cookies大同小异，只是每次请求和响应所附带的信息变成了表单变量。</p>
+<h5 id="通过QueryString保持状态"><a href="#通过QueryString保持状态" class="headerlink" title="通过QueryString保持状态"></a>通过QueryString保持状态</h5><p> 这个原理和上述两种状态保持方法原理是一样的，QueryString通过将信息保存在所请求地址的末尾来向服务器传送信息，通常和表单结合使用，一个典型的QueryString比如:</p>
+<p> <code>www.xxx.com/xxx.aspx?var1=value&amp;var2=value2</code></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文从一个比较高的视角来看HTTP协议，对于HTTP协议中的细节并没有深挖，但对于HTTP大框架有了比较系统的介绍，更多关于HTTP的细节信息，请去Bing或参看相关书籍:-)</p>
+<p>文章来源：<a href="http://www.cnblogs.com/CareySon/archive/2012/04/27/HTTP-Protocol.html" target="_blank" rel="external">http://www.cnblogs.com/CareySon/archive/2012/04/27/HTTP-Protocol.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>文章对您有用？打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechatpay.png" alt="林晓东 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay.png" alt="林晓东 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/27/20150327-web-optimization/" rel="next" title="网站前端性能优化">
+                <i class="fa fa-chevron-left"></i> 网站前端性能优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/02/20150402-mysql-errors/" rel="prev" title="mysql相关错误整理">
+                mysql相关错误整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/28/20150328-http/"
+     data-title="转http协议漫谈"
+     data-content=""
+     data-url="http://blog.linxiaodong.com.com/2015/03/28/20150328-http/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/28/20150328-http/"
+           data-title="转http协议漫谈" data-url="http://blog.linxiaodong.com.com/2015/03/28/20150328-http/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/author.jpg"
+               alt="林晓东" />
+          <p class="site-author-name" itemprop="name">林晓东</p>
+          <p class="site-description motion-element" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/buxuku" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xiaodong5959" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/42031633/" target="_blank" title="douban">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  douban
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiaodong5959" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.zhangxinxu.com/wordpress/" title="张鑫旭" target="_blank">张鑫旭</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP的定义和历史"><span class="nav-number">2.</span> <span class="nav-text">HTTP的定义和历史</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-0-9"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">HTTP 0.9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-1-0"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">HTTP 1.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-1-1"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">HTTP 1.1</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP的网络层次"><span class="nav-number">3.</span> <span class="nav-text">HTTP的网络层次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求-HTTP-Request"><span class="nav-number">4.</span> <span class="nav-text">HTTP请求(HTTP Request)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">4.0.0.0.1.</span> <span class="nav-text">HTTP请求方法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP响应-HTTP-Response"><span class="nav-number">5.</span> <span class="nav-text">HTTP响应(HTTP Response)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用头-General-header"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">通用头(General header)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实体头-Entity-header"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">实体头(Entity header)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求头-HTTP-Request-Header"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">请求头(HTTP Request Header)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应头-HTTP-Response-Header"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">响应头(HTTP Response Header)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#状态保持"><span class="nav-number">5.0.0.5.</span> <span class="nav-text">状态保持</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过Cookies保持状态"><span class="nav-number">5.0.0.5.1.</span> <span class="nav-text">通过Cookies保持状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过表单变量保持状态"><span class="nav-number">5.0.0.5.2.</span> <span class="nav-text">通过表单变量保持状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过QueryString保持状态"><span class="nav-number">5.0.0.5.3.</span> <span class="nav-text">通过QueryString保持状态</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林晓东</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buxuku"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz", "P0QeN4CeSm3RRLghin8m0BbA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

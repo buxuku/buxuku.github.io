@@ -1,0 +1,992 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="IXY1ltSsL1oyUWlv3qViZpamDEWmbGCw36A85yMmcuw" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微擎,php,二次开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="其实做为开发人员，我们都应该尊重别人的劳动成果的，但互联网的免费性，开源性，分享性，而更多的是码农的穷逼性，不知是被逼使用一些盗版软件，破解一些东西什么的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次微擎的云检测破解之道">
+<meta property="og:url" content="http://blog.linxiaodong.com.com/2016/04/28/microenine-crack/index.html">
+<meta property="og:site_name" content="林晓东的个人博客">
+<meta property="og:description" content="其实做为开发人员，我们都应该尊重别人的劳动成果的，但互联网的免费性，开源性，分享性，而更多的是码农的穷逼性，不知是被逼使用一些盗版软件，破解一些东西什么的。">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/16-4-28/62063731.jpg">
+<meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/16-4-28/91641646.jpg">
+<meta property="og:updated_time" content="2016-04-28T09:21:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录一次微擎的云检测破解之道">
+<meta name="twitter:description" content="其实做为开发人员，我们都应该尊重别人的劳动成果的，但互联网的免费性，开源性，分享性，而更多的是码农的穷逼性，不知是被逼使用一些盗版软件，破解一些东西什么的。">
+<meta name="twitter:image" content="http://7te946.com1.z0.glb.clouddn.com/16-4-28/62063731.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '3697207',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.linxiaodong.com.com/2016/04/28/microenine-crack/"/>
+
+
+
+
+
+  <title> 记录一次微擎的云检测破解之道 | 林晓东的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3e7b56b0f58d33e75fcd47aa74857ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">林晓东的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">一个走在前端的后端人</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'zeKsTcmzcvMmFP7m5Ud2','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2016/04/28/microenine-crack/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="林晓东">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/author.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="林晓东的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="林晓东的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                记录一次微擎的云检测破解之道
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-28T16:50:55+08:00">
+                2016-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/二次开发/" itemprop="url" rel="index">
+                    <span itemprop="name">二次开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/04/28/microenine-crack/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/28/microenine-crack/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/04/28/microenine-crack/" class="leancloud_visitors" data-flag-title="记录一次微擎的云检测破解之道">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其实做为开发人员，我们都应该尊重别人的劳动成果的，但互联网的免费性，开源性，分享性，而更多的是码农的穷逼性，不知是被逼使用一些盗版软件，破解一些东西什么的。<br><a id="more"></a><br>以前手头上微信框架用的是某X力的，虽然知道也是破解的微擎的，但人家便宜呀，模块多呀。</p>
+<p>不过真的是一分钱一分货，bug太多，更新不行，以至后来我升级到他们的新版本后根本就不能更新了。</p>
+<p>最后想了想，还是和微擎吧，毕竟是官方的，而且免费更新框架，至少框架这一块是稳定了。</p>
+<p>但用免费版的微擎有一个比较大的问题就是，很多模块都是要收费的，这样可免费用的模块就比较少了。</p>
+<p>网上会有很多微擎的模块盗版出来的，但安装会有一个问题就是，微擎的模块都是在线安装的，就算我们拿到模块进行本地安装时，也会通过模块名进行云检测，如果商城中有这个模块，就会提示盗版，而站点就可能会被记录黑名单，这样就不能再使用微擎的一切云服务了，比如安装微擎商城中的模块，更新框架等。</p>
+<p>网上主流的解决方法就是屏蔽云服务，但是这样所有模块就只能本地安装了，框架也不能更新了。</p>
+<p>我希望能够得到完美的解决方案就是，我能够正常使用微擎的免费服务，包括更新框架，安装商城免费的模块，更新商城的免费模块，同时，我也可以安装自己盗版的模块。</p>
+<p>通过分析微擎云服务文件，弄清楚了每个函数的用途，最后终于完美解决了我的问题，达到了我上面想要的效果。当然，具体解决方法就不公布了，毕竟这是一个不友好的行为。在此只是记录一下解决思路：让云服务不知道你安装了哪些盗版的模块。</p>
+<p>现在的效果就是这样的：<br><img src="http://7te946.com1.z0.glb.clouddn.com/16-4-28/62063731.jpg" alt=""></p>
+<p>人人商城肯定是盗版的，而微商城是正常从商城里面安装的，后期也是可以免费升级的。</p>
+<p><img src="http://7te946.com1.z0.glb.clouddn.com/16-4-28/91641646.jpg" alt=""><br>一键更新，毫无影响。</p>
+<p>分享一份自己备注的微擎cloud.mod.php函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div><div class="line">566</div><div class="line">567</div><div class="line">568</div><div class="line">569</div><div class="line">570</div><div class="line">571</div><div class="line">572</div><div class="line">573</div><div class="line">574</div><div class="line">575</div><div class="line">576</div><div class="line">577</div><div class="line">578</div><div class="line">579</div><div class="line">580</div><div class="line">581</div><div class="line">582</div><div class="line">583</div><div class="line">584</div><div class="line">585</div><div class="line">586</div><div class="line">587</div><div class="line">588</div><div class="line">589</div><div class="line">590</div><div class="line">591</div><div class="line">592</div><div class="line">593</div><div class="line">594</div><div class="line">595</div><div class="line">596</div><div class="line">597</div><div class="line">598</div><div class="line">599</div><div class="line">600</div><div class="line">601</div><div class="line">602</div><div class="line">603</div><div class="line">604</div><div class="line">605</div><div class="line">606</div><div class="line">607</div><div class="line">608</div><div class="line">609</div><div class="line">610</div><div class="line">611</div><div class="line">612</div><div class="line">613</div><div class="line">614</div><div class="line">615</div><div class="line">616</div><div class="line">617</div><div class="line">618</div><div class="line">619</div><div class="line">620</div><div class="line">621</div><div class="line">622</div><div class="line">623</div><div class="line">624</div><div class="line">625</div><div class="line">626</div><div class="line">627</div><div class="line">628</div><div class="line">629</div><div class="line">630</div><div class="line">631</div><div class="line">632</div><div class="line">633</div><div class="line">634</div><div class="line">635</div><div class="line">636</div><div class="line">637</div><div class="line">638</div><div class="line">639</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * [WeEngine System] Copyright (c) 2014 WE7.CC</div><div class="line"> * WeEngine is NOT a free software, it under the license terms, visited http://www.we7.cc/ for more details.</div><div class="line"> */</div><div class="line">defined(<span class="string">'IN_IA'</span>) <span class="keyword">or</span> <span class="keyword">exit</span>(<span class="string">'Access Denied'</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_client_define</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">array</span>(</div><div class="line">		<span class="string">'/framework/function/communication.func.php'</span>,</div><div class="line">		<span class="string">'/framework/model/cloud.mod.php'</span>,</div><div class="line">		<span class="string">'/web/source/cloud/upgrade.ctrl.php'</span>,</div><div class="line">		<span class="string">'/web/source/cloud/process.ctrl.php'</span>,</div><div class="line">		<span class="string">'/web/source/cloud/dock.ctrl.php'</span>,</div><div class="line">		<span class="string">'/web/themes/default/cloud/upgrade.html'</span>,</div><div class="line">		<span class="string">'/web/themes/default/cloud/process.html'</span></div><div class="line">	);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_prepare</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line">	setting_load();</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>($_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'key'</span>]) || <span class="keyword">empty</span>($_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'token'</span>])) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="string">'-1'</span>, <span class="string">"您的程序需要在微擎云服务平台注册你的站点资料, 来接入云平台服务后才能使用相应功能."</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_m_prepare</span><span class="params">($name)</span> </span>&#123;<span class="comment">//模块验证 传入模块名字，通过云平台验证是否受版权保护 仅用于模块安装 批量安装模块的时候使用</span></div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'module.check'</span>;</div><div class="line">	$pars[<span class="string">'module'</span>] = $name;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">if</span> (is_error($dat)) &#123;</div><div class="line">		<span class="keyword">return</span> $dat;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ($dat[<span class="string">'content'</span>] == <span class="string">'install-module-protect'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="string">'-1'</span>, <span class="string">'此模块已设置版权保护，您只能通过云平台来安装。'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_cloud_build_params</span><span class="params">()</span> </span>&#123;<span class="comment">//云服务变量数组</span></div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line">	$pars = <span class="keyword">array</span>();</div><div class="line">	$pars[<span class="string">'host'</span>] = $_SERVER[<span class="string">'HTTP_HOST'</span>];</div><div class="line">	$pars[<span class="string">'family'</span>] = IMS_FAMILY;</div><div class="line">	$pars[<span class="string">'version'</span>] = IMS_VERSION;</div><div class="line">	$pars[<span class="string">'release'</span>] = IMS_RELEASE_DATE;</div><div class="line">	$pars[<span class="string">'key'</span>] = $_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'key'</span>];</div><div class="line">	$pars[<span class="string">'password'</span>] = md5($_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'key'</span>] . $_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'token'</span>]);</div><div class="line">	$clients = cloud_client_define();</div><div class="line">	$string = <span class="string">''</span>;</div><div class="line">	<span class="keyword">foreach</span>($clients <span class="keyword">as</span> $cli) &#123;</div><div class="line">		$string .= md5_file(IA_ROOT . $cli);</div><div class="line">	&#125;</div><div class="line">	$pars[<span class="string">'client'</span>] = md5($string);</div><div class="line">	<span class="keyword">return</span> $pars;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_m_build</span><span class="params">($modulename, $type = <span class="string">''</span>)</span> </span>&#123;<span class="comment">//云平台安装 卸载模块 更新模块</span></div><div class="line">	$type = in_array($type, <span class="keyword">array</span>(<span class="string">'uninstall'</span>)) ? $type : <span class="string">''</span>;</div><div class="line">	$sql = <span class="string">'SELECT * FROM '</span> . tablename(<span class="string">'modules'</span>) . <span class="string">' WHERE `name`=:name'</span>;</div><div class="line">	$module = pdo_fetch($sql, <span class="keyword">array</span>(<span class="string">':name'</span> =&gt; $modulename));</div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'module.build'</span>;</div><div class="line">	$pars[<span class="string">'module'</span>] = $modulename;</div><div class="line">	$pars[<span class="string">'type'</span>] = $type;</div><div class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($module)) &#123;</div><div class="line">		$pars[<span class="string">'module_version'</span>] = $module[<span class="string">'version'</span>];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">		$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/module.build'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);<span class="comment">//云服务结果处理</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (!is_error($ret)) &#123;</div><div class="line">		$dir = IA_ROOT . <span class="string">'/addons/'</span> . $modulename;</div><div class="line">		$files = <span class="keyword">array</span>();</div><div class="line">		<span class="keyword">if</span> (!<span class="keyword">empty</span>($ret[<span class="string">'files'</span>])) &#123;</div><div class="line">			<span class="keyword">foreach</span> ($ret[<span class="string">'files'</span>] <span class="keyword">as</span> $file) &#123;</div><div class="line">				$entry = $dir . $file[<span class="string">'path'</span>];</div><div class="line">				<span class="keyword">if</span> (!is_file($entry) || md5_file($entry) != $file[<span class="string">'checksum'</span>]) &#123;</div><div class="line">					$files[] = <span class="string">'/'</span> . $modulename . $file[<span class="string">'path'</span>];</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		$ret[<span class="string">'files'</span>] = $files;</div><div class="line">		$schemas = <span class="keyword">array</span>();</div><div class="line">		<span class="keyword">if</span> (!<span class="keyword">empty</span>($ret[<span class="string">'schemas'</span>])) &#123;</div><div class="line">			load()-&gt;func(<span class="string">'db'</span>);</div><div class="line">			<span class="keyword">foreach</span> ($ret[<span class="string">'schemas'</span>] <span class="keyword">as</span> $remote) &#123;</div><div class="line">				$name = substr($remote[<span class="string">'tablename'</span>], <span class="number">4</span>);</div><div class="line">				$local = db_table_schema(pdo(), $name);</div><div class="line">				<span class="keyword">unset</span>($remote[<span class="string">'increment'</span>]);</div><div class="line">				<span class="keyword">unset</span>($local[<span class="string">'increment'</span>]);</div><div class="line">				<span class="keyword">if</span> (<span class="keyword">empty</span>($local)) &#123;</div><div class="line">					$schemas[] = $remote;</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					$diffs = db_table_fix_sql($local, $remote);</div><div class="line">					<span class="keyword">if</span> (!<span class="keyword">empty</span>($diffs)) &#123;</div><div class="line">						$schemas[] = $remote;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		$ret[<span class="string">'upgrade'</span>] = <span class="keyword">true</span>;</div><div class="line">		$ret[<span class="string">'type'</span>] = <span class="string">'module'</span>;</div><div class="line">		$ret[<span class="string">'schemas'</span>] = $schemas;</div><div class="line">				<span class="keyword">if</span> (<span class="keyword">empty</span>($module)) &#123;</div><div class="line">			$ret[<span class="string">'install'</span>] = <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_m_query</span><span class="params">()</span> </span>&#123;<span class="comment">//非系统模块发送到服务端 a=module&amp;do=check 已经安装模块 检查更新 安装模块 检查已经购买但没有安装的</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'module.query'</span>;</div><div class="line">	$pars[<span class="string">'module'</span>] = cloud_extra_module();<span class="comment">//获取非系统模块</span></div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/module.query'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_m_info</span><span class="params">($name)</span> </span>&#123;<span class="comment">//获取指定模块信息 安装模块 更新模块时进行检查</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'module.info'</span>;</div><div class="line">	$pars[<span class="string">'module'</span>] = $name;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/module.info'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_m_upgradeinfo</span><span class="params">($name)</span> </span>&#123;<span class="comment">//在线检测模块更新 仅用于module.ctrl.php 469 $do == 'upgrade' 参数 传入模块名</span></div><div class="line">	$module = pdo_fetch(<span class="string">"SELECT name, version FROM "</span>.tablename(<span class="string">'modules'</span>).<span class="string">" WHERE name = '&#123;$name&#125;'"</span>);</div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'module.info'</span>;</div><div class="line">	$pars[<span class="string">'module'</span>] = $name;</div><div class="line">	$pars[<span class="string">'curversion'</span>] = $module[<span class="string">'version'</span>];</div><div class="line">	$pars[<span class="string">'isupgrade'</span>] = <span class="number">1</span>;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/module.info'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_t_prepare</span><span class="params">($name)</span> </span>&#123;<span class="comment">//模板云检测</span></div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'theme.check'</span>;</div><div class="line">	$pars[<span class="string">'theme'</span>] = $name;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">if</span> (is_error($dat)) &#123;</div><div class="line">		<span class="keyword">return</span> $dat;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ($dat[<span class="string">'content'</span>] == <span class="string">'install-theme-protect'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="string">'-1'</span>, <span class="string">'此模板已设置版权保护，您只能通过云平台来安装。'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_t_query</span><span class="params">()</span> </span>&#123;<span class="comment">//获取在线安装的模板</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'theme.query'</span>;</div><div class="line">	$pars[<span class="string">'theme'</span>] = cloud_extra_theme();</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/theme.query'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_t_info</span><span class="params">($name)</span> </span>&#123;<span class="comment">//在线获取指定模板信息</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'theme.info'</span>;</div><div class="line">	$pars[<span class="string">'theme'</span>] = $name;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/theme.info'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_t_build</span><span class="params">($name)</span> </span>&#123;<span class="comment">//在线安装模板</span></div><div class="line">	$sql = <span class="string">'SELECT * FROM '</span> . tablename(<span class="string">'site_templates'</span>) . <span class="string">' WHERE `name`=:name'</span>;</div><div class="line">	$theme = pdo_fetch($sql, <span class="keyword">array</span>(<span class="string">':name'</span> =&gt; $name));</div><div class="line">	</div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'theme.build'</span>;</div><div class="line">	$pars[<span class="string">'theme'</span>] = $name;</div><div class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>($theme)) &#123;</div><div class="line">		$pars[<span class="string">'themeversion'</span>] = $theme[<span class="string">'version'</span>];</div><div class="line">	&#125;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/theme.build'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">if</span>(!is_error($ret)) &#123;</div><div class="line">		$dir = IA_ROOT . <span class="string">'/app/themes/'</span> . $name;</div><div class="line">		$files = <span class="keyword">array</span>();</div><div class="line">		<span class="keyword">if</span>(!<span class="keyword">empty</span>($ret[<span class="string">'files'</span>])) &#123;</div><div class="line">			<span class="keyword">foreach</span>($ret[<span class="string">'files'</span>] <span class="keyword">as</span> $file) &#123;</div><div class="line">				$entry = $dir . $file[<span class="string">'path'</span>];</div><div class="line">				<span class="keyword">if</span>(!is_file($entry) || md5_file($entry) != $file[<span class="string">'checksum'</span>]) &#123;</div><div class="line">					$files[] = <span class="string">'/'</span>. $name . $file[<span class="string">'path'</span>];</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		$ret[<span class="string">'files'</span>] = $files;</div><div class="line">		$ret[<span class="string">'upgrade'</span>] = <span class="keyword">true</span>;</div><div class="line">		$ret[<span class="string">'type'</span>] = <span class="string">'theme'</span>;</div><div class="line">				<span class="keyword">if</span>(<span class="keyword">empty</span>($theme)) &#123;</div><div class="line">			$ret[<span class="string">'install'</span>] = <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_t_upgradeinfo</span><span class="params">($name)</span> </span>&#123;<span class="comment">//在线获取模板更新</span></div><div class="line">	$sql = <span class="string">'SELECT `name`, `version` FROM '</span> . tablename(<span class="string">'site_templates'</span>) . <span class="string">' WHERE `name` = :name'</span>;</div><div class="line">	$theme = pdo_fetch($sql, <span class="keyword">array</span>(<span class="string">':name'</span> =&gt; $name));</div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'theme.upgrade'</span>;</div><div class="line">	$pars[<span class="string">'theme'</span>] = $theme[<span class="string">'name'</span>];</div><div class="line">	$pars[<span class="string">'version'</span>] = $theme[<span class="string">'version'</span>];</div><div class="line">	$pars[<span class="string">'isupgrade'</span>] = <span class="number">1</span>;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/module.info'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_sms_send</span><span class="params">($mobile, $content)</span> </span>&#123;<span class="comment">//在线短信接口</span></div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line">	$log = <span class="keyword">array</span>(</div><div class="line">		<span class="string">'mobile'</span> =&gt; $mobile,</div><div class="line">		<span class="string">'content'</span> =&gt; $content,</div><div class="line">		<span class="string">'result'</span> =&gt; <span class="string">''</span>,</div><div class="line">		<span class="string">'uniacid'</span> =&gt; $_W[<span class="string">'uniacid'</span>],</div><div class="line">		<span class="string">'createtime'</span> =&gt; TIMESTAMP</div><div class="line">	);</div><div class="line">	$row = pdo_get(<span class="string">'uni_settings'</span> , <span class="keyword">array</span>(<span class="string">'uniacid'</span> =&gt; $_W[<span class="string">'uniacid'</span>]), <span class="keyword">array</span>(<span class="string">'notify'</span>));</div><div class="line">	$row[<span class="string">'notify'</span>] = @iunserializer($row[<span class="string">'notify'</span>]);</div><div class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>($row[<span class="string">'notify'</span>]) &amp;&amp; !<span class="keyword">empty</span>($row[<span class="string">'notify'</span>][<span class="string">'sms'</span>])) &#123;</div><div class="line">		$config = $row[<span class="string">'notify'</span>][<span class="string">'sms'</span>];</div><div class="line">		$balance = intval($config[<span class="string">'balance'</span>]);</div><div class="line">		<span class="keyword">if</span>($balance &lt;= <span class="number">0</span>) &#123;</div><div class="line">			$log[<span class="string">'result'</span>] = <span class="string">'发送短信失败, 请联系系统管理人员. 错误详情: 短信余额不足'</span>;</div><div class="line">			pdo_insert(<span class="string">'core_sendsms_log'</span>, $log);</div><div class="line">			<span class="keyword">return</span> error(<span class="number">-1</span>, $log[<span class="string">'result'</span>]);</div><div class="line">		&#125;</div><div class="line">		$sign = $config[<span class="string">'signature'</span>];</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>($sign) &amp;&amp; IMS_FAMILY == <span class="string">'x'</span>) &#123;</div><div class="line">			$sign = $_W[<span class="string">'setting'</span>][<span class="string">'copyright'</span>][<span class="string">'sitename'</span>];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>($sign)) &#123;</div><div class="line">			$sign = <span class="string">'微擎'</span>;</div><div class="line">		&#125;</div><div class="line">		$log[<span class="string">'content'</span>] = $content . <span class="string">" 【&#123;$sign&#125;】"</span>;</div><div class="line"></div><div class="line">		$pars = _cloud_build_params();</div><div class="line">		$pars[<span class="string">'method'</span>] = <span class="string">'sms.send'</span>;</div><div class="line">		$pars[<span class="string">'mobile'</span>] = $mobile;</div><div class="line">		$pars[<span class="string">'content'</span>] = $content . <span class="string">" 【&#123;$sign&#125;】"</span>;</div><div class="line">		$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">		$file = IA_ROOT . <span class="string">'/data/sms.send'</span>;</div><div class="line">		$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">		<span class="keyword">if</span> (is_error($ret)) &#123;</div><div class="line">			$log[<span class="string">'result'</span>] = $ret[<span class="string">'message'</span>];</div><div class="line">			pdo_insert(<span class="string">'core_sendsms_log'</span>, $log);</div><div class="line">			<span class="keyword">return</span> error($ret[<span class="string">'errno'</span>], $ret[<span class="string">'message'</span>]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> ($ret == <span class="string">'success'</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			$log[<span class="string">'result'</span>] = $ret[<span class="string">'message'</span>];</div><div class="line">			pdo_insert(<span class="string">'core_sendsms_log'</span>, $log);</div><div class="line">			<span class="keyword">return</span> error(<span class="number">-1</span>, $ret);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	pdo_insert(<span class="string">'core_sendsms_log'</span>, $log);</div><div class="line">	<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'发送短信失败, 请联系系统管理人员. 错误详情: 没有设置短信配额或参数'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_build</span><span class="params">()</span> </span>&#123;<span class="comment">//程序更新入口</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'application.build'</span>;</div><div class="line">	$pars[<span class="string">'extra'</span>] = cloud_extra_account();</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/application.build'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">if</span>(!is_error($ret)) &#123;</div><div class="line">		<span class="keyword">if</span>($ret[<span class="string">'state'</span>] == <span class="string">'warning'</span>) &#123;</div><div class="line">			$ret[<span class="string">'files'</span>] = cloud_client_define();</div><div class="line">			<span class="keyword">unset</span>($ret[<span class="string">'schemas'</span>]);</div><div class="line">			<span class="keyword">unset</span>($ret[<span class="string">'scripts'</span>]);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			$files = <span class="keyword">array</span>();</div><div class="line">			<span class="keyword">if</span>(!<span class="keyword">empty</span>($ret[<span class="string">'files'</span>])) &#123;</div><div class="line">				<span class="keyword">foreach</span>($ret[<span class="string">'files'</span>] <span class="keyword">as</span> $file) &#123;</div><div class="line">					$entry = IA_ROOT . $file[<span class="string">'path'</span>];</div><div class="line">					<span class="keyword">if</span>(!is_file($entry) || md5_file($entry) != $file[<span class="string">'checksum'</span>]) &#123;</div><div class="line">						$files[] = $file[<span class="string">'path'</span>];</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			$ret[<span class="string">'files'</span>] = $files;</div><div class="line"></div><div class="line">			$schemas = <span class="keyword">array</span>();</div><div class="line">			<span class="keyword">if</span>(!<span class="keyword">empty</span>($ret[<span class="string">'schemas'</span>])) &#123;</div><div class="line">				load()-&gt;func(<span class="string">'db'</span>);</div><div class="line">				<span class="keyword">foreach</span>($ret[<span class="string">'schemas'</span>] <span class="keyword">as</span> $remote) &#123;</div><div class="line">					$name = substr($remote[<span class="string">'tablename'</span>], <span class="number">4</span>);</div><div class="line">					$local = db_table_schema(pdo(), $name);</div><div class="line">					<span class="keyword">unset</span>($remote[<span class="string">'increment'</span>]);</div><div class="line">					<span class="keyword">unset</span>($local[<span class="string">'increment'</span>]);</div><div class="line">					<span class="keyword">if</span>(<span class="keyword">empty</span>($local)) &#123;</div><div class="line">						$schemas[] = $remote;</div><div class="line">					&#125; <span class="keyword">else</span> &#123;</div><div class="line">						$sqls = db_table_fix_sql($local, $remote);</div><div class="line">						<span class="keyword">if</span>(!<span class="keyword">empty</span>($sqls)) &#123;</div><div class="line">							$schemas[] = $remote;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			$ret[<span class="string">'schemas'</span>] = $schemas;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>($ret[<span class="string">'family'</span>] == <span class="string">'x'</span> &amp;&amp; IMS_FAMILY == <span class="string">'v'</span>) &#123;</div><div class="line">			load()-&gt;model(<span class="string">'setting'</span>);</div><div class="line">			setting_upgrade_version(<span class="string">'x'</span>, IMS_VERSION, IMS_RELEASE_DATE);</div><div class="line">			message(<span class="string">'您已经购买了商业授权版本, 系统将转换为商业版, 并重新运行自动更新程序.'</span>, <span class="string">'refresh'</span>);</div><div class="line">		&#125;</div><div class="line">		$ret[<span class="string">'upgrade'</span>] = <span class="keyword">false</span>;</div><div class="line">		<span class="keyword">if</span>(!<span class="keyword">empty</span>($ret[<span class="string">'files'</span>]) || !<span class="keyword">empty</span>($ret[<span class="string">'schemas'</span>]) || !<span class="keyword">empty</span>($ret[<span class="string">'scripts'</span>])) &#123;</div><div class="line">			$ret[<span class="string">'upgrade'</span>] = <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line">		$upgrade = <span class="keyword">array</span>();</div><div class="line">		$upgrade[<span class="string">'upgrade'</span>] = $ret[<span class="string">'upgrade'</span>];</div><div class="line">		$upgrade[<span class="string">'lastupdate'</span>] = TIMESTAMP;</div><div class="line">		cache_write(<span class="string">'upgrade'</span>, $upgrade);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_schema</span><span class="params">()</span> </span>&#123;<span class="comment">//数据库整理</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'application.schema'</span>;</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	$file = IA_ROOT . <span class="string">'/data/application.schema'</span>;</div><div class="line">	$ret = _cloud_shipping_parse($dat, $file);</div><div class="line">	<span class="keyword">if</span>(!is_error($ret)) &#123;</div><div class="line">		$schemas = <span class="keyword">array</span>();</div><div class="line">		<span class="keyword">if</span>(!<span class="keyword">empty</span>($ret[<span class="string">'schemas'</span>])) &#123;</div><div class="line">			load()-&gt;func(<span class="string">'db'</span>);</div><div class="line">			<span class="keyword">foreach</span>($ret[<span class="string">'schemas'</span>] <span class="keyword">as</span> $remote) &#123;</div><div class="line">				$name = substr($remote[<span class="string">'tablename'</span>], <span class="number">4</span>);</div><div class="line">				$local = db_table_schema(pdo(), $name);</div><div class="line">				<span class="keyword">unset</span>($remote[<span class="string">'increment'</span>]);</div><div class="line">				<span class="keyword">unset</span>($local[<span class="string">'increment'</span>]);</div><div class="line">				<span class="keyword">if</span>(<span class="keyword">empty</span>($local)) &#123;</div><div class="line">					$schemas[] = $remote;</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					$diffs = db_schema_compare($local, $remote);</div><div class="line">					<span class="keyword">if</span>(!<span class="keyword">empty</span>($diffs)) &#123;</div><div class="line">						$schemas[] = $remote;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		$ret[<span class="string">'schemas'</span>] = $schemas;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> $ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_download</span><span class="params">($path, $type = <span class="string">''</span>)</span> </span>&#123;<span class="comment">//下载文件</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'application.shipping'</span>;</div><div class="line">	$pars[<span class="string">'path'</span>] = $path;</div><div class="line">	$pars[<span class="string">'type'</span>] = $type;</div><div class="line">	$pars[<span class="string">'gz'</span>] = function_exists(<span class="string">'gzcompress'</span>) &amp;&amp; function_exists(<span class="string">'gzuncompress'</span>) ? <span class="string">'true'</span> : <span class="string">'false'</span>;</div><div class="line">	$headers = <span class="keyword">array</span>(<span class="string">'content-type'</span> =&gt; <span class="string">'application/x-www-form-urlencoded'</span>);</div><div class="line">	$dat = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars, $headers, <span class="number">300</span>);</div><div class="line">	<span class="keyword">if</span>(is_error($dat)) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'网络存在错误， 请稍后重试。'</span> . $dat[<span class="string">'message'</span>]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>($dat[<span class="string">'content'</span>] == <span class="string">'success'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	$ret = @json_decode($dat[<span class="string">'content'</span>], <span class="keyword">true</span>);</div><div class="line">	<span class="keyword">if</span>(is_error($ret)) &#123;</div><div class="line">		<span class="keyword">return</span> $ret;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'不能下载文件， 请稍后重试。'</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_cloud_shipping_parse</span><span class="params">($dat, $file)</span> </span>&#123;<span class="comment">//云服务结果处理</span></div><div class="line">	<span class="keyword">if</span> (is_error($dat)) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'网络传输错误, 请检查您的cURL是否可用, 或者服务器网络是否正常. '</span> . $dat[<span class="string">'message'</span>]);</div><div class="line">	&#125;</div><div class="line">	$tmp = unserialize($dat[<span class="string">'content'</span>]);</div><div class="line">	<span class="keyword">if</span> (is_array($tmp) &amp;&amp; is_error($tmp)) &#123;</div><div class="line">		<span class="keyword">if</span> ($tmp[<span class="string">'errno'</span>] == <span class="string">'-2'</span>) &#123;</div><div class="line">			$data = file_get_contents(IA_ROOT . <span class="string">'/framework/version.inc.php'</span>);</div><div class="line">			file_put_contents(IA_ROOT . <span class="string">'/framework/version.inc.php'</span>, str_replace(<span class="string">"'x'"</span>, <span class="string">"'v'"</span>, $data));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> $tmp;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ($dat[<span class="string">'content'</span>] == <span class="string">'patching'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'补丁程序正在更新中，请稍后再试！'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ($dat[<span class="string">'content'</span>] == <span class="string">'blacklist'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'抱歉，您的站点已被列入云服务黑名单，云服务一切业务已被禁止，请联系微擎客服！'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (strlen($dat[<span class="string">'content'</span>]) != <span class="number">32</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'云服务平台向您的服务器传输数据过程中出现错误, 这个错误可能是由于您的通信密钥和云服务不一致, 请尝试诊断云服务参数(重置站点ID和通信密钥). 传输原始数据:'</span> . $dat[<span class="string">'meta'</span>]);</div><div class="line">	&#125;</div><div class="line">	$data = @file_get_contents($file);</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($data)) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'没有接收到服务器的传输的数据.'</span>);</div><div class="line">	&#125;</div><div class="line">	@unlink($file);</div><div class="line">	$ret = @iunserializer($data);</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($data) || <span class="keyword">empty</span>($ret) || $dat[<span class="string">'content'</span>] != $ret[<span class="string">'secret'</span>]) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'云服务平台向您的服务器传输的数据校验失败, 可能是因为您的网络不稳定, 或网络不安全, 请稍后重试.'</span>);</div><div class="line">	&#125;</div><div class="line">	$ret = iunserializer($ret[<span class="string">'data'</span>]);</div><div class="line">	<span class="keyword">if</span> (is_array($ret) &amp;&amp; is_error($ret)) &#123;</div><div class="line">		<span class="keyword">if</span> ($ret[<span class="string">'errno'</span>] == <span class="string">'-2'</span>) &#123;</div><div class="line">			$data = file_get_contents(IA_ROOT . <span class="string">'/framework/version.inc.php'</span>);</div><div class="line">			file_put_contents(IA_ROOT . <span class="string">'/framework/version.inc.php'</span>, str_replace(<span class="string">"'x'"</span>, <span class="string">"'v'"</span>, $data));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (!is_error($ret) &amp;&amp; is_array($ret) &amp;&amp; !<span class="keyword">empty</span>($ret)) &#123;</div><div class="line">		<span class="keyword">if</span> ($ret[<span class="string">'state'</span>] == <span class="string">'fatal'</span>) &#123;</div><div class="line">			<span class="keyword">return</span> error($ret[<span class="string">'errorno'</span>], <span class="string">'发生错误: '</span> . $ret[<span class="string">'message'</span>]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> $ret;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> error($ret[<span class="string">'errno'</span>], <span class="string">"发生错误: &#123;$ret['message']&#125;"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_request</span><span class="params">($url, $post = <span class="string">''</span>, $extra = array<span class="params">()</span>, $timeout = <span class="number">60</span>)</span> </span>&#123;<span class="comment">//发送云服务请求</span></div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line">	load()-&gt;func(<span class="string">'communication'</span>);</div><div class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($_W[<span class="string">'setting'</span>][<span class="string">'cloudip'</span>][<span class="string">'ip'</span>]) &amp;&amp; <span class="keyword">empty</span>($extra[<span class="string">'ip'</span>])) &#123;</div><div class="line">		$extra[<span class="string">'ip'</span>] = $_W[<span class="string">'setting'</span>][<span class="string">'cloudip'</span>][<span class="string">'ip'</span>];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ihttp_request($url, $post, $extra, $timeout);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_extra_account</span><span class="params">()</span> </span>&#123;<span class="comment">//获取添加公众号信息</span></div><div class="line">	$data = <span class="keyword">array</span>();</div><div class="line">	$data[<span class="string">'accounts'</span>] = pdo_fetchall(<span class="string">"SELECT name, account, original FROM "</span>.tablename(<span class="string">'account_wechats'</span>) . <span class="string">" GROUP BY account"</span>);</div><div class="line">	<span class="keyword">return</span> serialize($data);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_extra_module</span><span class="params">()</span> </span>&#123;<span class="comment">//获取非系统模块 只用于cloud_m_query()方法</span></div><div class="line">	$sql = <span class="string">'SELECT `name` FROM '</span> . tablename(<span class="string">'modules'</span>) . <span class="string">' WHERE `type` &lt;&gt; :type'</span>;</div><div class="line">	$modules = pdo_fetchall($sql, <span class="keyword">array</span>(<span class="string">':type'</span> =&gt; <span class="string">'system'</span>), <span class="string">'name'</span>);</div><div class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($modules)) &#123;</div><div class="line">		<span class="keyword">return</span> base64_encode(iserializer(array_keys($modules)));</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">''</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_extra_theme</span><span class="params">()</span> </span>&#123;<span class="comment">//获取非默认模板 </span></div><div class="line">	$sql = <span class="string">'SELECT `name` FROM '</span> . tablename(<span class="string">'site_templates'</span>) . <span class="string">' WHERE `name` &lt;&gt; :name'</span>;</div><div class="line">	$themes = pdo_fetchall($sql, <span class="keyword">array</span>(<span class="string">':name'</span> =&gt; <span class="string">'default'</span>), <span class="string">'name'</span>);</div><div class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($themes)) &#123;</div><div class="line">		<span class="keyword">return</span> base64_encode(iserializer(array_keys($themes)));</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">''</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_cron_create</span><span class="params">($cron)</span> </span>&#123;<span class="comment">//添加定时任务</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'cron.create'</span>;</div><div class="line">	$pars[<span class="string">'cron'</span>] = base64_encode(iserializer($cron));</div><div class="line">	$result = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">return</span> _cloud_cron_parse($result);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_cron_update</span><span class="params">($cron)</span> </span>&#123;<span class="comment">//更新定时任务</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'cron.update'</span>;</div><div class="line">	$pars[<span class="string">'cron'</span>] = base64_encode(iserializer($cron));</div><div class="line">	$result = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">return</span> _cloud_cron_parse($result);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_cron_get</span><span class="params">($cron_id)</span> </span>&#123;<span class="comment">//获取定时任务</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'cron.get'</span>;</div><div class="line">	$pars[<span class="string">'cron_id'</span>] = $cron_id;</div><div class="line">	$result = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">return</span> _cloud_cron_parse($result);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_cron_change_status</span><span class="params">($cron_id, $status)</span> </span>&#123;<span class="comment">//更改定时任务状态</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'cron.status'</span>;</div><div class="line">	$pars[<span class="string">'cron_id'</span>] = $cron_id;</div><div class="line">	$pars[<span class="string">'status'</span>] = $status;</div><div class="line">	$result = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">return</span> _cloud_cron_parse($result);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_cron_remove</span><span class="params">($cron_id)</span> </span>&#123;<span class="comment">//删除定时任务</span></div><div class="line">	$pars = _cloud_build_params();</div><div class="line">	$pars[<span class="string">'method'</span>] = <span class="string">'cron.remove'</span>;</div><div class="line">	$pars[<span class="string">'cron_id'</span>] = $cron_id;</div><div class="line">	$result = cloud_request(<span class="string">'http://v2.addons.we7.cc/gateway.php'</span>, $pars);</div><div class="line">	<span class="keyword">return</span> _cloud_cron_parse($result);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_cloud_cron_parse</span><span class="params">($result)</span> </span>&#123;<span class="comment">//定时任务返回结果处理</span></div><div class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($result)) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'没有接收到服务器的传输的数据'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ($result[<span class="string">'content'</span>] == <span class="string">'blacklist'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'抱歉，您的站点已被列入云服务黑名单，云服务一切业务已被禁止，请联系微擎客服！'</span>);</div><div class="line">	&#125;</div><div class="line">	$result = json_decode($result[<span class="string">'content'</span>], <span class="keyword">true</span>);</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">null</span> === $result) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, <span class="string">'云服务通讯发生错误，请稍后重新尝试！'</span>);</div><div class="line">	&#125;</div><div class="line">	$result = $result[<span class="string">'message'</span>];</div><div class="line">	<span class="keyword">if</span> (is_error($result)) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">-1</span>, $result[<span class="string">'message'</span>]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> $result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_auth_url</span><span class="params">($forward, $data = array<span class="params">()</span>)</span></span>&#123;<span class="comment">//云端oauth权限</span></div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line"></div><div class="line">	$auth = <span class="keyword">array</span>();</div><div class="line">	$auth[<span class="string">'key'</span>] = <span class="string">''</span>;</div><div class="line">	$auth[<span class="string">'password'</span>] = <span class="string">''</span>;</div><div class="line">	$auth[<span class="string">'url'</span>] = rtrim($_W[<span class="string">'siteroot'</span>], <span class="string">'/'</span>);</div><div class="line">	$auth[<span class="string">'referrer'</span>] = intval($_W[<span class="string">'config'</span>][<span class="string">'setting'</span>][<span class="string">'referrer'</span>]);</div><div class="line">	$auth[<span class="string">'version'</span>] = IMS_VERSION;</div><div class="line">	$auth[<span class="string">'forward'</span>] = $forward;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>($_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'key'</span>]) &amp;&amp; !<span class="keyword">empty</span>($_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'token'</span>])) &#123;</div><div class="line">		$auth[<span class="string">'key'</span>] = $_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'key'</span>];</div><div class="line">		$auth[<span class="string">'password'</span>] = md5($_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'key'</span>] . $_W[<span class="string">'setting'</span>][<span class="string">'site'</span>][<span class="string">'token'</span>]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ($data &amp;&amp; is_array($data)) &#123;</div><div class="line">		$auth = array_merge($auth, $data);</div><div class="line">	&#125;</div><div class="line">	$query = base64_encode(json_encode($auth));</div><div class="line">	$auth_url = <span class="string">'http://v2.addons.we7.cc/web/index.php?c=auth&amp;a=passwort&amp;__auth='</span> . $query;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> $auth_url;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_module_setting_prepare</span><span class="params">($module, $binding)</span> </span>&#123;<span class="comment">//模块设置</span></div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line">	$auth = _cloud_build_params();</div><div class="line">	$auth[<span class="string">'arguments'</span>] = <span class="keyword">array</span>(</div><div class="line">		<span class="string">'binding'</span> =&gt; $binding,</div><div class="line">		<span class="string">'acid'</span> =&gt; $_W[<span class="string">'uniacid'</span>],</div><div class="line">		<span class="string">'type'</span> =&gt; <span class="string">'module'</span>,</div><div class="line">		<span class="string">'module'</span> =&gt; $module,</div><div class="line">	);</div><div class="line">	$iframe_auth_url = cloud_auth_url(<span class="string">'module'</span>, $auth);</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> $iframe_auth_url;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloud_resource_to_local</span><span class="params">($uniacid, $type, $url)</span></span>&#123;</div><div class="line">	<span class="keyword">global</span> $_W;</div><div class="line"></div><div class="line">	load()-&gt;func(<span class="string">'file'</span>);</div><div class="line"></div><div class="line">	$setting = $_W[<span class="string">'setting'</span>][<span class="string">'upload'</span>][$type];</div><div class="line"></div><div class="line">	$pathinfo = pathinfo($url);</div><div class="line">	$extension = !<span class="keyword">empty</span>($pathinfo[<span class="string">'extension'</span>]) ? $pathinfo[<span class="string">'extension'</span>] : <span class="string">'jpg'</span>;</div><div class="line">	$originname = $pathinfo[<span class="string">'basename'</span>];</div><div class="line"></div><div class="line">	$setting[<span class="string">'folder'</span>] = <span class="string">"&#123;$type&#125;s/&#123;$uniacid&#125;/"</span>.date(<span class="string">'Y/m/'</span>);</div><div class="line"></div><div class="line">	$originname = pathinfo($url, PATHINFO_BASENAME);</div><div class="line">	$filename = file_random_name(ATTACHMENT_ROOT .<span class="string">'/'</span>. $setting[<span class="string">'folder'</span>], $extension);</div><div class="line">	$pathname = $setting[<span class="string">'folder'</span>] . $filename;</div><div class="line">	$fullname = ATTACHMENT_ROOT . $pathname;</div><div class="line"></div><div class="line">	mkdirs(dirname($fullname));</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (file_put_contents($fullname, file_get_contents($url)) == <span class="keyword">false</span>) &#123;</div><div class="line">		<span class="keyword">return</span> error(<span class="number">1</span>, <span class="string">'提取文件失败'</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($_W[<span class="string">'setting'</span>][<span class="string">'remote'</span>][<span class="string">'type'</span>])) &#123;</div><div class="line">		$remotestatus = file_remote_upload($pathname);</div><div class="line">		<span class="keyword">if</span> (is_error($remotestatus)) &#123;</div><div class="line">			<span class="keyword">return</span> error(<span class="number">1</span>, <span class="string">'远程附件上传失败，请检查配置并重新上传'</span>);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			file_delete($pathname);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	$data = <span class="keyword">array</span>(</div><div class="line">		<span class="string">'uniacid'</span> =&gt; $uniacid,</div><div class="line">		<span class="string">'uid'</span> =&gt; intval($_W[<span class="string">'uid'</span>]),</div><div class="line">		<span class="string">'filename'</span> =&gt; $originname,</div><div class="line">		<span class="string">'attachment'</span> =&gt; $pathname,</div><div class="line">		<span class="string">'type'</span> =&gt; $type == <span class="string">'image'</span> ? <span class="number">1</span> : <span class="number">2</span>,</div><div class="line">		<span class="string">'createtime'</span> =&gt; TIMESTAMP,</div><div class="line">	);</div><div class="line">	pdo_insert(<span class="string">'core_attachment'</span>, $data);</div><div class="line"></div><div class="line">	$data[<span class="string">'url'</span>] = tomedia($pathname);</div><div class="line">	$data[<span class="string">'id'</span>] = pdo_insertid();</div><div class="line"></div><div class="line">	<span class="keyword">return</span> $data;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>文章对您有用？打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechatpay.png" alt="林晓东 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay.png" alt="林晓东 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微擎/" rel="tag"># 微擎</a>
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+            <a href="/tags/二次开发/" rel="tag"># 二次开发</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/07/mysql-lpad/" rel="next" title="mysql LPAD RPAD 字符串前后补全">
+                <i class="fa fa-chevron-left"></i> mysql LPAD RPAD 字符串前后补全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/01/js-undefined-null/" rel="prev" title="javascript中的undefined null">
+                javascript中的undefined null <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/28/microenine-crack/"
+     data-title="记录一次微擎的云检测破解之道"
+     data-content=""
+     data-url="http://blog.linxiaodong.com.com/2016/04/28/microenine-crack/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/28/microenine-crack/"
+           data-title="记录一次微擎的云检测破解之道" data-url="http://blog.linxiaodong.com.com/2016/04/28/microenine-crack/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/author.jpg"
+               alt="林晓东" />
+          <p class="site-author-name" itemprop="name">林晓东</p>
+          <p class="site-description motion-element" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/buxuku" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xiaodong5959" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/42031633/" target="_blank" title="douban">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  douban
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiaodong5959" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.zhangxinxu.com/wordpress/" title="张鑫旭" target="_blank">张鑫旭</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林晓东</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buxuku"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz", "P0QeN4CeSm3RRLghin8m0BbA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
