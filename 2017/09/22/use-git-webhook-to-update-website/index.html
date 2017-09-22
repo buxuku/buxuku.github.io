@@ -77,7 +77,7 @@
 <meta property="og:url" content="http://blog.linxiaodong.com.com/2017/09/22/use-git-webhook-to-update-website/index.html">
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:description" content="一.安装git1yum install git">
-<meta property="og:updated_time" content="2017-09-22T09:13:29.962Z">
+<meta property="og:updated_time" content="2017-09-22T09:45:48.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用git webhook 来同步更新代码">
 <meta name="twitter:description" content="一.安装git1yum install git">
@@ -384,6 +384,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash </div><div class="line">cd /home/wwwroot/518zst</div><div class="line">#echo $USER &gt;&gt; /home/deploy/deploy.log</div><div class="line">#sudo -u zijidelu echo &quot;OKOK4&quot; &gt;&gt; /home/deploy/deploy.log </div><div class="line">git reset --hard HEAD &gt;&gt; /home/deploy/deploy.log</div><div class="line">git pull origin master &gt;&gt; /home/deploy/deploy.log</div><div class="line">#chmod 777 data/order_print_seller.html</div><div class="line">#chmod 777 data/order_print_vendor.html</div></pre></td></tr></table></figure>
 <p>这个脚本这最近一次的部署中是正常运行的，因为他是以<code>zijidelu</code>这个用户来执行的。<br>但在我以前的编写中是加了一条<code>sudo -u zijidelu</code>,像：<code>sudo -u zijidelu git reset --hard HEAD</code>，同时<code>vi /etc/soduers</code>在root用户下面添加了这一句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">daemon  ALL=(ALL)       NOPASSWD:ALL</div></pre></td></tr></table></figure></p>
 <p>表示deamon用户可以在非终端模式下执行命令，这样在以前的部署中正常执行的。<br>反而在这一次这样设置后没能正常执行，<code>sudo -u</code>这条命令没有任何的结果</p>
+<p>经测试，这是因为php执行的模式的问题，当php以<code>FastCGI</code>执行的时候，我们可以按照上面的脚本来写即可。但如果以非<code>FastCGI</code>模式来运行的时候，<code>echo $USER &gt;</code>只是一行空白，这个时候执行的命令前面就需要加上<code>sudo -u</code>，并且在sudoers中添加<code>deamon</code>这个用户的脚本执行。</p>
 <h1 id="六-测试"><a href="#六-测试" class="headerlink" title="六.测试"></a>六.测试</h1><p>测试可以分步测试，在php文件中通过写入文件来查看php是否正常执行，然后通过sh脚本的输出看sh脚本是否正常执行。<br>同时也可以在终端下测试sh执行是否正确。</p>
 
       
