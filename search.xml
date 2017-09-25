@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[在React中踩过的坑以及最佳实践]]></title>
+    <url>%2F2017%2F09%2F25%2FReact-pits-and-best-practices%2F</url>
+    <content type="text"><![CDATA[一.富文本编辑器二.地图]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[利用git webhook 来同步更新代码]]></title>
     <url>%2F2017%2F09%2F22%2Fuse-git-webhook-to-update-website%2F</url>
     <content type="text"><![CDATA[一.安装git1yum install git 二.给zjjidelu用户添加用户目录因为我们需要通过ssh的方式来连接git,这里我是用zijidelu来安装的控制面板，通过在php中执行echo shell_exec(&#39;whoami&#39;)能够看到php脚本是以zijidelu用户来执行的，所以网站的文件权限和用户组我设置的是zijidelu:zijideluGroup,我需要用zijidelu这个用户来执行git以避免文件权限的变化。运行git的时候。会从当前用户目录中去查找ssh key; 123cd /home/mkdir zijidelu_homemkdir .ssh 三.生成ssh key1sudo -u zijidelu ssh-keygen -t rsa ssh保存的路径就是我们上一步创建的目录 接下来把这个目录设置成zijidelu这个用户的主目录。vi /etc/passwd修改zijidelu用户为： 1zijidelu:x:1520:1520::/home/zijidelu_home:/sbin/nologin 四.撰写webhook执行的php脚本这个是用于gitee的脚本，其它如coding也类似，只是取得的参数可能有变化。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;?php$access_token = '******';$access_ip = array('*.*.*.*');/* get user token and ip address */$client_ip = $_SERVER['REMOTE_ADDR'];/* create open log */$fs = fopen('./webhook.log', 'a');fwrite($fs, 'Request on ['.date("Y-m-d H:i:s").'] from ['.$client_ip.']'.PHP_EOL);/* test token *//* test ip */// if ( ! in_array($client_ip, $access_ip))// &#123;// echo "error 503";// fwrite($fs, "Invalid ip [&#123;$client_ip&#125;]".PHP_EOL);// exit(0);// &#125;/* get json data */$json = file_get_contents('php://input');$data = json_decode($json, true);$client_token = $data['password'];if ($client_token !== $access_token)&#123; echo "error 403"; fwrite($fs, "Invalid token [&#123;$client_token&#125;]".PHP_EOL); exit(0);&#125;/* get branch */$branch = $data["ref"];fwrite($fs, '======================================================================='.PHP_EOL);/* if you need get full json input *///fwrite($fs, 'DATA: '.print_r($data, true).PHP_EOL);/* branch filter */if ($branch === 'refs/heads/master') &#123; /* if master branch*/ fwrite($fs, 'BRANCH: '.print_r($branch, true).PHP_EOL); fwrite($fs, '======================================================================='.PHP_EOL); $fs and fclose($fs); /* then pull master */ exec("/home/deploy/deploy.sh"); &#125; // else // &#123;// /* if devel branch */// fwrite($fs, 'BRANCH: '.print_r($branch, true).PHP_EOL);// fwrite($fs, '======================================================================='.PHP_EOL);// $fs and fclose($fs);// /* pull devel branch */// exec("/home/deploy/devel_deploy.sh");// &#125;?&gt; 五.撰写sh脚本这一步通过#echo $USER &gt;&gt; /home/deploy/deploy.log通过查到sh脚本是以zijidelu这个用户来执行的 12345678#!/bin/bash cd /home/wwwroot/518zst#echo $USER &gt;&gt; /home/deploy/deploy.log#sudo -u zijidelu echo &quot;OKOK4&quot; &gt;&gt; /home/deploy/deploy.log git reset --hard HEAD &gt;&gt; /home/deploy/deploy.loggit pull origin master &gt;&gt; /home/deploy/deploy.log#chmod 777 data/order_print_seller.html#chmod 777 data/order_print_vendor.html 这个脚本这最近一次的部署中是正常运行的，因为他是以zijidelu这个用户来执行的。但在我以前的编写中是加了一条sudo -u zijidelu,像：sudo -u zijidelu git reset --hard HEAD，同时vi /etc/soduers在root用户下面添加了这一句：1daemon ALL=(ALL) NOPASSWD:ALL 表示deamon用户可以在非终端模式下执行命令，这样在以前的部署中正常执行的。反而在这一次这样设置后没能正常执行，sudo -u这条命令没有任何的结果 经测试，这是因为php执行的模式的问题，当php以FastCGI执行的时候，我们可以按照上面的脚本来写即可。但如果以非FastCGI模式来运行的时候，echo $USER &gt;只是一行空白，这个时候执行的命令前面就需要加上sudo -u，并且在sudoers中添加deamon这个用户的脚本执行。 六.测试测试可以分步测试，在php文件中通过写入文件来查看php是否正常执行，然后通过sh脚本的输出看sh脚本是否正常执行。同时也可以在终端下测试sh执行是否正确。]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
       <tags>
         <tag>git</tag>
       </tags>

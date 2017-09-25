@@ -55,7 +55,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript," />
+  <meta name="keywords" content="javascript,react," />
 
 
 
@@ -71,18 +71,18 @@
 
 
 
-<meta name="description" content="在javascript的五种基本数据类型中,有两和数据类型可能会经常给我们带来一些困惑,他们就是undefined和null了.">
-<meta name="keywords" content="javascript">
+<meta name="description" content="一.富文本编辑器二.地图">
+<meta name="keywords" content="javascript,react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript中的undefined null">
-<meta property="og:url" content="http://blog.linxiaodong.com.com/2016/05/01/js-undefined-null/index.html">
+<meta property="og:title" content="在React中踩过的坑以及最佳实践">
+<meta property="og:url" content="http://blog.linxiaodong.com.com/2017/09/25/React-pits-and-best-practices/index.html">
 <meta property="og:site_name" content="林晓东的个人博客">
-<meta property="og:description" content="在javascript的五种基本数据类型中,有两和数据类型可能会经常给我们带来一些困惑,他们就是undefined和null了.">
+<meta property="og:description" content="一.富文本编辑器二.地图">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2016-05-01T13:58:59.000Z">
+<meta property="og:updated_time" content="2017-09-25T11:14:51.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript中的undefined null">
-<meta name="twitter:description" content="在javascript的五种基本数据类型中,有两和数据类型可能会经常给我们带来一些困惑,他们就是undefined和null了.">
+<meta name="twitter:title" content="在React中踩过的坑以及最佳实践">
+<meta name="twitter:description" content="一.富文本编辑器二.地图">
 
 
 
@@ -112,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.linxiaodong.com.com/2016/05/01/js-undefined-null/"/>
+  <link rel="canonical" href="http://blog.linxiaodong.com.com/2017/09/25/React-pits-and-best-practices/"/>
 
 
 
 
 
-  <title>javascript中的undefined null | 林晓东的个人博客</title>
+  <title>在React中踩过的坑以及最佳实践 | 林晓东的个人博客</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2016/05/01/js-undefined-null/">
+    <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/09/25/React-pits-and-best-practices/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林晓东">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">javascript中的undefined null</h1>
+          <h1 class="post-title" itemprop="name headline">在React中踩过的坑以及最佳实践</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-01T21:09:13+08:00">
-                2016-05-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T19:11:49+08:00">
+                2017-09-25
               </time>
             
 
@@ -368,7 +368,7 @@
 
           
           
-             <span id="/2016/05/01/js-undefined-null/" class="leancloud_visitors" data-flag-title="javascript中的undefined null">
+             <span id="/2017/09/25/React-pits-and-best-practices/" class="leancloud_visitors" data-flag-title="在React中踩过的坑以及最佳实践">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -399,23 +399,7 @@
       
 
       
-        <p>在javascript的五种基本数据类型中,有两和数据类型可能会经常给我们带来一些困惑,他们就是<code>undefined</code>和<code>null</code>了.<br><a id="more"></a></p>
-<h2 id="对于undefined来说"><a href="#对于undefined来说" class="headerlink" title="对于undefined来说"></a>对于undefined来说</h2><p>我们先来看一种情况:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line"><span class="built_in">console</span>.log(a);<span class="comment">//"undefined"</span></div><div class="line"><span class="built_in">console</span>.log(b);<span class="comment">//报错</span></div></pre></td></tr></table></figure></p>
-<p>然后有<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);<span class="comment">//"undefined"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b);<span class="comment">//"undefined"</span></div></pre></td></tr></table></figure></p>
-<p>这里我们可以得出结论就是:未定义的变量,未初始化的变量,使用typeof的时候,他们的结果都是’undefined’;而对于未定义的变量,他也只能使用typeof操作符,执行其它操作都将报错.(调用delete也不会报错,但没有任何意义);</p>
-<p>从上面也可以看出,未初始化变量的默认值就是<code>undefined</code>,所以<code>console.log(a == undefined)</code>将会打印出<code>true</code>.</p>
-<p>因此,良好的编程习惯应该这样:没必要显式地声明<code>a = undefined</code>;而对于任何变量,我们都应该显式的初始化一个除<code>undefined</code>外我们想要的值,这样当我们在应用typeof的时候,我们将可以很容易地知道<code>undefined</code>结果代表的是变量未声明.</p>
-<h2 id="对于null"><a href="#对于null" class="headerlink" title="对于null"></a>对于null</h2><p>我们也是先看一种情况<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="literal">null</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a); <span class="comment">//object;</span></div></pre></td></tr></table></figure></p>
-<p>这里我们可以看出,<code>null</code>是以一种空对象的形式保存的.所以对于任何我们即将要以对象的形式保存的变量,我们都可以使用<code>null</code>来进行初始化;</p>
-<p>有一点不好理解的就是,当<code>conslole.log(null == undefined)</code>的时候,结果竟然返回的是<code>true</code>,其中的原因就是<code>undefined</code>是派生至<code>null</code>的.那么<code>console.log(null === undefined)</code>的结果肯定是<code>false</code>,因为他们是两种数据类型.</p>
-<p>因为我们也就能够理解下面这段代码了:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">null</span>));<span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">undefined</span>));<span class="comment">//false</span></div></pre></td></tr></table></figure>
-<p>对于<code>undefined</code>和<code>null</code>它们将存在于以下区别</p>
-<p>1.在使用Boolean进行转换的时候,<code>undefined</code>和<code>null</code>都为<code>false</code>,而<code>null</code>所赋于的变量,拥有任何对象后都将会是<code>true</code>值.</p>
-<p>2.在使用Number进行转换的时候,<code>Number(null)</code>的值为0,而<code>Number(undefined)</code>为<code>NaN</code>.</p>
-<p>3.在合作String进行转换的时候,<code>String(null)</code>的结果是<code>&quot;null&quot;</code>,而<code>String(undefined)</code>的结果是<code>&quot;undefined&quot;</code>.</p>
-<p>我们还需要注意的一点就是,<code>typeof</code>操作符返回的结果是字符串.所以<code>console.log(typeof undefined == undefined);</code>的结果是<code>false</code>,所以<code>typeof undefined</code>返回的<code>&quot;undefined&quot;</code>非此<code>undefined</code>.</p>
-
+        <h1 id="一-富文本编辑器"><a href="#一-富文本编辑器" class="headerlink" title="一.富文本编辑器"></a>一.富文本编辑器</h1><h1 id="二-地图"><a href="#二-地图" class="headerlink" title="二.地图"></a>二.地图</h1>
       
     </div>
     
@@ -463,6 +447,8 @@
           
             <a href="/tags/javascript/" rel="tag"># javascript</a>
           
+            <a href="/tags/react/" rel="tag"># react</a>
+          
         </div>
       
 
@@ -474,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/28/microenine-crack/" rel="next" title="记录一次微擎的云检测破解之道">
-                <i class="fa fa-chevron-left"></i> 记录一次微擎的云检测破解之道
+              <a href="/2017/09/22/use-git-webhook-to-update-website/" rel="next" title="利用git webhook 来同步更新代码">
+                <i class="fa fa-chevron-left"></i> 利用git webhook 来同步更新代码
               </a>
             
           </div>
@@ -483,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/01/js-type-conversion/" rel="prev" title="javascript中数据类型转换那点事">
-                javascript中数据类型转换那点事 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -663,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对于undefined来说"><span class="nav-number">1.</span> <span class="nav-text">对于undefined来说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对于null"><span class="nav-number">2.</span> <span class="nav-text">对于null</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-富文本编辑器"><span class="nav-number">1.</span> <span class="nav-text">一.富文本编辑器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-地图"><span class="nav-number">2.</span> <span class="nav-text">二.地图</span></a></li></ol></div>
             
 
           </div>
