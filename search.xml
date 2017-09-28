@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[react-route从v3迁移到v4(折腾+踩坑)]]></title>
+    <url>%2F2017%2F09%2F28%2FMigrating-react-route-v3-to-v4%2F</url>
+    <content type="text"><![CDATA[从react-router v3到react-router v4确实不能算是升级，而是称得到是迁移了。API的变化发生了翻天覆地的变化了。 一. 包的改变所有引入的react-route都要换成react-route-dom了 二. 没有了browserHistory需要引入BrowserRouter来实现 三. location中没有了query官方对此讨论也很激烈，https://github.com/ReactTraining/react-router/issues/4410 官方给出的解决方案就是使用第三方库query-string来解决 四. path不再支持通配符path=&quot;goods/(:id)&quot;需要写成path=&quot;goods/:id?&quot; 五. 不能直接从props.params中取值了this.props.params.id需要改成this.props.match.params.id 六. 不再有onEnter等apihttps://reacttraining.com/react-router/web/example/auth-workflow https://github.com/lincenying/mmf-blog-react-v2 扩展阅读 【React Router 从v3升级到v4踩坑之旅】(http://www.jianshu.com/p/e2277aaa53f1)【react-router v4 使用 history 控制路由跳转】(https://segmentfault.com/a/1190000011137828)]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>react-route</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[在React中踩过的坑以及最佳实践]]></title>
     <url>%2F2017%2F09%2F25%2FReact-pits-and-best-practices%2F</url>
     <content type="text"><![CDATA[一.富文本编辑器二.地图]]></content>
@@ -55,8 +67,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>面向对象</tag>
         <tag>demo</tag>
+        <tag>面向对象</tag>
       </tags>
   </entry>
   <entry>
@@ -68,8 +80,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>面向对象</tag>
         <tag>demo</tag>
+        <tag>面向对象</tag>
       </tags>
   </entry>
   <entry>
@@ -481,8 +493,8 @@
       </categories>
       <tags>
         <tag>html</tag>
-        <tag>前端</tag>
         <tag>javascript</tag>
+        <tag>前端</tag>
         <tag>css</tag>
       </tags>
   </entry>
