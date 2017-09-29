@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[react从v15升级到v16]]></title>
+    <url>%2F2017%2F09%2F29%2Fupdate-react-from-v15-to-v16%2F</url>
+    <content type="text"><![CDATA[react已经发布了v16的正式版，同时也把license从BSD修改为MIT了，在折腾了router4之后，也来继续折腾react v16了，react的升级不像router那样变化之大，网上说的只要react v15在控制台里面没有什么wraning之类的，就可以直接升级到v16了，但在实际升级过程中，可能因为实际项目的差异，可能还需要做一些调整的地方。 一.需要同时升级react和react-dom如果你只是升级了react的话，肯定去运行出一大堆错误出来的，必须同时把react-dom也升级到v16版本。 二.需要移除contextTypes因为在我之前的代码的，路由的跳转用的是下面这种方式 123static contextTypes = &#123; router: React.PropTypes.object&#125; 升级之后，将不再支持React.PropTypes.object了，而我的项目也使用了router v4了，所以全部移除这部分代码，改为history的方式 三.升级第三方包一些奇怪的错误，可能是第三方包没有兼容react v16而引起的，我们尽可能把第三方包升级到最新版。以及删除之前所有的模块再来重新包装一些包，因为单独升级一个包，不一定能同时升级与它相关的依赖包。 123rm -rf node_modulesnpm cache cleannpm i 四.Stateless function components cannot be given refs. Attempts to access this ref will fail.null目前看来应该是UI库antd的一个兼容问题 https://github.com/ant-design/ant-design/issues/7784]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[react-route从v3迁移到v4(折腾+踩坑)]]></title>
     <url>%2F2017%2F09%2F28%2FMigrating-react-route-v3-to-v4%2F</url>
     <content type="text"><![CDATA[从react-router v3到react-router v4确实不能算是升级，而是称得到是迁移了。API的变化发生了翻天覆地的变化了。 一. 包的改变所有引入的react-route都要换成react-route-dom了 二. 没有了browserHistory需要引入BrowserRouter来实现 三. location中没有了query官方对此讨论也很激烈，https://github.com/ReactTraining/react-router/issues/4410 官方给出的解决方案就是使用第三方库query-string来解决 四. path不再支持通配符path=&quot;goods/(:id)&quot;需要写成path=&quot;goods/:id?&quot; 五. 不能直接从props.params中取值了this.props.params.id需要改成this.props.match.params.id 六. 不再有onEnter等apihttps://reacttraining.com/react-router/web/example/auth-workflow https://github.com/lincenying/mmf-blog-react-v2 扩展阅读 【React Router 从v3升级到v4踩坑之旅】(http://www.jianshu.com/p/e2277aaa53f1)【react-router v4 使用 history 控制路由跳转】(https://segmentfault.com/a/1190000011137828)]]></content>
@@ -309,8 +320,8 @@
       </categories>
       <tags>
         <tag>php</tag>
-        <tag>ecshop</tag>
         <tag>二次开发</tag>
+        <tag>ecshop</tag>
       </tags>
   </entry>
   <entry>
