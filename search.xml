@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[在react-router v4中实现多个布局模板]]></title>
+    <url>%2F2017%2F09%2F30%2Fmultiple-layouts-with-react-router-v4%2F</url>
+    <content type="text"><![CDATA[在前端发过迁移React-router v4的踩坑记录：《react-route从v3迁移到v4(折腾+踩坑)》,整个升级需要有很多坑，但我觉得都还比较好，可以一步一步地去填这些坑，不外乎就是一个工作量的问题。 但在最后解决我之前项目中处理404页面的时候，遇到了一个头痛的问题： 在我的项目中，所有页面共用了一套Layout,除了404页面是完全独立的一套Layout,这个实现在v3中是很方便的，比如用下面这套route配置就可以完成了 12345&lt;Route path=&quot;/&quot; component=&#123;Layouts&#125; &gt; &lt;IndexRoute component=&#123;Home&#125;/&gt; &lt;Route path=&quot;/goods/add&quot; component=&#123;GoodsAdd&#125;/&gt;&lt;/Route&gt;&lt;Route path=&quot;*&quot; component=&#123;NotFoundPage&#125; /&gt; 但到了react-router v4就行不通了，因为在v4中，要实现这样的Layout，path=”/“的匹配规则就不能添加exec了，而对于404的那个链接，刚会首先进入path=”/“这个里面去，从而导致Layouts的渲染。不管是否使用Switch均无法解决这个问题。 一直在想办法解决404页面的问题，刚网上搜索出来的解决方法均一样： 12345&lt;Switch&gt; &lt;Route exact path=&quot;/&quot; component=&#123;Home&#125;/&gt; &lt;Route path=&quot;/about&quot; component=&#123;About&#125;/&gt; &lt;Route component=&#123;NoMatch&#125;/&gt;&lt;/Switch&gt; 这个确实是一个实现方式，但却不能实现我需要的Layout功能了，Home和About是完全独立的两个页面当然是没问题的。 后来转念一想，我的需求不再于404页面的问题，而在于如何实现多套Layout的问题，如何通过简单的方式来实现多套Layout,那么404页面做为完全独立的一个页面，也就能够简单的实现的。 因为我大多数页面都会是同一个Layout,而极个别的可能会是另外的一套，所以我还是想通过v3的方式那样，通过根路由来渲染这个主要的Layout,这样我不用再去处理那大部分的，而只需要去处理那及个别的即可。 后来通过阅读react-router v4的文档，发现有一个render的api,通过render的方式，我们就有了更多的自定义渲染控制权了，包括怎么渲染，额外传递一些参数等等。 有了这个api,问题就好解决了，我们可以自己再封装一个实现router v4中onEnter功能的高组组件类似的一个组件，通过这个组件来决定利用哪个Layout来渲染这个页面，这样就可以实现任意多套的Layout了。 最终我封装了一个ARoute的组件，这个组件实现onEnter的功能，同时加载Layout. 123456789101112131415161718192021222324252627282930313233343536373839import React from &apos;react&apos;import Route from &apos;react-router-dom/Route&apos;import Redirect from &apos;react-router-dom/Redirect&apos;import &#123;Layout&#125; from &apos;antd&apos;import Layouts from &apos;./Layout&apos;import SideBar from &apos;./SideBar&apos;import &apos;./style/layout.less&apos;;const &#123;Content&#125; = Layout;const SideBarLayout = (&#123;component: Component, ...rest&#125;) =&gt; &#123; const &#123;layout&#125; = rest; return ( &lt;Route &#123;...rest&#125; render=&#123;matchProps =&gt; ( !layout || layout==&quot;main&quot; ?&lt;Layouts&gt; &lt;Layout className=&#123;!layout?&quot; ant-layout-has-sider&quot;:&quot;&quot;&#125;&gt; &#123;!layout?&lt;SideBar /&gt;:null&#125; &lt;Content style=&#123;&#123; minHeight: 680, overflow:&quot;visible&quot;, width:!layout?&quot;1028px&quot;:&quot;1200px&quot; &#125;&#125; &gt; &lt;Component &#123;...matchProps&#125; /&gt; &lt;/Content&gt;&lt;/Layout&gt; &lt;/Layouts&gt; :&lt;Component &#123;...matchProps&#125; /&gt; )&#125; /&gt; )&#125;;export default (&#123; component: Component, ...rest &#125;) =&gt; &#123; const &#123;path&#125;=rest; const status=sessionStorage.getItem(&quot;suppliers&quot;); const out=(!status || JSON.parse(status).status&lt;6); const inEnter=path &amp;&amp; path.indexOf(&quot;enter&quot;)&gt;-1; const entered=status &amp;&amp; JSON.parse(status).status==7; return (!out &amp;&amp; !inEnter) || (out &amp;&amp; inEnter)? &lt;SideBarLayout &#123;...rest&#125; component=&#123;Component&#125; /&gt; :entered &amp;&amp; inEnter?&lt;Redirect to=&#123;&#123; pathname: &apos;/&apos; &#125;&#125; /&gt;: &lt;Redirect to=&#123;&#123; pathname: &apos;/enter/write/fullPage&apos; &#125;&#125; /&gt;&#125; 我的路由就可以写成这样的 1234567&lt;BrowserRouter&gt; &lt;Switch&gt; &lt;ARoute exact path=&quot;/&quot; component=&#123;Home&#125; /&gt; &lt;ARoute exact path=&quot;/goods/add&quot; component=&#123;GoodsAdd&#125; /&gt; &lt;ARoute layout=&quot;404&quot; component=&#123;NotFoundPage&#125; /&gt; &lt;/Switch&gt;&lt;/BrowserRouter&gt; 我原本是想把这里面的所有ARoute封装在一起，但发现这样路由会去匹配里面的所有ARoute.]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>react-router</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[react从v15升级到v16]]></title>
     <url>%2F2017%2F09%2F29%2Fupdate-react-from-v15-to-v16%2F</url>
     <content type="text"><![CDATA[react已经发布了v16的正式版，同时也把license从BSD修改为MIT了，在折腾了router4之后，也来继续折腾react v16了，react的升级不像router那样变化之大，网上说的只要react v15在控制台里面没有什么wraning之类的，就可以直接升级到v16了，但在实际升级过程中，可能因为实际项目的差异，可能还需要做一些调整的地方。 一.需要同时升级react和react-dom如果你只是升级了react的话，肯定去运行出一大堆错误出来的，必须同时把react-dom也升级到v16版本。比如下面这个错误： 1Cannot find module &quot;react/lib/ReactComponentTreeHook&quot; 二.需要移除contextTypes因为在我之前的代码的，路由的跳转用的是下面这种方式 123static contextTypes = &#123; router: React.PropTypes.object&#125; 升级之后，将不再支持React.PropTypes.object了，而我的项目也使用了router v4了，所以全部移除这部分代码，改为history的方式 三.升级第三方包一些奇怪的错误，可能是第三方包没有兼容react v16而引起的，我们尽可能把第三方包升级到最新版。以及删除之前所有的模块再来重新包装一些包，因为单独升级一个包，不一定能同时升级与它相关的依赖包。 123rm -rf node_modulesnpm cache cleannpm i 四.Stateless function components cannot be given refs. Attempts to access this ref will fail.null目前看来应该是UI库antd的一个兼容问题 https://github.com/ant-design/ant-design/issues/7784]]></content>
@@ -78,8 +90,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>面向对象</tag>
         <tag>demo</tag>
+        <tag>面向对象</tag>
       </tags>
   </entry>
   <entry>
@@ -91,8 +103,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>面向对象</tag>
         <tag>demo</tag>
+        <tag>面向对象</tag>
       </tags>
   </entry>
   <entry>
@@ -181,8 +193,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>javascript</tag>
         <tag>html</tag>
+        <tag>javascript</tag>
         <tag>css</tag>
         <tag>工具</tag>
       </tags>
@@ -503,9 +515,9 @@
         <category>前端</category>
       </categories>
       <tags>
+        <tag>html</tag>
         <tag>javascript</tag>
         <tag>前端</tag>
-        <tag>html</tag>
         <tag>css</tag>
       </tags>
   </entry>
