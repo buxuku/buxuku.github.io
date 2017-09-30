@@ -79,7 +79,7 @@
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:description" content="一.安装git1yum install git">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-25T11:16:42.549Z">
+<meta property="og:updated_time" content="2017-09-30T07:43:54.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用git webhook 来同步更新代码">
 <meta name="twitter:description" content="一.安装git1yum install git">
@@ -402,7 +402,7 @@
         <h1 id="一-安装git"><a href="#一-安装git" class="headerlink" title="一.安装git"></a>一.安装git</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install git</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h1 id="二-给zjjidelu用户添加用户目录"><a href="#二-给zjjidelu用户添加用户目录" class="headerlink" title="二.给zjjidelu用户添加用户目录"></a>二.给zjjidelu用户添加用户目录</h1><p>因为我们需要通过ssh的方式来连接git,这里我是用zijidelu来安装的控制面板，通过在php中执行<code>echo shell_exec(&#39;whoami&#39;)</code>能够看到php脚本是以zijidelu用户来执行的，所以网站的文件权限和用户组我设置的是<code>zijidelu:zijideluGroup</code>,我需要用<code>zijidelu</code>这个用户来执行git以避免文件权限的变化。运行git的时候。会从当前用户目录中去查找ssh key;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /home/</div><div class="line">mkdir zijidelu_home</div><div class="line">mkdir .ssh</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /home/</div><div class="line">mkdir zijidelu_home</div><div class="line">cd zijidelu_home</div><div class="line">mkdir .ssh</div><div class="line">cd ../</div><div class="line">cd ../</div><div class="line">chown -R zijidelu:zijideluGroup zijidelu_home</div></pre></td></tr></table></figure>
 <h1 id="三-生成ssh-key"><a href="#三-生成ssh-key" class="headerlink" title="三.生成ssh key"></a>三.生成ssh key</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -u zijidelu ssh-keygen -t rsa</div></pre></td></tr></table></figure>
 <p>ssh保存的路径就是我们上一步创建的目录</p>
 <p>接下来把这个目录设置成<code>zijidelu</code>这个用户的主目录。<code>vi /etc/passwd</code>修改<code>zijidelu</code>用户为：</p>
@@ -413,7 +413,10 @@
 <p>这个脚本这最近一次的部署中是正常运行的，因为他是以<code>zijidelu</code>这个用户来执行的。<br>但在我以前的编写中是加了一条<code>sudo -u zijidelu</code>,像：<code>sudo -u zijidelu git reset --hard HEAD</code>，同时<code>vi /etc/soduers</code>在root用户下面添加了这一句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">daemon  ALL=(ALL)       NOPASSWD:ALL</div></pre></td></tr></table></figure></p>
 <p>表示deamon用户可以在非终端模式下执行命令，这样在以前的部署中正常执行的。<br>反而在这一次这样设置后没能正常执行，<code>sudo -u</code>这条命令没有任何的结果</p>
 <p>经测试，这是因为php执行的模式的问题，当php以<code>FastCGI</code>执行的时候，我们可以按照上面的脚本来写即可。但如果以非<code>FastCGI</code>模式来运行的时候，<code>echo $USER &gt;</code>只是一行空白，这个时候执行的命令前面就需要加上<code>sudo -u</code>，并且在sudoers中添加<code>deamon</code>这个用户的脚本执行。</p>
-<h1 id="六-测试"><a href="#六-测试" class="headerlink" title="六.测试"></a>六.测试</h1><p>测试可以分步测试，在php文件中通过写入文件来查看php是否正常执行，然后通过sh脚本的输出看sh脚本是否正常执行。<br>同时也可以在终端下测试sh执行是否正确。</p>
+<h1 id="六-测试"><a href="#六-测试" class="headerlink" title="六.测试"></a>六.测试</h1><p>第一次最好在服务器端通过<code>sudo -u zijidelu git pull origin master</code>来运行一次，因为首次通过ssh方式来连接git的话，在know_host里面没有记录，会弹出确认信息，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host &apos;git.coding.net (123.59.83.79)&apos; can&apos;t be established.</div><div class="line">RSA key fingerprint is 98:ab:2b:30:60:00:82:86:bb:85:db:87:22:c4:4f:b1.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure>
+<p>我们输入yes之后，以后就不用再确认了，这个时候通过exec来执行git也能成功执行了。<br>否则如果我们直接通过exec来执行的话，git pull这一步是不会执行的，也不会抛出任何信息的。</p>
+<p>测试可以分步测试，在php文件中通过写入文件来查看php是否正常执行，然后通过sh脚本的输出看sh脚本是否正常执行。<br>同时也可以在终端下测试sh执行是否正确。</p>
 
       
     </div>
