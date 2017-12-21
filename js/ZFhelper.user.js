@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         ZF助手
-// @version      0.1.1
+// @version      0.1.2
 // @author       idragonet
 // @match        https://c.dinpay.com/inpourAccountMain
 // @run-at       document-end
