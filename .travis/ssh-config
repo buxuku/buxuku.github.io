@@ -4,3 +4,9 @@ Host github.com
   StrictHostKeyChecking no
   IdentityFile ~/.ssh/github_blog
   IdentitiesOnly yes
+Host gcp
+  HostName $GCP_IP
+  User github_blog
+  StrictHostKeyChecking no
+  IdentityFile ~/.ssh/github_blog
+  IdentitiesOnly yes
