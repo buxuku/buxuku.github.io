@@ -12,7 +12,6 @@ branches:
 cache:
   directories:
     - node_modules
-    - themes
 
 before_install:
 - sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
