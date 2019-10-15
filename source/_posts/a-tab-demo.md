@@ -1,0 +1,171 @@
+---
+title: 用面向过程和面向对象方式写的一个tao标签卡demo
+date: 2016-10-25 18:49:38
+tags: 
+- javascript
+- 面向对象
+- demo
+category: 前端
+---
+主要是需要多思考面向对象中this的应用。
+<!--more-->
+## 面向过程
+
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .on{
+      background-color: red;
+    }
+    #tab div{
+      width: 400px;
+      height: 400px;
+      display: none;
+      border: 1px solid #ccc;
+    }
+    #tab .block{
+      display: block;
+    }
+  </style>
+  <script>
+    window.onload=function(){
+        var oPrent = document.getElementById('tab');
+        var oMenu = oPrent.getElementsByTagName('input');
+        var oShow = oPrent.getElementsByTagName('div');
+        for(i=0;i<oMenu.length;i++){
+          oMenu[i].index = i;
+          oMenu[i].onclick=function(){
+            for(j=0;j<oMenu.length;j++){
+              oMenu[j].className = '';
+              oShow[j].className = '';
+            }
+            this.className = 'on';
+            oShow[this.index].className = 'block';
+          }
+        }
+        var nowShow = 0;
+        var timmer = setInterval(function(){
+          if(nowShow>=oMenu.length){
+            nowShow = 0;
+          }
+          oMenu[nowShow].index = i;
+            for(j=0;j<oMenu.length;j++){
+              oMenu[j].className = '';
+              oShow[j].className = '';
+            }
+            oMenu[nowShow].className = 'on';
+            oShow[nowShow].className = 'block';
+          nowShow++;
+        },1000)
+    }
+  </script>
+</head>
+<body>
+  <div id="tab">
+    <input type="button" class="on" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <div class="block">111111111</div>
+    <div>222222222</div>
+    <div>333333333</div>
+  </div>
+</body>
+</html>
+
+```
+[view code](http://jsbin.com/pisiti/edit?html,output)
+
+## 面向对象
+
+深刻理解this的使用
+
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .on{
+      background-color: red;
+    }
+    #tab div{
+      width: 400px;
+      height: 400px;
+      display: none;
+      border: 1px solid #ccc;
+    }
+    #tab .block{
+      display: block;
+    }
+  </style>
+  <script>
+    window.onload=function(){
+      function Tab(name){
+        this.oPrent = document.getElementById(name);
+        this.oMenu = this.oPrent.getElementsByTagName('input');
+        this.oShow = this.oPrent.getElementsByTagName('div');
+      }
+      Tab.prototype.init = function(){
+        var This = this;
+        for(i=0;i<this.oMenu.length;i++){
+          this.oMenu[i].index = i;
+          this.oMenu[i].onclick=function(){
+            This.change(this);
+          }
+        }
+      }
+      Tab.prototype.change = function(obj){
+        for(j=0;j<this.oMenu.length;j++){
+          this.oMenu[j].className = '';
+          this.oShow[j].className = '';
+        }
+        obj.className = 'on';
+        this.oShow[obj.index].className = 'block';
+      }
+      Tab.prototype.auto = function(){
+        var nowShow = 0;
+        var This = this;
+        var timmer = setInterval(function(){
+          if(nowShow>=This.oMenu.length){
+            nowShow = 0;
+          }
+          This.oMenu[nowShow].index = i;
+            for(j=0;j<This.oMenu.length;j++){
+              This.oMenu[j].className = '';
+              This.oShow[j].className = '';
+            }
+            This.oMenu[nowShow].className = 'on';
+            This.oShow[nowShow].className = 'block';
+          nowShow++;
+        },1000)
+      }
+      var tab = new Tab('tab');
+      tab.init();
+      tab.auto();
+    }
+  </script>
+</head>
+<body>
+  <div id="tab">
+    <input type="button" class="on" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <div class="block">111111111</div>
+    <div>222222222</div>
+    <div>333333333</div>
+  </div>
+</body>
+</html>
+```
+[view code](http://jsbin.com/sapudeh/edit?html,output)

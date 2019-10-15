@@ -1,0 +1,148 @@
+---
+title: 利用gulp,browser-sync,workspace更快捷地进行前端开发
+date: 2016-05-04 08:46:36
+tags: 
+- gulp
+category: 前端
+---
+
+做前端开发的朋友，也许就像我一样，键盘上面的ctrl键和s健估计是磨损是严重的了。因为我们要不断地编辑器中写完代码，然后ctrl+s,接着再浏览器中按下f5刷新查看效果。不断地重复这样辛勤的工作。
+<!--more-->
+之前用过chrome的一个插件，liveReload,可以实现代码保存之后，自动刷新浏览器的功能。但有一个缺点就是要在chrome中和sublime text中都要安装插件。
+
+后面使用了gulp之后，发现了一个更加NB的node模块，browser-sync，只需要安装这样一个模块，不用在浏览器中和编辑器中再安装插件了，而且自带一个静态服务器，我们纯前端的代码就可以不依赖其它服务环境了，当然，它也可以通过代理的方式，处理我们其它服务环境下面的代码。同时支持跨浏览器，包括手机浏览器，以及同步在多个浏览器上面响应点击，滚动等等事件。一次保存，多处自动刷新。
+
+整个安装过程也是比较简单的，这里大致记录一下：
+
+首先，定位到我们项目的文件夹，运行：
+```
+npm init
+```
+这样通过package.json的方式来管理我们项目的依赖包。
+
+接下来输入我们项目的相关信息 比如：
+```
+name: (browsersync) 
+version: (1.0.0) 
+description: 
+entry point: (gulpfile.js) 
+test command: 
+...
+...
+Is this ok? (yes) 
+```
+
+这里需要注意的两点是：1.项目名字不能用我们要安装依赖模块的名字，比如我们接下来要安装browser-sync,而我们把项目的名字也写成browser-sync的话，那么我们安装broser-sync的时候，可能会报下面这样的错误
+```
+Refusing to install browser-sync as a dependency of itself
+```
+2.entry point的入口文件写成gulpfile.js，因为我们要通过gulp来进行自动化构建。
+
+
+这个时候我们项目下面就会生成一个package.json文件
+
+```
+{
+  "name": "browsersync",
+  "version": "1.0.0",
+  "description": "browser-sync demo",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "buxuku",
+  "license": "ISC",
+  "devDependencies": {
+  }
+}
+```
+
+安装gulp,为了防止gulp升级而导致的一系列的问题，我们不采用全局的方式安装
+```
+npm install gulp --save-dev
+```
+继续安装browser-sync
+
+```
+npm install browser-sync
+```
+
+安装完毕后，创建gulpfile.js入口文件
+
+```
+var gulp        = require('gulp');
+var browserSync = require('browser-sync').create();
+
+// 静态服务器
+gulp.task('browser-sync', function() {
+    browserSync.init({
+    	files: "**",
+        server: {
+            baseDir: "./"
+        }
+    });
+
+});
+```
+这个时候，我们运行`gulp broser-sync`这个任务，就会自动创建一个http服务器，并打开我们的默认浏览器，同时监听我们的项目文件
+
+```
+$ gulp browser-sync
+[09:11:00] Using gulpfile D:\phpStudy\WWW\browser-sync\gulpfile.js
+[09:11:00] Starting 'browser-sync'...
+[09:11:00] Finished 'browser-sync' after 25 ms
+[BS] Access URLs:
+ -------------------------------------
+       Local: http://localhost:3000
+    External: http://192.168.37.1:3000
+ -------------------------------------
+          UI: http://localhost:3001
+ UI External: http://192.168.37.1:3001
+ -------------------------------------
+[BS] Serving files from: ./
+[BS] Watching files...
+```
+我们来测试看看
+![](http://7te946.com1.z0.glb.clouddn.com/16-5-4/93188300.jpg)
+
+我时候该我们的workspace上场了。如果你玩的是双屏，一个放浏览器，一个放编辑器，土豪，我们做朋友吧。我们穷逼孩子还是不得不来回在编辑器和浏览器之间切换一下。
+
+我们在html文件中引入一个外部css文件，整个代码如下：
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>browser-sync</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	原来的内容
+	我增加一句 保存一下 测试
+</body>
+</html>
+```
+```css
+body{
+	font-size: 16px;
+	color:green;
+}
+```
+首先设置chrome的workspace,还是用一张图片展示一下：
+![](http://7te946.com1.z0.glb.clouddn.com/16-5-4/18265961.jpg)
+
+这里需要注意的就是要指定Mappings值，这样chrome才知道和本地文件的对应关系。
+
+接下来我们来看看强大的workspace的功能。
+![](http://7te946.com1.z0.glb.clouddn.com/16-5-4/7876929.jpg)
+
+~~当然，最后我们看到了，我通过外部引入的css，在审查元素面板是不能看到引入文件的，而且对其修改，虽然能够反映到页面上面，但不会反映到本地css文件上面。这主要是因为browser-sync对css文件采用的是注入的方式。这种方式对css进行修改可以不用重新刷新页面，而只需要重新渲染css修改的部分。这也将导致的一个问题就是，我们在审查元素面板看到不所定义的css样式的真实行号。~~
+
+~~我尝试在browser-sync中增加配置`injectChanges: false`,css依然还是采用的注入方式。并没有起什么作用。~~
+
+在设置中点击`Restore defaults and reload`就可以。但通过审核元素面板修改css会存在一个问题就是，在输完属性名字是没有问题的，但一开始输入属性值，就会触发workspace保存文件，而文件一更新，又会导致browser-sync重新加载，所以就会无法完整输入具体属性值。配合browser-sync,还是通过审查元素面板点开css文件，进入source面板后修改再手动保存。参看如下操作：
+![](http://7te946.com1.z0.glb.clouddn.com/16-5-4/6855632.jpg)
+
+最后，我们打开UI地址，就可以对browser-sync进行很多丰富的设置了。
+
+![](http://7te946.com1.z0.glb.clouddn.com/16-5-4/79609084.jpg)
