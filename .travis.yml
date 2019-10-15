@@ -16,8 +16,8 @@ cache:
     - themes
 
 before_install:
-  #- sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
-  #- git submodule update --init --remote --recursive
+  - sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
+  - git submodule update --init --remote --recursive
 - openssl aes-256-cbc -K $encrypted_9c865ccd0ee1_key -iv $encrypted_9c865ccd0ee1_iv
   -in .travis/github_blog.enc -out ~/.ssh/github_blog -d
 - chmod 600 ~/.ssh/github_blog
@@ -26,8 +26,8 @@ before_install:
 
 # 修改本机 ssh 配置，防止秘钥认证过程影响自动部署
 - mv -fv .travis/ssh-config ~/.ssh/config
-- git config --global user.name "${USER.NAME}"
-- git config --global user.email "${USER.EMAIL}"
+- git config --global user.name "$USER.NAME"
+- git config --global user.email "$USER.EMAIL"
 # 赋予自动部署脚本可执行权限
 - chmod +x .travis/deploy.sh
 - npm install -g hexo-cli
