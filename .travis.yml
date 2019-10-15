@@ -15,7 +15,7 @@ cache:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_9c865ccd0ee1_key -iv $encrypted_9c865ccd0ee1_iv
-  -in travis/github_blog.enc -out ~/.ssh/github_blog -d
+  -in .travis/github_blog.enc -out ~/.ssh/github_blog -d
 - chmod 600 ~/.ssh/github_blog
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/github_blog
