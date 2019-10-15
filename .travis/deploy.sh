@@ -16,4 +16,4 @@ git commit -m "Site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 
 git push origin master:master --force --quiet
 
-rsync -rav -e ssh --exclude='.git/' ./ gcp:/data/blog
+rsync -rav -e ssh ./ gcp:/data/blog
