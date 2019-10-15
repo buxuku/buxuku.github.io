@@ -1,6 +1,8 @@
 language: node_js
 node_js: stable
 
+git:
+  submodules: false
 # 只监听 source 分支的改动
 branches:
   only:
@@ -13,12 +15,9 @@ cache:
     - node_modules
     - themes
 
-git:
-  submodules: false
-
 before_install:
- - sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
- - git submodule update --init --recursive
+  #- sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
+  - git submodule update --init --remote --recursive
 - openssl aes-256-cbc -K $encrypted_9c865ccd0ee1_key -iv $encrypted_9c865ccd0ee1_iv
   -in .travis/github_blog.enc -out ~/.ssh/github_blog -d
 - chmod 600 ~/.ssh/github_blog
