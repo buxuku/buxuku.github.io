@@ -19,7 +19,6 @@ before_install:
 - chmod 600 ~/.ssh/github_blog
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/github_blog
-- cp .travis/ssh_config ~/.ssh/config
 
 # 修改本机 ssh 配置，防止秘钥认证过程影响自动部署
 - mv -fv .travis/ssh-config ~/.ssh/config
