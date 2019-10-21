@@ -5,13 +5,13 @@ Host github.com
   IdentityFile ~/.ssh/github_blog
   IdentitiesOnly yes
 Host gcp
-  HostName $GCP_IP
+  HostName 34.80.239.228
   User github_blog
   StrictHostKeyChecking no
   IdentityFile ~/.ssh/github_blog
   IdentitiesOnly yes
 Host aliyun
-  HostName $ALIYUN_IP:
+  HostName 120.79.217.213:
   User root
   StrictHostKeyChecking no
   IdentityFile ~/.ssh/github_blog
