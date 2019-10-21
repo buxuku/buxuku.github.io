@@ -11,7 +11,7 @@ Host gcp
   IdentityFile ~/.ssh/github_blog
   IdentitiesOnly yes
 Host aliyun
-  HostName 120.79.217.213:
+  HostName 120.79.217.213
   User root
   StrictHostKeyChecking no
   IdentityFile ~/.ssh/github_blog
