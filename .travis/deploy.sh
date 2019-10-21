@@ -17,4 +17,4 @@ git commit -m "Site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin master:master --force --quiet
 
 rsync -rav -e ssh ./ gcp:/data/blog
-rsync -raw -e ssh ./ aliyun:/data/blog
+rsync -rav -e ssh ./ aliyun:/data/blog
