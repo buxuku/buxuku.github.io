@@ -1620,7 +1620,7 @@
 <p>尝试再新建一个apache管理的虚拟主机,js.car91.cn,发现js.car91.cn/server-status依然可以访问,看来不能访问的原因是tomcat的ajp转发上.</p>
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -1651,10 +1651,10 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1965,7 +1965,7 @@
 <p>修改my.cnf参数，没有则加入如下： </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">basedir = /usr/local/mysql #（不配置的话默认为$PREFIX_DIR）</span><br><span class="line">datadir = /var/mysql/data #（不配置的话默认为$PREFIX_DIR/data）</span><br><span class="line">log-error = /usr/local/mysql/mysql_error.log #（不配置的话默认为$PREFIX_DIR/data/$hostname.err）</span><br><span class="line">pid-file = /usr/local/mysql/mysql.pid #（不配置的话默认为$PREFIX_DIR/data/$hostname.pid）</span><br><span class="line">user = mysql</span><br><span class="line">tmpdir = /tmp #（不配置的话默认为/tmp）</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Linux</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>mysql</tag>
@@ -1997,7 +1997,7 @@
 
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2035,7 +2035,7 @@
 
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"php is OK"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Linux</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>centos</tag>
@@ -2089,7 +2089,7 @@
 <h2 id="五-常见问题"><a href="#五-常见问题" class="headerlink" title="五.常见问题"></a>五.常见问题</h2><h3 id="1-apache已经正常安装了，但外网无法访问"><a href="#1-apache已经正常安装了，但外网无法访问" class="headerlink" title="1.apache已经正常安装了，但外网无法访问"></a>1.apache已经正常安装了，但外网无法访问</h3><p>这是因为在默认情况，ceontos的防火墙关闭了80端口，开启方法如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT #允许80端口</span><br><span class="line">/etc/rc.d/init.d/iptables save #保存</span><br><span class="line">/etc/init.d/iptables restart #重启防火墙</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Linux</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>apache</tag>
