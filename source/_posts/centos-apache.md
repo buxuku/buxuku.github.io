@@ -4,7 +4,7 @@ tags:
 - centos
 - apache
 categories: 
-- Linux
+- linux
 ---
 ## 一.安装环境
 

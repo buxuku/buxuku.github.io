@@ -4,7 +4,7 @@ tags:
 - linux
 - apache
 categories:
-- Linux
+- linux
 ---
 
 # 一.开启模块

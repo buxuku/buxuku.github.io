@@ -5,7 +5,7 @@ tags:
 - linux
 - centos
 categories: 
-- Linux
+- linux
 ---
 ### 1.Sorry, I cannot run apxs
 

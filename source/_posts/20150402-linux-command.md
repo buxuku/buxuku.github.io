@@ -1,9 +1,9 @@
 title: linux常用命令
 date: 2015-04-02 10:10:46
 tags:
-- Linux
+- linux
 categories:
-- Linux
+- linux
 ---
 
 # 一.查看进程详细情况

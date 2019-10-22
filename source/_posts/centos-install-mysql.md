@@ -4,7 +4,7 @@ tags:
 - centos
 - mysql
 categories: 
-- Linux
+- linux
 ---
 ## 一.安装环境
 
