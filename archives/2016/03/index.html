@@ -43,7 +43,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -129,7 +129,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">一个走在前端的后端人</p>
+        <h1 class="site-subtitle" itemprop="description">一个走在前端的后端人</h1>
       
   </div>
 
@@ -211,9 +211,36 @@
   </li>
       
     
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+    
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -276,7 +303,7 @@
   
     
     <div class="collection-year">
-      <h1 class="collection-header">2016</h1>
+      <h2 class="collection-header">2016</h2>
     </div>
   
 
@@ -291,13 +318,13 @@
         </time>
       </div>
 
-      <h2 class="post-title">
+      <h3 class="post-title">
         
           <a class="post-title-link" href="/2016/03/29/clean-weixin-webview-local-storage/" itemprop="url">
             <span itemprop="name">清空微信浏览器缓存</span>
           </a>
         
-      </h2>
+      </h3>
 
     </header>
   </article>
@@ -320,13 +347,13 @@
         </time>
       </div>
 
-      <h2 class="post-title">
+      <h3 class="post-title">
         
           <a class="post-title-link" href="/2016/03/29/empty-value/" itemprop="url">
             <span itemprop="name">empty value</span>
           </a>
         
-      </h2>
+      </h3>
 
     </header>
   </article>
@@ -349,13 +376,13 @@
         </time>
       </div>
 
-      <h2 class="post-title">
+      <h3 class="post-title">
         
           <a class="post-title-link" href="/2016/03/22/20160322-git-with-ssh/" itemprop="url">
             <span itemprop="name">用ssh的方式来连接你的git</span>
           </a>
         
-      </h2>
+      </h3>
 
     </header>
   </article>
@@ -378,13 +405,13 @@
         </time>
       </div>
 
-      <h2 class="post-title">
+      <h3 class="post-title">
         
           <a class="post-title-link" href="/2016/03/21/20160321-push-my-code-on-github/" itemprop="url">
             <span itemprop="name">轻松把代码部署到github上面</span>
           </a>
         
-      </h2>
+      </h3>
 
     </header>
   </article>
@@ -407,13 +434,13 @@
         </time>
       </div>
 
-      <h2 class="post-title">
+      <h3 class="post-title">
         
           <a class="post-title-link" href="/2016/03/19/20160319-hexo-update-theme/" itemprop="url">
             <span itemprop="name">hexo 更新主题的方法</span>
           </a>
         
-      </h2>
+      </h3>
 
     </header>
   </article>
@@ -436,13 +463,13 @@
         </time>
       </div>
 
-      <h2 class="post-title">
+      <h3 class="post-title">
         
           <a class="post-title-link" href="/2016/03/18/20160318-ewei-shop-fixed/" itemprop="url">
             <span itemprop="name">微擎模块人人商城11.7版修记录</span>
           </a>
         
-      </h2>
+      </h3>
 
     </header>
   </article>
@@ -663,6 +690,7 @@
 
 
 
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -675,12 +703,40 @@
 
 
 
+
+
+  
 
   
 
   
 
-  
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
+    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

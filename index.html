@@ -43,7 +43,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -129,7 +129,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">一个走在前端的后端人</p>
+        <h1 class="site-subtitle" itemprop="description">一个走在前端的后端人</h1>
       
   </div>
 
@@ -211,9 +211,36 @@
   </li>
       
     
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+    
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -253,12 +280,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/10/12/mockjs-skills/" class="post-title-link" itemprop="url">mockjs使用的一些技巧</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -282,7 +309,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -305,6 +332,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/10/12/mockjs-skills/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/10/12/mockjs-skills/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -332,6 +375,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -357,12 +402,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/10/03/git-bisect/" class="post-title-link" itemprop="url">使用git bisect进行二分法定位错误的提交</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -386,7 +431,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -409,6 +454,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/10/03/git-bisect/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/10/03/git-bisect/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -439,6 +500,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -464,12 +527,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/09/30/multiple-layouts-with-react-router-v4/" class="post-title-link" itemprop="url">在react-router v4中实现多个布局模板</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -493,7 +556,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -516,6 +579,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/09/30/multiple-layouts-with-react-router-v4/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/09/30/multiple-layouts-with-react-router-v4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -544,6 +623,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -569,12 +650,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/09/29/update-react-from-v15-to-v16/" class="post-title-link" itemprop="url">react从v15升级到v16</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -598,7 +679,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -621,6 +702,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/09/29/update-react-from-v15-to-v16/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/09/29/update-react-from-v15-to-v16/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -648,6 +745,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -673,12 +772,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/09/28/Migrating-react-route-v3-to-v4/" class="post-title-link" itemprop="url">react-route从v3迁移到v4(折腾+踩坑)</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -702,7 +801,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -725,6 +824,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/09/28/Migrating-react-route-v3-to-v4/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/09/28/Migrating-react-route-v3-to-v4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -752,6 +867,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -777,12 +894,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/09/25/React-pits-and-best-practices/" class="post-title-link" itemprop="url">在React中踩过的坑以及最佳实践</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -806,7 +923,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -829,6 +946,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/09/25/React-pits-and-best-practices/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/09/25/React-pits-and-best-practices/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -847,6 +980,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -872,12 +1007,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/09/22/use-git-webhook-to-update-website/" class="post-title-link" itemprop="url">利用git webhook 来同步更新代码</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -901,7 +1036,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -924,6 +1059,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/09/22/use-git-webhook-to-update-website/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/09/22/use-git-webhook-to-update-website/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -951,6 +1102,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -976,12 +1129,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2017/02/08/webpack-step-by-step/" class="post-title-link" itemprop="url">webpack一步一步深入学习应用</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1005,7 +1158,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -1028,6 +1181,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/02/08/webpack-step-by-step/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/02/08/webpack-step-by-step/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -1060,6 +1229,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -1085,12 +1256,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2016/10/26/a-Multiplication-Table-demo/" class="post-title-link" itemprop="url">用几行原生js代码写的九九乘法表</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1114,7 +1285,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -1137,6 +1308,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2016/10/26/a-Multiplication-Table-demo/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2016/10/26/a-Multiplication-Table-demo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -1164,6 +1351,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -1189,12 +1378,12 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             
             <a href="/2016/10/26/a-drap-demo/" class="post-title-link" itemprop="url">用面向过程和面向对象写一个拖拽demo</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1218,7 +1407,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -1241,6 +1430,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2016/10/26/a-drap-demo/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2016/10/26/a-drap-demo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -1268,6 +1473,8 @@
     
     
     
+      
+
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -1489,6 +1696,7 @@
 
 
 
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -1501,12 +1709,40 @@
 
 
 
+
+
+  
 
   
 
   
 
-  
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
+    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

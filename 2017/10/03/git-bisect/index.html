@@ -43,7 +43,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:description" content="使用场景来源于曾经的一次代码合并，代码合并之后，控制台报错，而且不是显性的错误，很难从代码层面查找到问题，测试了几次都没办法定位到问题的所在位置。无奈，只好进行回退对比了，这一次合并一共有十来次提交，决定回退看看是哪一次提交产生了对比，然后做修改对比。 当然，很自然的就是采用二分法的回退，先回退到中间的那一个版本，看问题是否存在，这样每回退一次，都可以减少一半的提交记录，十来次的提交，很快就可以定">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-24T01:57:38.015Z">
+<meta property="og:updated_time" content="2019-11-19T07:07:57.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用git bisect进行二分法定位错误的提交">
 <meta name="twitter:description" content="使用场景来源于曾经的一次代码合并，代码合并之后，控制台报错，而且不是显性的错误，很难从代码层面查找到问题，测试了几次都没办法定位到问题的所在位置。无奈，只好进行回退对比了，这一次合并一共有十来次提交，决定回退看看是哪一次提交产生了对比，然后做修改对比。 当然，很自然的就是采用二分法的回退，先回退到中间的那一个版本，看问题是否存在，这样每回退一次，都可以减少一半的提交记录，十来次的提交，很快就可以定">
@@ -131,7 +131,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">一个走在前端的后端人</p>
+        <h1 class="site-subtitle" itemprop="description">一个走在前端的后端人</h1>
       
   </div>
 
@@ -213,9 +213,36 @@
   </li>
       
     
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+    
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -255,13 +282,13 @@
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             使用git bisect进行二分法定位错误的提交
             <a href="https://github.com/buxuku/buxuku.github.io/tree/hexo/source/_posts/git-bisect.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
 
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -285,7 +312,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-24 01:57:38" itemprop="dateModified" datetime="2019-10-24T01:57:38+00:00">2019-10-24</time>
+                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
               </span>
             
           
@@ -308,6 +335,22 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2017/10/03/git-bisect/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/10/03/git-bisect/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -377,7 +420,32 @@
     
     
     
+      
+
         
+      
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block;">
+        <img src="/img/wechatpay.png" alt="林晓东 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+        
+      
+      <div style="display: inline-block;">
+        <img src="/img/alipay.png" alt="林晓东 Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
       
 
       <footer class="post-footer">
@@ -386,7 +454,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
             
           </div>
         
@@ -425,6 +493,9 @@
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -631,6 +702,7 @@
 
 
 
+  <script src="/js/local-search.js?v=7.4.1"></script>
 
 
 
@@ -643,12 +715,40 @@
 
 
 
+
+
+  
 
   
 
   
 
-  
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
+    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>
