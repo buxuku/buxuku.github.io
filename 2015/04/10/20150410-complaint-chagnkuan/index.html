@@ -65,7 +65,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/tousu/cc1.png">
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/tousu/cc2.png">
-<meta property="og:updated_time" content="2019-11-19T07:07:57.708Z">
+<meta property="og:updated_time" content="2019-11-19T08:07:29.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="投诉之长城宽带">
 <meta name="twitter:description" content="最开始发现宽带问题是用手机下载APP的时候，经常会先下载一个360手机助手，第二次下载的时候才会下载到正常的APP,后来发现我在使用京东，淘宝，亚马逊，包括百度的时候，都会自动变成联盟网站的链接，而且平时看电视基本上不卡的，而且是基本上都是卡的，最开始也不解，以为是应用商店的问题，因为在应用商店里面也有人评价说下载成了其它的APP,后来在电脑上下载APP的时候，在APP的官网上下载也会出现这样的问">
@@ -315,7 +315,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
               </span>
             
           
@@ -338,22 +338,6 @@
           
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/04/10/20150410-complaint-chagnkuan/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/04/10/20150410-complaint-chagnkuan/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -453,7 +437,13 @@
           </div>
           
     
-    <div class="comments" id="comments"></div>
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
   
 
         </div>
@@ -682,31 +672,19 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(item => {
-    return GUEST.includes(item);
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
-    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
-    placeholder: "Just go go",
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false,
-    lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname,
-    recordIP: false,
-    serverURLs: ''
-  });
-}, window.Valine);
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
+      apikey: 'cHYsWBSmrYnpUD0UOXcT0Wiwys8NXVWqFK6yTP1Q30ptyETFjCkcsNawadV4cOK9',
+      shortname: 'buxuku',
+      url: "http://blog.linxiaodong.com.com/2015/04/10/20150410-complaint-chagnkuan/",
+      identifier: "2015/04/10/20150410-complaint-chagnkuan/",
+      title: '投诉之长城宽带',
+    });
+  }, window.DisqusJS);
 </script>
 
 </body>

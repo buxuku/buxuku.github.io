@@ -69,7 +69,7 @@
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/blog4.gif">
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/blog5.gif">
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/blog6.gif">
-<meta property="og:updated_time" content="2019-11-19T07:07:57.712Z">
+<meta property="og:updated_time" content="2019-11-19T08:07:29.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="转photoshop下去除水印的六种方法">
 <meta name="twitter:description" content="1、使用仿制图章工具去除文字。这是比较常用的方法。具体的操作是，选取仿制图章工具，按住Alt键，在无文字区域点击相似的色彩或图案采样， 然后在文字区域拖动鼠标复制以复盖文字。要注意的是，采样点即为复制的起始点。选择不同的笔刷直径会影响绘制的范围，而不同的笔刷硬度会影响绘制区域的边缘融合效果。">
@@ -319,28 +319,12 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
               </span>
             
           
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2014/12/25/photoshop-remove-vatermark/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2014/12/25/photoshop-remove-vatermark/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -442,7 +426,13 @@
           </div>
           
     
-    <div class="comments" id="comments"></div>
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
   
 
         </div>
@@ -673,31 +663,19 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(item => {
-    return GUEST.includes(item);
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
-    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
-    placeholder: "Just go go",
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false,
-    lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname,
-    recordIP: false,
-    serverURLs: ''
-  });
-}, window.Valine);
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
+      apikey: 'cHYsWBSmrYnpUD0UOXcT0Wiwys8NXVWqFK6yTP1Q30ptyETFjCkcsNawadV4cOK9',
+      shortname: 'buxuku',
+      url: "http://blog.linxiaodong.com.com/2014/12/25/photoshop-remove-vatermark/",
+      identifier: "2014/12/25/photoshop-remove-vatermark/",
+      title: '转photoshop下去除水印的六种方法',
+    });
+  }, window.DisqusJS);
 </script>
 
 </body>

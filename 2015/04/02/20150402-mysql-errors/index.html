@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:description" content="一.Can’t find file: ‘./mysql/plugin.frm’ (errno: 13)公司的服务器mysql一直是以root用户启动起来的，运行一直正常，今天给linux重新建了一个root组的用户，以这个用户的身份登录后，重启mysql一直失败，然后就把所有mysql运程结束了，以该用户身份启动mysql时，在错误日志中一直提示如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T07:07:57.708Z">
+<meta property="og:updated_time" content="2019-11-19T08:07:29.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql相关错误整理">
 <meta name="twitter:description" content="一.Can’t find file: ‘./mysql/plugin.frm’ (errno: 13)公司的服务器mysql一直是以root用户启动起来的，运行一直正常，今天给linux重新建了一个root组的用户，以这个用户的身份登录后，重启mysql一直失败，然后就把所有mysql运程结束了，以该用户身份启动mysql时，在错误日志中一直提示如下：">
@@ -312,7 +312,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
               </span>
             
           
@@ -335,22 +335,6 @@
           
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/04/02/20150402-mysql-errors/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/04/02/20150402-mysql-errors/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -446,7 +430,13 @@
           </div>
           
     
-    <div class="comments" id="comments"></div>
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
   
 
         </div>
@@ -677,31 +667,19 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(item => {
-    return GUEST.includes(item);
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
-    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
-    placeholder: "Just go go",
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false,
-    lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname,
-    recordIP: false,
-    serverURLs: ''
-  });
-}, window.Valine);
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
+      apikey: 'cHYsWBSmrYnpUD0UOXcT0Wiwys8NXVWqFK6yTP1Q30ptyETFjCkcsNawadV4cOK9',
+      shortname: 'buxuku',
+      url: "http://blog.linxiaodong.com.com/2015/04/02/20150402-mysql-errors/",
+      identifier: "2015/04/02/20150402-mysql-errors/",
+      title: 'mysql相关错误整理',
+    });
+  }, window.DisqusJS);
 </script>
 
 </body>

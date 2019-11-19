@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:description" content="我们都知道，在js中闭包会一直保持对着包含函数中的变量的引用，哪怕是在其它地方返回了闭包函数，其外部函数中的变量也不会销毁的。根据这个特性，我们引用一个面试题来深入观察一下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T07:07:57.712Z">
+<meta property="og:updated_time" content="2019-11-19T08:07:29.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js中闭包变量的问题">
 <meta name="twitter:description" content="我们都知道，在js中闭包会一直保持对着包含函数中的变量的引用，哪怕是在其它地方返回了闭包函数，其外部函数中的变量也不会销毁的。根据这个特性，我们引用一个面试题来深入观察一下：">
@@ -312,7 +312,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
               </span>
             
           
@@ -335,22 +335,6 @@
           
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2016/10/14/closure-bind-vars/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2016/10/14/closure-bind-vars/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -457,7 +441,13 @@
           </div>
           
     
-    <div class="comments" id="comments"></div>
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
   
 
         </div>
@@ -686,31 +676,19 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(item => {
-    return GUEST.includes(item);
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
-    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
-    placeholder: "Just go go",
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false,
-    lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname,
-    recordIP: false,
-    serverURLs: ''
-  });
-}, window.Valine);
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
+      apikey: 'cHYsWBSmrYnpUD0UOXcT0Wiwys8NXVWqFK6yTP1Q30ptyETFjCkcsNawadV4cOK9',
+      shortname: 'buxuku',
+      url: "http://blog.linxiaodong.com.com/2016/10/14/closure-bind-vars/",
+      identifier: "2016/10/14/closure-bind-vars/",
+      title: 'js中闭包变量的问题',
+    });
+  }, window.DisqusJS);
 </script>
 
 </body>

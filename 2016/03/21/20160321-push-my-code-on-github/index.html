@@ -66,7 +66,7 @@
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/16-3-21/53438101.jpg">
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/16-3-21/11795900.jpg">
 <meta property="og:image" content="http://7te946.com1.z0.glb.clouddn.com/16-3-21/89223794.jpg">
-<meta property="og:updated_time" content="2019-11-19T07:07:57.712Z">
+<meta property="og:updated_time" content="2019-11-19T08:07:29.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="轻松把代码部署到github上面">
 <meta name="twitter:description" content="我们使用git很多时候都是需要配合github同步使用的，当我们在本地使用了git管理代码，并进行修改，提交之后，接下来我们就想把代码部署到github上面去，整个流程也是非常简单的。">
@@ -316,7 +316,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 07:07:57" itemprop="dateModified" datetime="2019-11-19T07:07:57+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
               </span>
             
           
@@ -339,22 +339,6 @@
           
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2016/03/21/20160321-push-my-code-on-github/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2016/03/21/20160321-push-my-code-on-github/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -456,7 +440,13 @@
           </div>
           
     
-    <div class="comments" id="comments"></div>
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
   
 
         </div>
@@ -687,31 +677,19 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(item => {
-    return GUEST.includes(item);
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: '5wphdzga6D3AEsmUiRp3HMKf-gzGzoHsz',
-    appKey: 'P0QeN4CeSm3RRLghin8m0BbA',
-    placeholder: "Just go go",
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false,
-    lang: 'zh-cn' || 'zh-cn',
-    path: location.pathname,
-    recordIP: false,
-    serverURLs: ''
-  });
-}, window.Valine);
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
+      apikey: 'cHYsWBSmrYnpUD0UOXcT0Wiwys8NXVWqFK6yTP1Q30ptyETFjCkcsNawadV4cOK9',
+      shortname: 'buxuku',
+      url: "http://blog.linxiaodong.com.com/2016/03/21/20160321-push-my-code-on-github/",
+      identifier: "2016/03/21/20160321-push-my-code-on-github/",
+      title: '轻松把代码部署到github上面',
+    });
+  }, window.DisqusJS);
 </script>
 
 </body>
