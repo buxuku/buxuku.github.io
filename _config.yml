@@ -96,7 +96,7 @@ search:
   format: html
   limit: 10000
 
-genrator_readme:
+generator_readme:
   categories:
     前端: 1
     软件: 2

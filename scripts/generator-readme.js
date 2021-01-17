@@ -3,8 +3,8 @@ hexo.extend.generator.register('generator-readme', function (locals) {
     let categoriesFiltered = categoriesFilter ? locals.categories.filter(item => !!categoriesFilter[item.name]) : locals.categories;
     let categories = [];
 
-    categoriesFiltered.data.sort((a, b) => {
-        return hexo.config.categories_in_readme[a.name] - hexo.config.categories_in_readme[b.name];
+    categoriesFilter && categoriesFiltered.data.sort((a, b) => {
+        return categoriesFilter[a.name] - categoriesFilter[b.name];
     })
     categoriesFiltered.data.forEach((item,index) => {
         const obj = {...item};
