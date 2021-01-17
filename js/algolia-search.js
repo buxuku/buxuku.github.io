@@ -1,108 +1,127 @@
-/* global instantsearch, CONFIG */
+/* global instantsearch, algoliasearch, CONFIG */
 
-window.addEventListener('DOMContentLoaded', () => {
-  const algoliaSettings = CONFIG.algolia;
+document.addEventListener('DOMContentLoaded', () => {
+  const { indexName, appID, apiKey, hits } = CONFIG.algolia;
 
-  let search = instantsearch({
-    appId         : algoliaSettings.appID,
-    apiKey        : algoliaSettings.apiKey,
-    indexName     : algoliaSettings.indexName,
+  const search = instantsearch({
+    indexName,
+    searchClient  : algoliasearch(appID, apiKey),
     searchFunction: helper => {
-      let searchInput = document.querySelector('#search-input input');
-      if (searchInput.value) {
+      if (document.querySelector('.search-input').value) {
         helper.search();
       }
     }
   });
 
   window.pjax && search.on('render', () => {
-    window.pjax.refresh(document.getElementById('algolia-hits'));
+    window.pjax.refresh(document.querySelector('.algolia-hits'));
   });
 
   // Registering Widgets
-  [
+  search.addWidgets([
+    instantsearch.widgets.configure({
+      hitsPerPage: hits.per_page || 10
+    }),
+
     instantsearch.widgets.searchBox({
-      container  : '#search-input',
-      placeholder: algoliaSettings.labels.input_placeholder
+      container           : '.search-input-container',
+      placeholder         : CONFIG.i18n.placeholder,
+      // Hide default icons of algolia search
+      showReset           : false,
+      showSubmit          : false,
+      showLoadingIndicator: false,
+      cssClasses          : {
+        input: 'search-input'
+      }
     }),
 
     instantsearch.widgets.stats({
-      container: '#algolia-stats',
+      container: '.algolia-stats',
       templates: {
-        body: data => {
-          let stats = algoliaSettings.labels.hits_stats
+        text: data => {
+          const stats = CONFIG.i18n.hits_time
             .replace(/\$\{hits}/, data.nbHits)
             .replace(/\$\{time}/, data.processingTimeMS);
-          return `${stats}
-            <span class="algolia-powered">
-              <img src="${CONFIG.root}images/algolia_logo.svg" alt="Algolia">
-            </span>
-            <hr>`;
+          return `<span>${stats}</span>
+            <img src="${CONFIG.images}/logo-algolia-nebula-blue-full.svg" alt="Algolia">`;
         }
+      },
+      cssClasses: {
+        text: 'search-stats'
       }
     }),
 
     instantsearch.widgets.hits({
-      container  : '#algolia-hits',
-      hitsPerPage: algoliaSettings.hits.per_page || 10,
-      templates  : {
+      container : '.algolia-hits',
+      escapeHTML: false,
+      templates : {
         item: data => {
-          let link = data.permalink ? data.permalink : CONFIG.root + data.path;
-          return `<a href="${link}" class="algolia-hit-item-link">${data._highlightResult.title.value}</a>`;
+          const { title, excerpt, excerptStrip, contentStripTruncate } = data._highlightResult;
+          let result = `<a href="${data.permalink}" class="search-result-title">${title.value}</a>`;
+          const content = excerpt || excerptStrip || contentStripTruncate;
+          if (content && content.value) {
+            const div = document.createElement('div');
+            div.innerHTML = content.value;
+            result += `<a href="${data.permalink}"><p class="search-result">${div.textContent.substr(0, 100)}...</p></a>`;
+          }
+          return result;
         },
         empty: data => {
-          return `<div id="algolia-hits-empty">
-              ${algoliaSettings.labels.hits_empty.replace(/\$\{query}/, data.query)}
+          return `<div class="algolia-hits-empty">
+              ${CONFIG.i18n.empty.replace(/\$\{query}/, data.query)}
             </div>`;
         }
       },
       cssClasses: {
-        item: 'algolia-hit-item'
+        list: 'search-result-list'
       }
     }),
 
     instantsearch.widgets.pagination({
-      container    : '#algolia-pagination',
-      scrollTo     : false,
-      showFirstLast: false,
-      labels       : {
+      container: '.algolia-pagination',
+      scrollTo : false,
+      showFirst: false,
+      showLast : false,
+      templates: {
         first   : '<i class="fa fa-angle-double-left"></i>',
         last    : '<i class="fa fa-angle-double-right"></i>',
         previous: '<i class="fa fa-angle-left"></i>',
         next    : '<i class="fa fa-angle-right"></i>'
       },
       cssClasses: {
-        root    : 'pagination',
-        item    : 'pagination-item',
-        link    : 'page-number',
-        active  : 'current',
-        disabled: 'disabled-item'
+        list        : ['pagination', 'algolia-pagination'],
+        item        : 'pagination-item',
+        link        : 'page-number',
+        selectedItem: 'current',
+        disabledItem: 'disabled-item'
       }
     })
-  ].forEach(search.addWidget, search);
+  ]);
 
   search.start();
 
   // Handle and trigger popup window
-  document.querySelector('.popup-trigger').addEventListener('click', () => {
-    document.body.style.overflow = 'hidden';
-    document.querySelector('.search-pop-overlay').style.display = 'block';
-    document.querySelector('.popup').style.display = 'block';
-    document.querySelector('#search-input input').focus();
+  document.querySelectorAll('.popup-trigger').forEach(element => {
+    element.addEventListener('click', () => {
+      document.body.classList.add('search-active');
+      setTimeout(() => document.querySelector('.search-input').focus(), 500);
+    });
   });
 
   // Monitor main search box
   const onPopupClose = () => {
-    document.body.style.overflow = '';
-    document.querySelector('.search-pop-overlay').style.display = 'none';
-    document.querySelector('.popup').style.display = 'none';
+    document.body.classList.remove('search-active');
   };
 
-  document.querySelector('.search-pop-overlay').addEventListener('click', onPopupClose);
+  document.querySelector('.search-pop-overlay').addEventListener('click', event => {
+    if (event.target === document.querySelector('.search-pop-overlay')) {
+      onPopupClose();
+    }
+  });
   document.querySelector('.popup-btn-close').addEventListener('click', onPopupClose);
-  window.addEventListener('pjax:success', onPopupClose);
+  document.addEventListener('pjax:success', onPopupClose);
   window.addEventListener('keyup', event => {
-    if (event.which === 27) {
+    if (event.key === 'Escape') {
       onPopupClose();
     }
   });

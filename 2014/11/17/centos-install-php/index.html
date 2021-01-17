@@ -1,340 +1,323 @@
 <!DOCTYPE html>
-
-
-
-
-
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
-
-<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+<meta name="generator" content="Hexo 5.3.0">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '7.4.1',
-    exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":"flat"},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
-    },
-    sidebarPadding: 40
-  };
-</script>
 
-  <meta name="description" content="一.安装环境 centos6.5最小化安装/AWS centos  二.所需工具 php-5.5.5">
-<meta name="keywords" content="centos,php">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.linxiaodong.com.com","root":"/","images":"/images","scheme":"Pisces","version":"8.2.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="一.安装环境 centos6.5最小化安装&#x2F;AWS centos  二.所需工具 php-5.5.5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centos编译安装php">
 <meta property="og:url" content="http://blog.linxiaodong.com.com/2014/11/17/centos-install-php/index.html">
 <meta property="og:site_name" content="林晓东的个人博客">
-<meta property="og:description" content="一.安装环境 centos6.5最小化安装/AWS centos  二.所需工具 php-5.5.5">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T08:07:29.763Z">
+<meta property="og:description" content="一.安装环境 centos6.5最小化安装&#x2F;AWS centos  二.所需工具 php-5.5.5">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2014-11-17T15:33:29.000Z">
+<meta property="article:modified_time" content="2021-01-17T06:17:50.607Z">
+<meta property="article:author" content="林晓东">
+<meta property="article:tag" content="centos">
+<meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="centos编译安装php">
-<meta name="twitter:description" content="一.安装环境 centos6.5最小化安装/AWS centos  二.所需工具 php-5.5.5">
-  <link rel="canonical" href="http://blog.linxiaodong.com.com/2014/11/17/centos-install-php/">
 
 
-<script id="page-configurations">
+<link rel="canonical" href="http://blog.linxiaodong.com.com/2014/11/17/centos-install-php/">
+
+
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-  <title>centos编译安装php | 林晓东的个人博客</title>
+<title>centos编译安装php | 林晓东的个人博客</title>
   
-
-
-
-
 
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">林晓东的个人博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-        <h1 class="site-subtitle" itemprop="description">一个走在前端的后端人</h1>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">林晓东的个人博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个走在前端的后端人</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-      
-      
-        
-        
-        <li class="menu-item menu-item-首页">
-      
-    
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-分类">
-      
-    
-
-    <a href="/categories" rel="section"><i class="fa fa-fw fa-folder"></i>分类</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-关于我">
-      
-    
-
-    <a href="/about" rel="section"><i class="fa fa-fw fa-id-badge"></i>关于我</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-时间线">
-      
-    
-
-    <a href="/archives" rel="section"><i class="fa fa-fw fa-history"></i>时间线</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-标签">
-      
-    
-
-    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-      
-    
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-分类"><a href="/categories" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about" rel="section"><i class="fa fa-id-badge fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-时间线"><a href="/archives" rel="section"><i class="fa fa-history fa-fw"></i>时间线</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger">
-          <i class="fa fa-search fa-fw"></i>Search
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
       </li>
-    
   </ul>
-
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">一.安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E6%89%80%E9%9C%80%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">二.所需工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">三.安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php%E7%8E%AF%E5%A2%83%E9%9C%80%E8%A6%81%E7%9A%84devel%E5%8C%85"><span class="nav-number">3.1.</span> <span class="nav-text">1.编译安装php环境需要的devel包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BD%EF%BC%8C%E8%A7%A3%E5%8E%8Bphp"><span class="nav-number">3.2.</span> <span class="nav-text">2.下载，解压php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%BE%E7%BD%AE%E7%BC%96%E8%AF%91%E5%8F%82%E6%95%B0-%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text">3.设置编译参数,安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%95%B4%E5%90%88php-apache"><span class="nav-number">3.4.</span> <span class="nav-text">4.整合php apache</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="林晓东"
+      src="/img/author.jpg">
+  <p class="site-author-name" itemprop="name">林晓东</p>
+  <div class="site-description" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/buxuku" title="github → https:&#x2F;&#x2F;github.com&#x2F;buxuku" rel="noopener" target="_blank">github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/xiaodong5959" title="weibo → http:&#x2F;&#x2F;weibo.com&#x2F;xiaodong5959" rel="noopener" target="_blank">weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/42031633/" title="douban → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;42031633&#x2F;" rel="noopener" target="_blank">douban</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xiaodong5959" title="zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xiaodong5959" rel="noopener" target="_blank">zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buxuku@gmail.com" title="E-Mail → mailto:buxuku@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
-  <div class="reading-progress-bar"></div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <a href="https://github.com/buxuku" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-            
 
-          <div class="content">
-            
+    <div class="main-inner post posts-expand">
 
-  <div class="posts-expand">
-      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2014/11/17/centos-install-php/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="林晓东的个人博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            centos编译安装php
-            <a href="https://github.com/buxuku/buxuku.github.io/tree/hexo/source/_posts/centos-install-php.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
+        <h1 class="post-title" itemprop="name headline">
+          centos编译安装php<a href="https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/centos-install-php.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
 
-          
-        </h2>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+      <time title="创建时间：2014-11-17 15:33:29" itemprop="dateCreated datePublished" datetime="2014-11-17T15:33:29+00:00">2014-11-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
 
-              
-                
-              
-
-              <time title="Created: 2014-11-17 15:33:29" itemprop="dateCreated datePublished" datetime="2014-11-17T15:33:29+00:00">2014-11-17</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -343,8 +326,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <h2 id="一-安装环境"><a href="#一-安装环境" class="headerlink" title="一.安装环境"></a>一.安装环境</h2><blockquote>
 <p>centos6.5最小化安装/AWS centos</p>
 </blockquote>
@@ -353,309 +334,122 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="三-安装步骤"><a href="#三-安装步骤" class="headerlink" title="三.安装步骤"></a>三.安装步骤</h2><h3 id="1-编译安装php环境需要的devel包"><a href="#1-编译安装php环境需要的devel包" class="headerlink" title="1.编译安装php环境需要的devel包"></a>1.编译安装php环境需要的devel包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install libxml2-devel gd-devel libmcrypt-devel libcurl-devel openssl-devel</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-下载，解压php"><a href="#2-下载，解压php" class="headerlink" title="2.下载，解压php"></a>2.下载，解压php</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src</span><br><span class="line">wget http://us3.php.net/get/php-5.5.5.tar.gz/from/cn2.php.net/mirror</span><br><span class="line">tar -xvf php-5.5.5.tar.gz</span><br><span class="line">cd php-5.5.5</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-设置编译参数-安装"><a href="#3-设置编译参数-安装" class="headerlink" title="3.设置编译参数,安装"></a>3.设置编译参数,安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-apxs2=/usr/local/apache2/bin/apxs --disable-cli --enable-shared --with-libxml-dir --with-gd --with-openssl --enable-mbstring --with-mcrypt --with-mysqli --with-mysql --enable-opcache --enable-mysqlnd --enable-zip --with-zlib-dir --with-pdo-mysql --with-jpeg-dir --with-freetype-dir --with-curl --without-pdo-sqlite --without-sqlite3</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
+<h3 id="2-下载，解压php"><a href="#2-下载，解压php" class="headerlink" title="2.下载，解压php"></a>2.下载，解压php</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;src</span><br><span class="line">wget http:&#x2F;&#x2F;us3.php.net&#x2F;get&#x2F;php-5.5.5.tar.gz&#x2F;from&#x2F;cn2.php.net&#x2F;mirror</span><br><span class="line">tar -xvf php-5.5.5.tar.gz</span><br><span class="line">cd php-5.5.5</span><br></pre></td></tr></table></figure>
+<h3 id="3-设置编译参数-安装"><a href="#3-设置编译参数-安装" class="headerlink" title="3.设置编译参数,安装"></a>3.设置编译参数,安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --with-apxs2&#x3D;&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;bin&#x2F;apxs --disable-cli --enable-shared --with-libxml-dir --with-gd --with-openssl --enable-mbstring --with-mcrypt --with-mysqli --with-mysql --enable-opcache --enable-mysqlnd --enable-zip --with-zlib-dir --with-pdo-mysql --with-jpeg-dir --with-freetype-dir --with-curl --without-pdo-sqlite --without-sqlite3</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 <p>我已经尽量的在参数上做了精简，用以上参数编译安装好的 php 运行 wordpress, joomla, ip board 等常见的博客、论坛程序都是没有问题的，因为有了 –disable-cli，所以就没法 make test 了，安装好以后也没法 php -v 了。安装吧：</p>
-<h3 id="4-整合php-apache"><a href="#4-整合php-apache" class="headerlink" title="4.整合php apache"></a>4.整合php apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp php.ini-production /usr/local/lib/php.ini</span><br><span class="line">vi /usr/local/apache2/conf/httpd.conf</span><br></pre></td></tr></table></figure>
-
+<h3 id="4-整合php-apache"><a href="#4-整合php-apache" class="headerlink" title="4.整合php apache"></a>4.整合php apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp php.ini-production &#x2F;usr&#x2F;local&#x2F;lib&#x2F;php.ini</span><br><span class="line">vi &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;httpd.conf</span><br></pre></td></tr></table></figure>
 <p>在httpd.conf里面添加如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AddType application/x-httpd-php .php</span><br><span class="line">AddType application/x-httpd-php-source .phps</span><br><span class="line">#应该将以上两句添加在其他AddType之后。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LoadModule php5_module modules/libphp5.so</span><br><span class="line">#上面那行可能在编译安装 php 的过程中已经由系统自动添加了</span><br><span class="line">&lt;FilesMatch \.php$&gt;</span><br><span class="line">	SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .php</span><br><span class="line">AddType application&#x2F;x-httpd-php-source .phps</span><br><span class="line">#应该将以上两句添加在其他AddType之后。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LoadModule php5_module modules&#x2F;libphp5.so</span><br><span class="line">#上面那行可能在编译安装 php 的过程中已经由系统自动添加了</span><br><span class="line">&lt;FilesMatch \.php$&gt;</span><br><span class="line">	SetHandler application&#x2F;x-httpd-php</span><br><span class="line">&lt;&#x2F;FilesMatch&gt;</span><br></pre></td></tr></table></figure>
 <p>接下来可以重启php查看是否安装成功了。</p>
 <p>我们可以在apache默认目录下面新建一个php文件测试一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/apache2/htdocs/php.php</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"php is OK"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;htdocs&#x2F;php.php</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;php is OK&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
     
     
-      
 
-        
-      
-        <div class="reward-container">
-  <div></div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    Donate
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>By me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-        
-      
-      <div style="display: inline-block;">
-        <img src="/img/wechatpay.png" alt="林晓东 WeChat Pay">
-        <p>WeChat Pay</p>
+  <div class="post-reward">
+      <div>
+        <img src="/img/wechatpay.png" alt="林晓东 微信">
+        <span>微信</span>
       </div>
-        
-      
-      <div style="display: inline-block;">
-        <img src="/img/alipay.png" alt="林晓东 Alipay">
-        <p>Alipay</p>
+      <div>
+        <img src="/img/alipay.png" alt="林晓东 支付宝">
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-      
-
-      <footer class="post-footer">
-          
-            
-          
           <div class="post-tags">
-            
               <a href="/tags/centos/" rel="tag"><i class="fa fa-tag"></i> centos</a>
-            
               <a href="/tags/php/" rel="tag"><i class="fa fa-tag"></i> php</a>
-            
           </div>
-        
 
         
 
           <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-              
-                <a href="/2014/11/17/centos-apache/" rel="next" title="centos下编译安装apache">
+            <div class="post-nav-item">
+                <a href="/2014/11/17/centos-apache/" rel="prev" title="centos下编译安装apache">
                   <i class="fa fa-chevron-left"></i> centos下编译安装apache
                 </a>
-              
             </div>
-
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2014/11/17/install-php-erros/" rel="prev" title="centos下编译安装php出错整理">
+            <div class="post-nav-item">
+                <a href="/2014/11/17/install-php-erros/" rel="next" title="centos下编译安装php出错整理">
                   centos下编译安装php出错整理 <i class="fa fa-chevron-right"></i>
                 </a>
-              
             </div>
           </div>
-        
-      </footer>
-    
+    </footer>
   </article>
-  
-  
-  
-
-  </div>
-
-
-          </div>
-          
-    
-    
-  <div class="comments" id="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-  
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-        
-        
-        
-        
-      
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-安装环境"><span class="nav-number">1.</span> <span class="nav-text">一.安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-所需工具"><span class="nav-number">2.</span> <span class="nav-text">二.所需工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-安装步骤"><span class="nav-number">3.</span> <span class="nav-text">三.安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-编译安装php环境需要的devel包"><span class="nav-number">3.1.</span> <span class="nav-text">1.编译安装php环境需要的devel包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-下载，解压php"><span class="nav-number">3.2.</span> <span class="nav-text">2.下载，解压php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-设置编译参数-安装"><span class="nav-number">3.3.</span> <span class="nav-text">3.设置编译参数,安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-整合php-apache"><span class="nav-number">3.4.</span> <span class="nav-text">4.整合php apache</span></a></li></ol></li></ol></div>
-        
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-      src="/img/author.jpg"
-      alt="林晓东">
-  <p class="site-author-name" itemprop="name">林晓东</p>
-  <div class="site-description" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        
-          <a href="/archives">
-        
-          <span class="site-state-item-count">57</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-categories">
-        
-          
-            <a href="/categories/">
-          
-        
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">categories</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-tags">
-        
-          
-            <a href="/tags/">
-          
-        
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">tags</span>
-        </a>
-      </div>
-    
-  </nav>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/buxuku" title="github &rarr; https://github.com/buxuku" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>github</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="http://weibo.com/xiaodong5959" title="weibo &rarr; http://weibo.com/xiaodong5959" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>weibo</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://www.douban.com/people/42031633/" title="douban &rarr; https://www.douban.com/people/42031633/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>douban</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://www.zhihu.com/people/xiaodong5959" title="zhihu &rarr; https://www.zhihu.com/people/xiaodong5959" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>zhihu</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="mailto:buxuku@gmail.com" title="E-Mail &rarr; mailto:buxuku@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-    
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">林晓东</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">
-      
-    Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
-<script src="/js/schemes/pisces.js?v=7.4.1"></script>
-<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
 
 
 
@@ -664,45 +458,6 @@
 
 
 
-
-
-
-
-  <script src="/js/local-search.js?v=7.4.1"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
-
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
-      apikey: 'cHYsWBSmrYnpUD0UOXcT0Wiwys8NXVWqFK6yTP1Q30ptyETFjCkcsNawadV4cOK9',
-      shortname: 'buxuku',
-      url: "http://blog.linxiaodong.com.com/2014/11/17/centos-install-php/",
-      identifier: "2014/11/17/centos-install-php/",
-      title: 'centos编译安装php',
-    });
-  }, window.DisqusJS);
-</script>
 
 </body>
 </html>

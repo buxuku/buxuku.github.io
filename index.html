@@ -1,279 +1,278 @@
 <!DOCTYPE html>
-
-
-
-
-
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
-
-<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+<meta name="generator" content="Hexo 5.3.0">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '7.4.1',
-    exturl: false,
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":"flat"},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
-    },
-    sidebarPadding: 40
-  };
-</script>
 
-  <meta name="description" content="林晓东的个人博客，专注于HTML前端技术">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.linxiaodong.com.com","root":"/","images":"/images","scheme":"Pisces","version":"8.2.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="林晓东的个人博客，专注于HTML前端技术">
 <meta property="og:type" content="website">
 <meta property="og:title" content="林晓东的个人博客">
 <meta property="og:url" content="http://blog.linxiaodong.com.com/index.html">
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:description" content="林晓东的个人博客，专注于HTML前端技术">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="林晓东">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="林晓东的个人博客">
-<meta name="twitter:description" content="林晓东的个人博客，专注于HTML前端技术">
-  <link rel="canonical" href="http://blog.linxiaodong.com.com/">
 
 
-<script id="page-configurations">
+<link rel="canonical" href="http://blog.linxiaodong.com.com/">
+
+
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
-    isPage: false,
-    isArchive: false
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
   };
 </script>
-
-  <title>林晓东的个人博客</title>
+<title>林晓东的个人博客</title>
   
-
-
-
-
 
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">林晓东的个人博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-        <h1 class="site-subtitle" itemprop="description">一个走在前端的后端人</h1>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">林晓东的个人博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个走在前端的后端人</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-      
-      
-        
-        
-        <li class="menu-item menu-item-首页">
-      
-    
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-分类">
-      
-    
-
-    <a href="/categories" rel="section"><i class="fa fa-fw fa-folder"></i>分类</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-关于我">
-      
-    
-
-    <a href="/about" rel="section"><i class="fa fa-fw fa-id-badge"></i>关于我</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-时间线">
-      
-    
-
-    <a href="/archives" rel="section"><i class="fa fa-fw fa-history"></i>时间线</a>
-
-  </li>
-      
-    
-      
-      
-        
-        
-        <li class="menu-item menu-item-标签">
-      
-    
-
-    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-      
-    
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-分类"><a href="/categories" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about" rel="section"><i class="fa fa-id-badge fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-时间线"><a href="/archives" rel="section"><i class="fa fa-history fa-fw"></i>时间线</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger">
-          <i class="fa fa-search fa-fw"></i>Search
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
       </li>
-    
   </ul>
-
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="林晓东"
+      src="/img/author.jpg">
+  <p class="site-author-name" itemprop="name">林晓东</p>
+  <div class="site-description" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/buxuku" title="github → https:&#x2F;&#x2F;github.com&#x2F;buxuku" rel="noopener" target="_blank">github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/xiaodong5959" title="weibo → http:&#x2F;&#x2F;weibo.com&#x2F;xiaodong5959" rel="noopener" target="_blank">weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/42031633/" title="douban → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;42031633&#x2F;" rel="noopener" target="_blank">douban</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xiaodong5959" title="zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xiaodong5959" rel="noopener" target="_blank">zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buxuku@gmail.com" title="E-Mail → mailto:buxuku@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
-  <div class="reading-progress-bar"></div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <a href="https://github.com/buxuku" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-            
 
-          <div class="content">
-            
+    <div class="main-inner index posts-expand">
 
-  <div class="posts-expand">
-        
+    
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/10/12/mockjs-skills/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2021/01/17/regexp-memonic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -281,57 +280,32 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/10/12/mockjs-skills/" class="post-title-link" itemprop="url">mockjs使用的一些技巧</a>
-          
+          <a href="/2021/01/17/regexp-memonic/" class="post-title-link" itemprop="url">正则表达式速记口诀</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-              
-                
-              
+      <time title="创建时间：2021-01-17 14:14:40 / 修改时间：06:17:50" itemprop="dateCreated datePublished" datetime="2021-01-17T14:14:40+00:00">2021-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-10-12 18:44:26" itemprop="dateCreated datePublished" datetime="2017-10-12T18:44:26+00:00">2017-10-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -340,17 +314,388 @@
     
     
     <div class="post-body" itemprop="articleBody">
+          <h4 id="这是一个正则的助记口诀-顺口溜-让我们用30分钟时间来轻松背下难记的正则"><a href="#这是一个正则的助记口诀-顺口溜-让我们用30分钟时间来轻松背下难记的正则" class="headerlink" title="这是一个正则的助记口诀/顺口溜,让我们用30分钟时间来轻松背下难记的正则"></a>这是一个正则的助记口诀/顺口溜,让我们用30分钟时间来轻松背下难记的正则</h4><p>欢迎通过issue提交更好的口诀或者补充未提到的正则表达式</p>
+<h2 id="首先先奉上口诀"><a href="#首先先奉上口诀" class="headerlink" title="首先先奉上口诀:"></a>首先先奉上口诀:</h2><blockquote>
+<p>从前有个傻大三,</p>
+</blockquote>
+<blockquote>
+<p>哇塞,日子过得特别难 <code>\w\s\r\z\d\t\b\n</code></p>
+</blockquote>
+<blockquote>
+<p>人傻人穷只有捡破烂</p>
+</blockquote>
+<blockquote>
+<p>做梦都想变成大富豪,就不用再出来捡破烂 <code>\W\S\D\B</code></p>
+</blockquote>
+<blockquote>
+<p>每天哼着歌儿出去捡破烂</p>
+</blockquote>
+<blockquote>
+<p>两手叉着腰,左手捡了右手又捡 <code>a|b</code></p>
+</blockquote>
+<blockquote>
+<p>你问他捡到钱没 <code>?</code></p>
+</blockquote>
+<blockquote>
+<p>左手回答得还行,右手被问得头冒金星 <code>+</code> <code>*</code></p>
+</blockquote>
+<blockquote>
+<p>只有装进袋子把数字标 <code>&#123;n&#125;</code></p>
+</blockquote>
+<blockquote>
+<p>关上门来把金银财宝往屋里搬 <code>[abc]</code></p>
+</blockquote>
+<blockquote>
+<p>脑袋儿被门夹了不知道啥东西要选 <code>[^abc]</code></p>
+</blockquote>
+<blockquote>
+<p>钢镚儿一碗,铁镚儿一碗 <code>(abc)</code></p>
+</blockquote>
+<blockquote>
+<p>没问题的打个标记,好知道有好多钱 <code>(?&lt;name&gt;)</code></p>
+</blockquote>
+<blockquote>
+<p>有问题的放一边,挤破脑袋也还要向前再看一眼 <code>(?=exp)</code> <code>(?!exp)</code> <code>(?&lt;=)</code> <code>(?&lt;!)</code></p>
+</blockquote>
+<blockquote>
+<p>剩下的铜钱儿用线串 <code>[a-zA-Z0-9]</code></p>
+</blockquote>
+<blockquote>
+<p>一不小心遇到地头蛇,一顿拷问被吓得赶紧溜回家 <code>+?</code> <code>*?</code></p>
+</blockquote>
+<h2 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h2><h3 id="嘴巴儿尖尖-句句都是钱"><a href="#嘴巴儿尖尖-句句都是钱" class="headerlink" title="嘴巴儿尖尖,句句都是钱"></a>嘴巴儿尖尖,句句都是钱</h3><p>尖尖代表<code>^</code>符号,钱代表<code>$</code>符号</p>
+<p>傻大三这个人一张嘴说话,句句都是以钱收尾</p>
+<p><strong>所以我们get到了</strong></p>
+<table>
+<thead>
+<tr>
+<th>正则表达式</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>^</code></td>
+<td>匹配字符串的开始</td>
+<td><code>^acb</code> 匹配以abc开头的字符串</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>匹配字符串结尾</td>
+<td><code>abc$</code>匹配以abc结尾的字符串</td>
+</tr>
+</tbody></table>
+<h3 id="哇塞-日子过得特别难"><a href="#哇塞-日子过得特别难" class="headerlink" title="哇塞,日子过得特别难."></a>哇塞,日子过得特别难.</h3><p>在正则里面有许多的元字符,这里收集了比较常用的一些,取元字符的来当声母,用来助记这些元字符,当然,我们更明白元字符所对应的英文单词,就无须死背元字符所对应的的内容了.</p>
+<p><strong>所以我们get到了一大串的元字符</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>描述</th>
+<th>对应文字</th>
+<th>对应单词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\w</code></td>
+<td>匹配一个单词的组成部分,字符,数字,下划线.(是否匹配中文视操作系统和应用环境而定)</td>
+<td>哇</td>
+<td>Word</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>匹配空白符</td>
+<td>塞</td>
+<td>Space</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>回车</td>
+<td>日</td>
+<td>Enter</td>
+</tr>
+<tr>
+<td><code>\z</code></td>
+<td>字符串结尾(类似$，但不受处理多行选项的影响)</td>
+<td>子</td>
+<td>?</td>
+</tr>
+<tr>
+<td></td>
+<td>过</td>
+<td>过</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>数字</td>
+<td>得</td>
+<td>Digital</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>tab制表符</td>
+<td>特</td>
+<td>Tabulator key</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>边界,单词分界位置</td>
+<td>别</td>
+<td>Boundary</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>换行符</td>
+<td>难</td>
+<td>Line feed</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>点号(相当于句号),在一个段落中,以它结尾,它包括了前的各种符号,但不匹配换行符.因为换行就是新段落了</td>
+<td>.</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="做梦都想变成大富豪-就不用再出来捡破烂"><a href="#做梦都想变成大富豪-就不用再出来捡破烂" class="headerlink" title="做梦都想变成大富豪,就不用再出来捡破烂"></a>做梦都想变成大富豪,就不用再出来捡破烂</h3><p>变成大富豪,表示元字符变成了大写字母</p>
+<p>就不用再出来破烂,表示不再匹配,相当于对以上小写的元字符取反</p>
+<p><strong>所以我们get到了</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\W</code></td>
+<td>匹配一个非单词的组成部分,字符,数字,下划线.(是否匹配中文视操作系统和应用环境而定)</td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>匹配非空白符</td>
+</tr>
+<tr>
+<td><code>\D</code></td>
+<td>非数字</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>非边界,单词分界位置</td>
+</tr>
+</tbody></table>
+<h3 id="两手叉着腰-左手捡了右手又捡"><a href="#两手叉着腰-左手捡了右手又捡" class="headerlink" title="两手叉着腰,左手捡了右手又捡"></a>两手叉着腰,左手捡了右手又捡</h3><p>这一表示正则里面的分枝匹配,形如<code>a|b</code>表示两边或的匹配关系,即可以匹配<code>a</code>也可以匹配<code>b</code></p>
+<p>傻大三捡垃圾,左边有就左手捡到,右边有,就右手捡起来.</p>
+<h3 id="你问他捡到钱没-左手回答得还行-右手被问得头冒金星-只有装进袋子把数字标"><a href="#你问他捡到钱没-左手回答得还行-右手被问得头冒金星-只有装进袋子把数字标" class="headerlink" title="你问他捡到钱没?左手回答得还行,右手被问得头冒金星,只有装进袋子把数字标"></a>你问他捡到钱没?左手回答得还行,右手被问得头冒金星,只有装进袋子把数字标</h3><p>问到捡到钱没,这是一个问句,回答应该是是与否,代表0或者1,所以有正则<code>?</code>匹配0次或者1次</p>
+<p>因为他左手刚刚捡到了一块垃圾,所以他傻傻地也知道左手捡到有东西,在数学里面就是用正号<code>+</code>表示,至少有一个.</p>
+<p>被问得头冒金星,他也不知道右手到底有没有捡到有东西了.金星用<code>*</code>表示,可能没有捡到有,也可能捡到很多</p>
+<p>只好数一下装进袋子里面,用数字标上有多少.袋子用<code>&#123;&#125;</code>表示,数字用<code>n</code>表示有多少个.得到完整的正则表达式<code>&#123;n&#125;</code>即表示前面的匹配<code>n</code>次</p>
+<p><strong>于是我们get到的正则的匹配模式</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>匹配至少一次</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>匹配0次或者多次</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>匹配零次或者一次</td>
+</tr>
+<tr>
+<td><code>&#123;n&#125;</code></td>
+<td>匹配n次</td>
+</tr>
+<tr>
+<td><code>&#123;n,m&#125;</code></td>
+<td>匹配n到m次</td>
+</tr>
+<tr>
+<td><code>&#123;n,&#125;</code></td>
+<td>匹配n次或者更多次,没有m代表无穷尽</td>
+</tr>
+</tbody></table>
+<h3 id="关上门来把金银财宝往屋里搬-脑袋儿被门夹了不知道啥东西要选"><a href="#关上门来把金银财宝往屋里搬-脑袋儿被门夹了不知道啥东西要选" class="headerlink" title="关上门来把金银财宝往屋里搬,脑袋儿被门夹了不知道啥东西要选"></a>关上门来把金银财宝往屋里搬,脑袋儿被门夹了不知道啥东西要选</h3><p>关上门表示<code>[]</code>符号,关在里面的金银财宝,都可以往屋里搬,所以表达式<code>[abc]</code>表示匹配<code>abc</code>任意一个.</p>
+<p>结果傻大三的头<code>^</code>不小心被门给夹住了,不知道要这些金银财宝了.所以表达式<code>[^abc]</code>表示匹配不是<code>abc</code>这些字符的.</p>
+<h3 id="钢镚儿一碗-铁镚儿一碗"><a href="#钢镚儿一碗-铁镚儿一碗" class="headerlink" title="钢镚儿一碗,铁镚儿一碗"></a>钢镚儿一碗,铁镚儿一碗</h3><p>碗用<code>()</code>表示,傻大三还是知道对这些垃圾进行分类,也就是正则里面的分组,分组之后,不仅可以用于前面的匹配模式,也可以用于后面的反向引用和零宽匹配及更多的功能.</p>
+<p>比如<code>(abc)&#123;2&#125;</code>表示匹配连续的两个<code>abc</code>即<code>abcabc</code></p>
+<h3 id="没问题的打个标记-好知道有好多钱"><a href="#没问题的打个标记-好知道有好多钱" class="headerlink" title="没问题的打个标记,好知道有好多钱"></a>没问题的打个标记,好知道有好多钱</h3><p>傻大三对碗打个标记,以免有疑问<code>?</code>时才好知道有好多钱,所以有正则表达式形式<code>(?&lt;name&gt;exp)</code>,打好标记之后,在后续就可以通过这个标记来识别引用了.</p>
+<p>比如<code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code>表示匹配连续重复的单词,比如<code>go go</code>.如果不打标记,默认使用数字来识别,每个分组会自动拥有一个<strong>组号</strong>，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。所以这个表达式不打标记的写法就是<code>\b(\w+)\b\s+\1\b</code></p>
+<h3 id="有问题的放一边-挤破脑袋也还要向前再看一眼"><a href="#有问题的放一边-挤破脑袋也还要向前再看一眼" class="headerlink" title="有问题的放一边,挤破脑袋也还要向前再看一眼"></a>有问题的放一边,挤破脑袋也还要向前再看一眼</h3><p>有问题<code>?</code>的,有可能是真钢镚,即等号<code>=</code>表示,有可能不是真钢镚,即非<code>!</code>表示</p>
+<p>放一边,表示只匹配了,但不参与捕获.和前面的<code>^</code>,<code>$</code>,<code>\b</code>一样,是属于零宽断言,它们 本身不匹配任何字符,只是对 “字符串的两头” 或者 “字符之间的缝隙” 附加了一个条件.</p>
+<p>于是有正预测先行断言<code>(?=exp)</code>,表示断言自身出现的位置后面能匹配表达式,比如<code>\b\w+(?=ed\b)</code>表示匹配以<code>ed</code>结尾的单词,但不包含<code>ed</code>;</p>
+<p>同理有负预测先行断言<code>(?!exp)</code>,和上面的意思相反,即不能满足表达式.比如<code>\b\w*e(?!d)\w*\b</code>表示匹配包含<code>e</code>的单词,但同时<code>e</code>后面不能跟着字符<code>d</code>.它和<code>\b\w*e[^d]\w*\b</code>的区别是,后者的<code>[^d]</code>会参与一次匹配,比如它会匹配上<code>e,abc</code>,因为里面的<code>,</code>参与了<code>[^d]</code>的匹配.</p>
+<p>挤破脑袋向前<code>&lt;</code>,前面说的是先行断言,即先匹配上前面的表达式.相反的,挤破脑袋往前面去就变成了后发断言.即有</p>
+<p>正预测后发断言<code>(?&lt;=exp)</code>表示断言自身出现的位置前端能匹配表达式<code>exp</code></p>
+<p>负预测后发断言<code>(?&lt;!exp)</code>表示断言自身出现的位置前面不匹配表达式<code>exp</code></p>
+<p>零宽断言是先满足匹配其自身表达式后,再获取断言里面的表达式是否满足. 比如<code>(?&lt;=\d&#123;4&#125;)\d+(?=\d&#123;4&#125;)</code>去匹配<code>1234567890</code>,先匹配上<code>\d+</code>,再判断<code>(?&lt;=\d&#123;4&#125;</code>和<code>(?=d&#123;4&#125;)</code>,于是最终的匹配结果是<code>56</code>.</p>
+<p><strong>综合以上三条,我们对于正则分组,可以再总结一下</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>(exp)</code></td>
+<td>分组匹配,后续可以通过<code>\n</code>进行反向引用</td>
+</tr>
+<tr>
+<td><code>(?&lt;word&gt;exp)</code></td>
+<td>分组匹配命名,后续可以通过<code>\k&lt;word&gt;</code>进行反向引用</td>
+</tr>
+<tr>
+<td><code>(?:exp)</code></td>
+<td>只分组,不生成分组编号,也不捕获.相当于只看一眼<code>:</code>而已</td>
+</tr>
+<tr>
+<td><code>(?=exp)</code></td>
+<td>匹配<code>exp</code>前面的位置</td>
+</tr>
+<tr>
+<td><code>(?!exp)</code></td>
+<td>匹配后面不是跟的<code>exp</code>的位置</td>
+</tr>
+<tr>
+<td><code>(?&lt;=exp)</code></td>
+<td>匹配<code>exp</code>后面的后面</td>
+</tr>
+<tr>
+<td><code>(?&lt;!exp)</code></td>
+<td>匹配前面不是跟的<code>exp</code>的位置</td>
+</tr>
+</tbody></table>
+<h3 id="剩下的铜钱儿用线串"><a href="#剩下的铜钱儿用线串" class="headerlink" title="剩下的铜钱儿用线串"></a>剩下的铜钱儿用线串</h3><p>用线<code>-</code>串,表示把铜钱儿都串起来了,就是正则里面的<code>[a-zA-Z0-9]</code>这种表示方法,表示<code>a</code>到<code>z</code>的全部大小写字母和<code>0</code>到<code>9</code>的全部数字.</p>
+<h3 id="一顿拷问被吓得赶紧溜回家"><a href="#一顿拷问被吓得赶紧溜回家" class="headerlink" title="一顿拷问被吓得赶紧溜回家"></a>一顿拷问被吓得赶紧溜回家</h3><p>遇到地头蛇拷问<code>?</code>,溜回家不再捡垃圾,就是正则里面的遇到<code>?</code>由默认的贪婪匹配变成了非贪婪(惰性)匹配.</p>
+<p>比如对于字符串<code>aabaab</code>用正则<code>a.*b</code>会匹配上整个字符串,因为它是贪婪匹配的,里面的<code>.*</code>会尽可能长的进行匹配.</p>
+<p>而<code>a.*?b</code>则只会匹配<code>aab</code>.因为对于<code>.*</code>遇到了<code>?</code>号,就被变成了非贪婪匹配了.</p>
+<p><strong>于是结合前面的匹配模式,我们可以get到</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+?</code></td>
+<td>匹配至少一次,但尽可能少地匹配</td>
+</tr>
+<tr>
+<td><code>*?</code></td>
+<td>匹配0次或者多次,但尽可能少地匹配</td>
+</tr>
+<tr>
+<td><code>??</code></td>
+<td>匹配零次或者一次,但尽可能少地匹配</td>
+</tr>
+<tr>
+<td><code>&#123;n,m&#125;?</code></td>
+<td>匹配n到m次,但尽可能少地匹配</td>
+</tr>
+<tr>
+<td><code>&#123;n,&#125;?</code></td>
+<td>匹配n次或者更多次,没有m代表无穷尽,但尽可能少地匹配</td>
+</tr>
+</tbody></table>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://u.jd.com/t0YyaYQ">《正则表达式必知必会》</a></p>
+<p><a target="_blank" rel="noopener" href="https://deerchao.cn/tutorials/regex/regex.htm">正则表达式30分钟入门教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式MDN</a></p>
 
       
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/10/12/mockjs-skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
+      <meta itemprop="name" content="林晓东">
+      <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林晓东的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/10/12/mockjs-skills/" class="post-title-link" itemprop="url">mockjs使用的一些技巧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-10-12 18:44:26" itemprop="dateCreated datePublished" datetime="2017-10-12T18:44:26+00:00">2017-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
           <p>整理一下自己在项目用使用mockjs时的一些小技巧</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/10/12/mockjs-skills/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -359,27 +704,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/10/03/git-bisect/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -387,57 +736,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/10/03/git-bisect/" class="post-title-link" itemprop="url">使用git bisect进行二分法定位错误的提交</a>
-          
+          <a href="/2017/10/03/git-bisect/" class="post-title-link" itemprop="url">使用git bisect进行二分法定位错误的提交</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-10-03 19:38:49" itemprop="dateCreated datePublished" datetime="2017-10-03T19:38:49+00:00">2017-10-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-10-03 19:38:49" itemprop="dateCreated datePublished" datetime="2017-10-03T19:38:49+00:00">2017-10-03</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件/" itemprop="url" rel="index">
-                    <span itemprop="name">软件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -446,20 +776,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>使用场景来源于曾经的一次代码合并，代码合并之后，控制台报错，而且不是显性的错误，很难从代码层面查找到问题，测试了几次都没办法定位到问题的所在位置。无奈，只好进行回退对比了，这一次合并一共有十来次提交，决定回退看看是哪一次提交产生了对比，然后做修改对比。</p>
 <p>当然，很自然的就是采用二分法的回退，先回退到中间的那一个版本，看问题是否存在，这样每回退一次，都可以减少一半的提交记录，十来次的提交，很快就可以定位到错误的那一次提交了。</p>
 <p>而对于强大的git，在这一次的经历中，确实是没有想到git还有<code>git bisect</code>这么方便的一个命令，虽然它和<code>git flow</code>工具一样，并不是什么强大的命令，但在这关键的时候，确实能减少我们的工作量，十多次的提交还好，手动回退也很方便，但如果次数很多，再自己去记录，计算中间那一次的提交，就显得不是那么方便了。</p>
 <p>于是，顺便安利一下这个命令，当工作中再次遇到类似需要定位错误的提交时，就可以更加得心应手了。</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/10/03/git-bisect/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -468,27 +794,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/09/30/multiple-layouts-with-react-router-v4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -496,57 +826,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/09/30/multiple-layouts-with-react-router-v4/" class="post-title-link" itemprop="url">在react-router v4中实现多个布局模板</a>
-          
+          <a href="/2017/09/30/multiple-layouts-with-react-router-v4/" class="post-title-link" itemprop="url">在react-router v4中实现多个布局模板</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-09-30 16:01:36" itemprop="dateCreated datePublished" datetime="2017-09-30T16:01:36+00:00">2017-09-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-09-30 16:01:36" itemprop="dateCreated datePublished" datetime="2017-09-30T16:01:36+00:00">2017-09-30</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -555,18 +866,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在前端发过迁移React-router v4的踩坑记录：<a href="http://blog.linxiaodong.com/2017/09/28/Migrating-react-route-v3-to-v4/" target="_blank" rel="noopener">《react-route从v3迁移到v4(折腾+踩坑)》</a>,整个升级需要有很多坑，但我觉得都还比较好，可以一步一步地去填这些坑，不外乎就是一个工作量的问题。</p>
+          <p>在前端发过迁移React-router v4的踩坑记录：<a target="_blank" rel="noopener" href="http://blog.linxiaodong.com/2017/09/28/Migrating-react-route-v3-to-v4/">《react-route从v3迁移到v4(折腾+踩坑)》</a>,整个升级需要有很多坑，但我觉得都还比较好，可以一步一步地去填这些坑，不外乎就是一个工作量的问题。</p>
 <p>但在最后解决我之前项目中处理404页面的时候，遇到了一个头痛的问题：</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/09/30/multiple-layouts-with-react-router-v4/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -575,27 +882,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/09/29/update-react-from-v15-to-v16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -603,57 +914,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/09/29/update-react-from-v15-to-v16/" class="post-title-link" itemprop="url">react从v15升级到v16</a>
-          
+          <a href="/2017/09/29/update-react-from-v15-to-v16/" class="post-title-link" itemprop="url">react从v15升级到v16</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-09-29 17:36:34" itemprop="dateCreated datePublished" datetime="2017-09-29T17:36:34+00:00">2017-09-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-09-29 17:36:34" itemprop="dateCreated datePublished" datetime="2017-09-29T17:36:34+00:00">2017-09-29</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -662,17 +954,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>react已经发布了v16的正式版，同时也把license从<code>BSD</code>修改为<code>MIT</code>了，在折腾了router4之后，也来继续折腾react v16了，react的升级不像router那样变化之大，网上说的只要react v15在控制台里面没有什么wraning之类的，就可以直接升级到v16了，但在实际升级过程中，可能因为实际项目的差异，可能还需要做一些调整的地方。</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/09/29/update-react-from-v15-to-v16/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -681,27 +969,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/09/28/Migrating-react-route-v3-to-v4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -709,57 +1001,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/09/28/Migrating-react-route-v3-to-v4/" class="post-title-link" itemprop="url">react-route从v3迁移到v4(折腾+踩坑)</a>
-          
+          <a href="/2017/09/28/Migrating-react-route-v3-to-v4/" class="post-title-link" itemprop="url">react-route从v3迁移到v4(折腾+踩坑)</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-09-28 18:19:14" itemprop="dateCreated datePublished" datetime="2017-09-28T18:19:14+00:00">2017-09-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-09-28 18:19:14" itemprop="dateCreated datePublished" datetime="2017-09-28T18:19:14+00:00">2017-09-28</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -768,17 +1041,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>从react-router v3到react-router v4确实不能算是升级，而是称得到是迁移了。API的变化发生了翻天覆地的变化了。</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/09/28/Migrating-react-route-v3-to-v4/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -787,27 +1056,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/09/25/React-pits-and-best-practices/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -815,57 +1088,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/09/25/React-pits-and-best-practices/" class="post-title-link" itemprop="url">在React中踩过的坑以及最佳实践</a>
-          
+          <a href="/2017/09/25/React-pits-and-best-practices/" class="post-title-link" itemprop="url">在React中踩过的坑以及最佳实践</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-09-25 19:11:49" itemprop="dateCreated datePublished" datetime="2017-09-25T19:11:49+00:00">2017-09-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-09-25 19:11:49" itemprop="dateCreated datePublished" datetime="2017-09-25T19:11:49+00:00">2017-09-25</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -874,37 +1128,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="一-富文本编辑器"><a href="#一-富文本编辑器" class="headerlink" title="一.富文本编辑器"></a>一.富文本编辑器</h1><h1 id="二-地图"><a href="#二-地图" class="headerlink" title="二.地图"></a>二.地图</h1>
-        
       
     </div>
 
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/09/22/use-git-webhook-to-update-website/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -912,57 +1167,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/09/22/use-git-webhook-to-update-website/" class="post-title-link" itemprop="url">利用git webhook 来同步更新代码</a>
-          
+          <a href="/2017/09/22/use-git-webhook-to-update-website/" class="post-title-link" itemprop="url">利用git webhook 来同步更新代码</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-09-22 16:37:11" itemprop="dateCreated datePublished" datetime="2017-09-22T16:37:11+00:00">2017-09-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-09-22 16:37:11" itemprop="dateCreated datePublished" datetime="2017-09-22T16:37:11+00:00">2017-09-22</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件/" itemprop="url" rel="index">
-                    <span itemprop="name">软件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -971,17 +1207,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="一-安装git"><a href="#一-安装git" class="headerlink" title="一.安装git"></a>一.安装git</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/09/22/use-git-webhook-to-update-website/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -990,27 +1222,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2017/02/08/webpack-step-by-step/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1018,57 +1254,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2017/02/08/webpack-step-by-step/" class="post-title-link" itemprop="url">webpack一步一步深入学习应用</a>
-          
+          <a href="/2017/02/08/webpack-step-by-step/" class="post-title-link" itemprop="url">webpack一步一步深入学习应用</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2017-02-08 18:49:12" itemprop="dateCreated datePublished" datetime="2017-02-08T18:49:12+00:00">2017-02-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2017-02-08 18:49:12" itemprop="dateCreated datePublished" datetime="2017-02-08T18:49:12+00:00">2017-02-08</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -1077,22 +1294,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>全局安装webpack</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack -g</span><br></pre></td></tr></table></figure>
-
-<h2 id="第一步：最简使用"><a href="#第一步：最简使用" class="headerlink" title="第一步：最简使用"></a>第一步：最简使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-step //新建一个目录并初始化它</span><br><span class="line">cd webpack-step</span><br><span class="line">npm init -y //加y参数全部使用默认值快速初始化</span><br><span class="line">npm i webpack@1.14.0 -D //项目中再安装一次webpack,webpack现在已经有2.0版本了，有些配置文件修改了，还是先安装1.0以上的版本吧</span><br><span class="line">touch test.js //新建一个文件</span><br><span class="line">vi test.js //编辑文件 写入console.log(&quot;hello world&quot;);并保存</span><br><span class="line">webpack test.js bundle.js //运行webpack进行打包</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack -g </span><br></pre></td></tr></table></figure>
+<h2 id="第一步：最简使用"><a href="#第一步：最简使用" class="headerlink" title="第一步：最简使用"></a>第一步：最简使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-step &#x2F;&#x2F;新建一个目录并初始化它</span><br><span class="line">cd webpack-step</span><br><span class="line">npm init -y &#x2F;&#x2F;加y参数全部使用默认值快速初始化</span><br><span class="line">npm i webpack@1.14.0 -D &#x2F;&#x2F;项目中再安装一次webpack,webpack现在已经有2.0版本了，有些配置文件修改了，还是先安装1.0以上的版本吧</span><br><span class="line">touch test.js &#x2F;&#x2F;新建一个文件</span><br><span class="line">vi test.js &#x2F;&#x2F;编辑文件 写入console.log(&quot;hello world&quot;);并保存</span><br><span class="line">webpack test.js bundle.js &#x2F;&#x2F;运行webpack进行打包</span><br></pre></td></tr></table></figure>
 <p>执行到这一步，就会在项目中打包生成一个bundle.js的打包文件<br>这就是webpack的最简使用方法了。</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2017/02/08/webpack-step-by-step/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -1101,27 +1312,31 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
+
+
+
 
     
-        
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2016/10/26/a-Multiplication-Table-demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/author.jpg">
       <meta itemprop="name" content="林晓东">
       <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1129,57 +1344,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2016/10/26/a-Multiplication-Table-demo/" class="post-title-link" itemprop="url">用几行原生js代码写的九九乘法表</a>
-          
+          <a href="/2016/10/26/a-Multiplication-Table-demo/" class="post-title-link" itemprop="url">用几行原生js代码写的九九乘法表</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
+      <time title="创建时间：2016-10-26 17:14:14" itemprop="dateCreated datePublished" datetime="2016-10-26T17:14:14+00:00">2016-10-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-17 06:17:50" itemprop="dateModified" datetime="2021-01-17T06:17:50+00:00">2021-01-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
 
-              <time title="Created: 2016-10-26 17:14:14" itemprop="dateCreated datePublished" datetime="2016-10-26T17:14:14+00:00">2016-10-26</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+  
+</div>
 
         </div>
       </header>
@@ -1188,17 +1384,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>无聊想到写的一个小demo,整个js代码只有几行，关键思路就是乘数置前的处理手段。</p>
           <!--noindex-->
-          
             <div class="post-button">
               <a class="btn" href="/2016/10/26/a-Multiplication-Table-demo/#more" rel="contents">
-                Read more &raquo;
+                阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -1207,344 +1399,70 @@
     
     
     
-      
 
-      <footer class="post-footer">
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
 
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://blog.linxiaodong.com.com/2016/10/26/a-drap-demo/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林晓东">
-      <meta itemprop="description" content="林晓东的个人博客，<br />专注于HTML前端技术">
-      <meta itemprop="image" content="/img/author.jpg">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="林晓东的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2016/10/26/a-drap-demo/" class="post-title-link" itemprop="url">用面向过程和面向对象写一个拖拽demo</a>
-          
-        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2016-10-26 15:46:29" itemprop="dateCreated datePublished" datetime="2016-10-26T15:46:29+00:00">2016-10-26</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:07:29" itemprop="dateModified" datetime="2019-11-19T08:07:29+00:00">2019-11-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>很简单的一个拖拽效果，没有判断窗口溢出的现象，主要还是加深this的应用。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2016/10/26/a-drap-demo/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-  </div>
-
-  
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
-
-          </div>
-          
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-      src="/img/author.jpg"
-      alt="林晓东">
-  <p class="site-author-name" itemprop="name">林晓东</p>
-  <div class="site-description" itemprop="description">林晓东的个人博客，<br />专注于HTML前端技术</div>
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        
-          <a href="/archives">
-        
-          <span class="site-state-item-count">57</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-categories">
-        
-          
-            <a href="/categories/">
-          
-        
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">categories</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-tags">
-        
-          
-            <a href="/tags/">
-          
-        
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">tags</span>
-        </a>
-      </div>
-    
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/buxuku" title="github &rarr; https://github.com/buxuku" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>github</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="http://weibo.com/xiaodong5959" title="weibo &rarr; http://weibo.com/xiaodong5959" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>weibo</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://www.douban.com/people/42031633/" title="douban &rarr; https://www.douban.com/people/42031633/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>douban</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://www.zhihu.com/people/xiaodong5959" title="zhihu &rarr; https://www.zhihu.com/people/xiaodong5959" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>zhihu</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="mailto:buxuku@gmail.com" title="E-Mail &rarr; mailto:buxuku@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-    
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">林晓东</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">
-      
-    Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
-<script src="/js/schemes/pisces.js?v=7.4.1"></script>
-<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.4.1"></script>
-
-
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1553,9 +1471,8 @@
 
   
 
-  
 
-  
+
 
 
 </body>
