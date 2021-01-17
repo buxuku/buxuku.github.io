@@ -8,13 +8,6 @@ git clone -b master git@github.com:buxuku/buxuku.github.io.git .deploy_git
 
 cd .deploy_git
 
-# master分支更新readme文件
-git checkout master
-cp ../public/README.md ./
-git add README.md
-git commit -m "[ci skip] README updated: `date +"%Y-%m-%d %H:%M:%S"`"
-git push origin master:master --force
-
 # gh-pages更新部署文件
 git fetch origin
 git checkout -b gh-pages origin/gh-pages
@@ -27,3 +20,11 @@ git commit -m "site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin gh-pages:gh-pages --force --quiet
 
 rsync -rav --exclude '.git' -e ssh ./ aliyun:/data/blog
+
+cd ../
+# master分支更新readme文件
+git checkout master
+cp ../public/README.md ./
+git add README.md
+git commit -m "[ci skip] README updated: `date +"%Y-%m-%d %H:%M:%S"`"
+git push origin master:master --force
