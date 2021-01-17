@@ -28,7 +28,6 @@
 #### [2015-04-28] [我所用过的sublime text 插件](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/20150428-sublime-text-plug.md)
 #### [2015-04-10] [实例 通过违章查询 优化json数据应用及实现历史记录功能](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/20150410-illegal-json-history.md)
 #### [2015-03-27] [网站前端性能优化](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/20150327-web-optimization.md)
-#### [2015-01-26] [一些前端学习中好的书籍，整理](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/w3c-good-book.md)
 ## 软件
 #### [2017-10-03] [使用git bisect进行二分法定位错误的提交](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/git-bisect.md)
 #### [2017-09-22] [利用git webhook 来同步更新代码](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/use-git-webhook-to-update-website.md)
