@@ -26,4 +26,4 @@ git add .
 git commit -m "site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin gh-pages:gh-pages --force --quiet
 
-rsync -rav -e ssh ./ aliyun:/data/blog
+rsync -rav --exclude '.git' -e ssh ./ aliyun:/data/blog
