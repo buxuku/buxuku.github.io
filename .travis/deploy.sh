@@ -12,11 +12,12 @@ cd .deploy_git
 git checkout master
 cp ../public/README.md ./
 git add README.md
-git commit -m "README updated: `date +"%Y-%m-%d %H:%M:%S"`"
+git commit -m "[ci skip] README updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin master:master --force --quiet
 
 # gh-pages更新部署文件
-git checkout gh-pages
+git fetch origin
+git checkout -b gh-pages origin/gh-pages
 mv .git/ ../public/
 cd ../public
 
