@@ -4,12 +4,7 @@ Host github.com
   StrictHostKeyChecking no
   IdentityFile ~/.ssh/github_blog
   IdentitiesOnly yes
-Host gcp
-  HostName 34.80.239.228
-  User github_blog
-  StrictHostKeyChecking no
-  IdentityFile ~/.ssh/github_blog
-  IdentitiesOnly yes
+
 Host aliyun
   HostName 120.79.217.213
   User root

@@ -23,7 +23,7 @@ cd ../public
 
 git add .
 
+git commit -m "site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin gh-pages:gh-pages --force --quiet
 
-rsync -rav -e ssh ./ gcp:/data/blog
 rsync -rav -e ssh ./ aliyun:/data/blog
