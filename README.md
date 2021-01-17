@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.com/buxuku/buxuku.github.io.svg?branch=master)](https://travis-ci.com/buxuku/buxuku.github.io)
 ## 前端
 #### [2021-01-17] [正则表达式速记口诀](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/regexp-memonic.md)
 #### [2017-10-12] [mockjs使用的一些技巧](https://github.com/buxuku/buxuku.github.io/tree/master/source/_posts/mockjs-skills.md)
