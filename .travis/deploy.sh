@@ -11,7 +11,7 @@ cd .deploy_git
 # gh-pages更新部署文件
 git fetch origin
 git checkout -b gh-pages origin/gh-pages
-mv .git/ ../public/
+cp -R .git/ ../public/
 cd ../public
 
 git add .
@@ -21,7 +21,7 @@ git push origin gh-pages:gh-pages --force --quiet
 
 rsync -rav --exclude '.git' -e ssh ./ aliyun:/data/blog
 
-cd ../
+cd ../.deploy_git
 # master分支更新readme文件
 git checkout master
 cp ../public/README.md ./

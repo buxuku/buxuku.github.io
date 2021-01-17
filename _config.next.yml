@@ -53,8 +53,8 @@ gitalk:
   enable: true
   github_id: buxuku
   repo: buxuku.github.io
-  client_id: ${GITALK_CLIENT_ID}
-  client_secret: ${GITALK_CLIENT_SECRET}
+  client_id: 77d489cdf81c5ee1d3d3
+  client_secret: d259c9ced85f6f68374e004a78a1d541af1f9095
   admin_user: buxuku
   distraction_free_mode: true
   language: zh-CN
