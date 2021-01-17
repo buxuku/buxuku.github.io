@@ -1,0 +1,6 @@
+{%- for c in page.categories %}
+## {{c.name}}
+{%- for p in c.posts %}
+#### [{{ moment(p.date).format('YYYY-MM-DD') }}] [{{p.title}}](https://github.com/buxuku/buxuku.github.io/tree/master/source/{{p.source}})
+{%- endfor %}
+{%- endfor %}

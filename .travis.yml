@@ -1,12 +1,10 @@
 language: node_js
 node_js: stable
 
-git:
-  submodules: false
 # 只监听 source 分支的改动
 branches:
   only:
-  - hexo
+  - master
 
 # 缓存依赖，节省持续集成时间
 cache:
@@ -14,8 +12,7 @@ cache:
     - node_modules
 
 before_install:
-- sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
-- git submodule update --init --remote --recursive
+
 - openssl aes-256-cbc -K $encrypted_9c865ccd0ee1_key -iv $encrypted_9c865ccd0ee1_iv
   -in .travis/github_blog.enc -out ~/.ssh/github_blog -d
 - chmod 600 ~/.ssh/github_blog
@@ -36,6 +33,7 @@ install:
 
 script:
 # 生成静态页面
+- cp ./source/_data/readme.njk ./node_modules/hexo-theme-next/layout/
 - hexo clean
 - hexo generate
 

@@ -7,14 +7,21 @@ export TZ='Asia/Shanghai'
 git clone -b master git@github.com:buxuku/buxuku.github.io.git .deploy_git
 
 cd .deploy_git
+
+# master分支更新readme文件
 git checkout master
+git add ./public/README.md
+git commit -m "README updated: `date +"%Y-%m-%d %H:%M:%S"`"
+git push origin master:master --force --quiet
+
+# gh-pages更新部署文件
+git checkout gh-pages
 mv .git/ ../public/
 cd ../public
 
 git add .
-git commit -m "Site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 
-git push origin master:master --force --quiet
+git push origin gh-pages:gh-pages --force --quiet
 
 rsync -rav -e ssh ./ gcp:/data/blog
 rsync -rav -e ssh ./ aliyun:/data/blog

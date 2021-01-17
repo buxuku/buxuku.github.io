@@ -1,0 +1,54 @@
+scheme: Pisces
+cache:
+  enable: false
+menu:
+  首页: / || fa fa-home
+  分类: /categories || fa fa-folder
+  关于我: /about || fa fa-id-badge
+  时间线: /archives || fa fa-history
+  标签: /tags || fa fa-tags
+sidebar:
+  position: right
+avatar:
+  url:  /img/author.jpg
+social:
+  github: https://github.com/buxuku
+  weibo: http://weibo.com/xiaodong5959
+  douban: https://www.douban.com/people/42031633/
+  zhihu: https://www.zhihu.com/people/xiaodong5959
+  E-Mail: mailto:buxuku@gmail.com || fa fa-envelope
+social_icons:
+  enable: true
+  # Icon Mappings
+  github: github
+  Twitter: twitter
+  weibo: weibo
+  icons_only: false
+  transition: false
+tag_icon: true
+reward_settings:
+  enable: true
+  animatin: false
+  comment: By me a coffee
+reward:
+  wechatpay: /img/wechatpay.png
+  alipay: /img/alipay.png
+#related_posts:
+#  enable: true,
+#  display_in_home: true
+#  params:
+#    maxCount: 5
+post_edit:
+  enable: true
+  url: https://github.com/buxuku/buxuku.github.io/tree/master/source/ # Link for view source
+github_banner:
+  enable: true
+  permalink: https://github.com/buxuku
+local_search:
+  enable: true
+custom_file_path:
+  post: source/_data/README.njk
+footer:
+  since: 2015
+  icon:
+    animated: true

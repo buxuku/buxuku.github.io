@@ -8,7 +8,7 @@ subtitle: 一个走在前端的后端人
 description: 林晓东的个人博客，<br />专注于HTML前端技术
 author: 林晓东
 email: buxuku@gmail.com
-language: zh-Hans
+language: zh-CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -41,7 +41,15 @@ highlight:
   enable: true
   line_number: true
   auto_detect: false
-  tab_replace: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
 
 # Category & Tag
 default_category: uncategorized
@@ -77,7 +85,8 @@ deploy:
 
 # title, chinese available
 links_title: Links
-# links
+# link
+
 links:
   张鑫旭: http://www.zhangxinxu.com/wordpress/
 
@@ -86,3 +95,10 @@ search:
   field: post
   format: html
   limit: 10000
+
+genrator_readme:
+  categories:
+    前端: 1
+    软件: 2
+  order_by: -date
+
