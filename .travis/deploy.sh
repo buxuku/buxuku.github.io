@@ -10,7 +10,8 @@ cd .deploy_git
 
 # master分支更新readme文件
 git checkout master
-git add ./public/README.md
+cp ./public/README.md ./
+git add README.md
 git commit -m "README updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin master:master --force --quiet
 
