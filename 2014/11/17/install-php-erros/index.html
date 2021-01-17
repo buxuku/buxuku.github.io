@@ -31,7 +31,7 @@
 <meta property="og:description" content="1.Sorry, I cannot run apxs1.&#x2F;configure --with-apxs2&#x3D;&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;bin&#x2F;apxs --disable-cli --enable-shared --with-libxml-dir --with-gd --with-openssl --enable-mbs">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2014-11-17T17:19:19.000Z">
-<meta property="article:modified_time" content="2021-01-17T06:34:56.276Z">
+<meta property="article:modified_time" content="2021-01-17T07:49:52.500Z">
 <meta property="article:author" content="林晓东">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="centos">
@@ -305,7 +305,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-01-17 06:34:56" itemprop="dateModified" datetime="2021-01-17T06:34:56+00:00">2021-01-17</time>
+        <time title="修改时间：2021-01-17 07:49:52" itemprop="dateModified" datetime="2021-01-17T07:49:52+00:00">2021-01-17</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -395,6 +395,7 @@
 
 
 
+    <div class="comments gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -455,6 +456,26 @@
 
 
 
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '${GITALK_CLIENT_ID}',
+      clientSecret: '${GITALK_CLIENT_SECRET}',
+      repo        : 'buxuku.github.io',
+      owner       : 'buxuku',
+      admin       : ['buxuku'],
+      id          : 'a7dc28e7a009769fffb5e8c2be6226df',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

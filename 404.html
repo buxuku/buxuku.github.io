@@ -28,8 +28,8 @@
 <meta property="og:url" content="http://blog.linxiaodong.com.com/404.html">
 <meta property="og:site_name" content="林晓东的个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-01-17T06:34:56.272Z">
-<meta property="article:modified_time" content="2021-01-17T06:34:56.272Z">
+<meta property="article:published_time" content="2021-01-17T07:49:52.500Z">
+<meta property="article:modified_time" content="2021-01-17T07:49:52.500Z">
 <meta property="article:author" content="林晓东">
 <meta name="twitter:card" content="summary">
 
@@ -303,6 +303,7 @@
     
 
 
+    <div class="comments gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -363,6 +364,26 @@
 
 
 
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '${GITALK_CLIENT_ID}',
+      clientSecret: '${GITALK_CLIENT_SECRET}',
+      repo        : 'buxuku.github.io',
+      owner       : 'buxuku',
+      admin       : ['buxuku'],
+      id          : '516a35d265e49707e113184afbcbb8c8',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
