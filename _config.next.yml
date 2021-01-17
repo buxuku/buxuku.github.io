@@ -48,6 +48,17 @@ local_search:
   enable: true
 custom_file_path:
   post: source/_data/README.njk
+
+gitalk:
+  enable: true
+  github_id: buxuku
+  repo: buxuku.github.io
+  client_id: ${GITALK_CLIENT_ID}
+  client_secret: ${GITALK_CLIENT_SECRET}
+  admin_user: buxuku
+  distraction_free_mode: true
+  language: zh-CN
+
 footer:
   since: 2015
   icon:
