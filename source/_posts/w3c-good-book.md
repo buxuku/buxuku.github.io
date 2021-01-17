@@ -7,6 +7,7 @@ tags:
 - javascript
 categories: 
 - 前端
+skipInReadme: true
 ---
 
 都是一些正在看和准备看的前端书籍，偶然在一位大牛的博客里找到整理出来的。

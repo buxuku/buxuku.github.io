@@ -8,7 +8,7 @@ hexo.extend.generator.register('generator-readme', function (locals) {
     })
     categoriesFiltered.data.forEach((item,index) => {
         const obj = {...item};
-        obj.posts = item.posts.sort(order_by).data;
+        obj.posts = item.posts.sort(order_by).data.filter(item => !item.skipInReadme);
         categories.push(obj);
     })
 
