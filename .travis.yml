@@ -33,7 +33,7 @@ install:
 
 script:
 # 生成静态页面
-- cp ./source/_data/readme.njk ./node_modules/hexo-theme-next/layout/
+- mv ./source/_data/readme.njk ./node_modules/hexo-theme-next/layout/
 - hexo clean
 - hexo generate
 
