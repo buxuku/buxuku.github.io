@@ -1,42 +1,31 @@
 language: node_js
 node_js: stable
-
-# 只监听 source 分支的改动
 branches:
   only:
   - master
-
-# 缓存依赖，节省持续集成时间
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-
 - openssl aes-256-cbc -K $encrypted_9c865ccd0ee1_key -iv $encrypted_9c865ccd0ee1_iv
   -in .travis/github_blog.enc -out ~/.ssh/github_blog -d
 - chmod 600 ~/.ssh/github_blog
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/github_blog
-
-# 修改本机 ssh 配置，防止秘钥认证过程影响自动部署
 - mv -fv .travis/ssh-config ~/.ssh/config
 - git config --global user.name "$USER_NAME"
 - git config --global user.email "$USER_EMAIL"
-# 赋予自动部署脚本可执行权限
 - chmod +x .travis/deploy.sh
 - npm install -g hexo-cli
-
 install:
-# 安装 Hexo 及其依赖
 - npm install
-
 script:
-# 生成静态页面
 - mv ./readme.njk ./node_modules/hexo-theme-next/layout/
 - hexo clean
 - hexo generate
 - hexo issue
-
 after_success:
-- .travis/deploy.sh
+- ".travis/deploy.sh"
+env:
+  global:
+    secure: o+pa5oqU8263gbFKISuxbO2kbSnHXvpYfEiXz4Gh1OW9HNX9N9Da0n0N790MfBJgRmXHfJowkNNLhGaFPx/8Z8/2Bg+kOkPeVztVJ69tKHBzZ5On9BrgSmF6Red0BLRkg+YVfe72213AHmnd8ETiUoTS1wzaxQwaY+F01IMqUjOX04oL4lIvUDAashp08ZEv5JOXn58VIHJoGnrO4fm6AYT2IJJ+laVDy4twYtKMEcWdTvU1MMmrbjveuaCJumI+dEH4AsTmweslLmNkTiAora1ToD3Z6SJ/IiKRkIEseoCXvCnVD2zcyHozCrPjZS2m57GaPtLwmAYSbx8zDcWBPVIGz8wJAMnnfGHpqms1HRdRXFoLIFQvzuR8KKc1XXlMZGXYNPTtODMrj4QGRdbr4IBFw5rv4tMRG5Txh0duO2nrOJ00vlD/We5lG7Gce4Nm+cXQ9hWOKVDD7p1Qnhmj1/C6vgtpaNmojTAxegNW7ZzHJiCZvszBqevySoLEt4bdnGGEfsCtDgkiZ7ISTZEMMXl+Vhv2UL4RxkWYuC2uXTR2kq6DTkLL9Ak2oAD5LRtJ+Eszo5s6UH88W7IHdh8XB6YnZ+SSoNFRrAPVKSfRLOYCJyWhHB0R1FVhJkKzx8rkNLhsxl+FbY9F50BPBWipcUc8MYCKNk0btB6NObZ0eK0=

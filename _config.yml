@@ -102,10 +102,6 @@ generator_readme:
     软件: 2
   order_by: -date
 
-env:
-  global:
-    GITHUB_TOKEN: $GITHUB_TOKEN
-
 auto_issue:
   owner: buxuku
   repo: github-api
