@@ -106,7 +106,6 @@ generator_readme:
 auto_issue:
   owner: buxuku
   repo: github-api
-  auth: $GITHUB_TOKEN
   userAgent: hexo-auto-iissue
   withGitalk: true
   template:
