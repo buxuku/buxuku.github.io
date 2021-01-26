@@ -33,9 +33,10 @@ install:
 
 script:
 # 生成静态页面
-- mv ./source/_data/readme.njk ./node_modules/hexo-theme-next/layout/
+- mv ./readme.njk ./node_modules/hexo-theme-next/layout/
 - hexo clean
 - hexo generate
+- hexo issue
 
 after_success:
 - .travis/deploy.sh

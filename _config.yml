@@ -78,7 +78,7 @@ exclude_generator:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
 - type: git
-  repo: git@github.com:buxuku/buxuku.github.io.git 
+  repo: git@github.com:buxuku/buxuku.github.io.git
 - type: git
   repo: git@git.coding.net:buxuku/buxuku.git
   branch: coding-pages
@@ -102,3 +102,14 @@ generator_readme:
     软件: 2
   order_by: -date
 
+
+auto_issue:
+  owner: buxuku
+  repo: github-api
+  userAgent: hexo-auto-iissue
+  withGitalk: true
+  template:
+    body: |-
+     {{_content}}
+    labels: |-
+      {{ tags.data|join(',', 'name') }},{{ categories.data|join(',', 'name') }}
