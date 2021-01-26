@@ -1,6 +1,7 @@
 ---
 title: hexo 更新主题的方法
 date: 2016-03-19 17:50:16
+updated: 2016-03-19 17:50:16
 tags: hexo
 categories: 
 - 软件

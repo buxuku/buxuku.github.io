@@ -1,6 +1,7 @@
 ---
 title: javascript中当数字遇上了字符
 date: 2016-05-02 15:13:17
+updated: 2016-05-02 15:13:17
 tags: javascript
 category: 前端
 ---

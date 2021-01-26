@@ -1,6 +1,7 @@
 ---
 title: 如何优雅地在mardown中插入表格
 date: 2016-05-02 00:08:01
+updated: 2016-05-02 00:08:01
 tags: markdown
 category: 软件
 ---

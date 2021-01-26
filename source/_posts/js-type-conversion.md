@@ -1,6 +1,7 @@
 ---
 title: javascript中数据类型转换那点事
 date: 2016-05-01 22:52:13
+updated: 2016-05-01 22:52:13
 tags: javascript
 category: 前端
 ---

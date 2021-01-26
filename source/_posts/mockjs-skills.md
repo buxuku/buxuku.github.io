@@ -1,6 +1,7 @@
 ---
 title: mockjs使用的一些技巧
 date: 2017-10-12 18:44:26
+updated: 2017-10-12 18:44:26
 tags:
 - mock
 - 前端

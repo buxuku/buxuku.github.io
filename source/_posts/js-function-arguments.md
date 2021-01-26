@@ -1,6 +1,7 @@
 ---
 title: 理解js中函数参数是按值传递而非按引用传递
 date: 2016-05-02 15:43:16
+updated: 2016-05-02 15:43:16
 tags: javascript
 category: 前端
 ---

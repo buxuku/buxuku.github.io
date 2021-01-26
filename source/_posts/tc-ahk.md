@@ -1,5 +1,6 @@
 title: 利用autohotkey打开TotalCommander并自动点击123
 date: 2015-01-17 16:38:46
+updated: 2015-01-17 16:38:46
 tags: 
 - TotalCommander
 categories: 

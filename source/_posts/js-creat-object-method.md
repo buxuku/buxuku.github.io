@@ -1,6 +1,7 @@
 ---
 title: javacript中创建对象的几种方式
 date: 2016-05-02 23:36:26
+updated: 2016-05-02 23:36:26
 tags: javascript
 category: 前端
 ---

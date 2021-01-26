@@ -1,6 +1,7 @@
 ---
 title: 正则表达式速记口诀
 date: 2021-01-17 14:14:40
+updated: 2021-01-17 14:14:40
 tags:
 - regexp
 category: 前端

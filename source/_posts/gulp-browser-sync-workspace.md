@@ -1,6 +1,7 @@
 ---
 title: 利用gulp,browser-sync,workspace更快捷地进行前端开发
 date: 2016-05-04 08:46:36
+updated: 2016-05-04 08:46:36
 tags: 
 - gulp
 category: 前端

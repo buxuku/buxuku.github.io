@@ -1,6 +1,7 @@
 ---
 title: 用ssh的方式来连接你的git
 date: 2016-03-22 14:29:26
+updated: 2016-03-22 14:29:26
 tags: git
 categories: 
 - 软件

@@ -1,6 +1,7 @@
 ---
 title: empty value
 date: 2016-03-29 09:26:50
+updated: 2016-03-29 09:26:50
 tags: 
 - php
 - ecshop

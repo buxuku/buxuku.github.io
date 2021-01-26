@@ -1,6 +1,7 @@
 ---
 title: 在React中踩过的坑以及最佳实践
 date: 2017-09-25 19:11:49
+updated: 2017-09-25 19:11:49
 tags: 
 - javascript
 - react

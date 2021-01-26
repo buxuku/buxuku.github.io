@@ -1,5 +1,6 @@
 title: centos编译安装mysql
 date: 2014-11-18 09:21:29
+updated: 2014-11-18 09:21:29
 tags: 
 - centos
 - mysql

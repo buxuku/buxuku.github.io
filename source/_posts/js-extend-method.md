@@ -1,6 +1,7 @@
 ---
 title: javascript中继承的几种方式
 date: 2016-05-03 23:04:39
+updated: 2016-05-03 23:04:39
 tags: javascript
 category: 前端
 ---

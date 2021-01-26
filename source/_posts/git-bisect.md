@@ -1,6 +1,7 @@
 ---
 title: 使用git bisect进行二分法定位错误的提交
 date: 2017-10-03 19:38:49
+updated: 2017-10-03 19:38:49
 tags:
 - git
 category: 软件

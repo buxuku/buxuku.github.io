@@ -1,6 +1,7 @@
 ---
 title: 在react-router v4中实现多个布局模板
 date: 2017-09-30 16:01:36
+updated: 2017-09-30 16:01:36
 tags:
 - react 
 - react-router

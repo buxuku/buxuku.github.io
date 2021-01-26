@@ -1,6 +1,7 @@
 ---
 title: 用几行原生js代码写的九九乘法表
 date: 2016-10-26 17:14:14
+updated: 2016-10-26 17:14:14
 tags: demo
 category: 前端
 ---

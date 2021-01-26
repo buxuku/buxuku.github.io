@@ -1,6 +1,7 @@
 ---
 title: js中闭包变量的问题 
 date: 2016-10-14 23:37:55
+updated: 2016-10-14 23:37:55
 tags: javascript
 category: 前端
 ---

@@ -1,5 +1,6 @@
 title: mysql相关错误整理
 date: 2015-04-02 10:01:29
+updated: 2015-04-02 10:01:29
 tags:
 - mysql
 categories:

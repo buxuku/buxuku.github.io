@@ -1,6 +1,7 @@
 ---
 title: react从v15升级到v16
 date: 2017-09-29 17:36:34
+updated: 2017-09-29 17:36:34
 tags:
 - react
 category: 前端

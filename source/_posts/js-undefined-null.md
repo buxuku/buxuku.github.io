@@ -1,6 +1,7 @@
 ---
 title: 'javascript中的undefined null'
 date: 2016-05-01 21:09:13
+updated: 2016-05-01 21:09:13
 tags: javascript
 category: 前端
 ---

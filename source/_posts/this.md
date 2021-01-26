@@ -1,6 +1,7 @@
 ---
 title: 通过call轻松理解this
 date: 2016-05-27 22:23:50
+updated: 2016-05-27 22:23:50
 tags: javascript
 category: 前端
 ---

@@ -1,6 +1,7 @@
 ---
 title: 不使用var就不是声明变量
 date: 2016-05-17 14:29:39
+updated: 2016-05-17 14:29:39
 tags: javascript
 category: 前端
 ---

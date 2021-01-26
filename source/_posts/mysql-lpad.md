@@ -1,6 +1,7 @@
 ---
 title: mysql LPAD RPAD 字符串前后补全
 date: 2016-04-07 14:45:16
+updated: 2016-04-07 14:45:16
 tags: mysql
 category: LAMP
 ---

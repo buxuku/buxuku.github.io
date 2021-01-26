@@ -1,6 +1,7 @@
 ---
 title: 用面向过程和面向对象方式写的一个tao标签卡demo
 date: 2016-10-25 18:49:38
+updated: 2016-10-25 18:49:38
 tags: 
 - javascript
 - 面向对象

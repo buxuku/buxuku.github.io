@@ -1,6 +1,7 @@
 ---
 title: 用面向过程和面向对象写一个拖拽demo
 date: 2016-10-26 15:46:29
+updated: 2016-10-26 15:46:29
 tags: 
 - javascript
 - 面向对象

@@ -1,6 +1,7 @@
 ---
 title: javascript中的词法作用域
 date: 2016-05-18 11:24:42
+updated: 2016-05-18 11:24:42
 tags: javascript
 category: 前端
 ---

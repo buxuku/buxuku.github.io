@@ -1,6 +1,7 @@
 ---
 title: 轻松把代码部署到github上面
 date: 2016-03-21 23:07:00
+updated: 2016-03-21 23:07:00
 tags: git
 categories: 
 - 软件
