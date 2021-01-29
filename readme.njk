@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.com/buxuku/buxuku.github.io.svg?branch=master)](https://travis-ci.com/buxuku/buxuku.github.io)
 
-{%- for c in page.categories %}
-## {{c.name}}
-{%- for p in c.posts %}
-#### [{{ moment(p.date).format('YYYY-MM-DD') }}] [{{p.title}}](https://blog.linxiaodong.com/{{p.path}})
+{%- for c in labels %}
+## {{c.title}}
+{%- for p in c.list %}
+#### [{{ moment(p.updated_at).format('YYYY-MM-DD') }}] [{{p.title}}]({{p.html_url}})
 {%- endfor %}
 {%- endfor %}
 
-本页由 [hexo-generator-readme](https://www.npmjs.com/package/hexo-generator-readme) 自动生成.
+本页由 [hexo-issue2readme](https://www.npmjs.com/package/hexo-issue2readme) 自动生成.
 
 最后更新于: "{{ moment().format('YYYY-MM-DD HH:mm:ss') }}"

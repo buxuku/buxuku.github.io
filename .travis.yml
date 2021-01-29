@@ -20,10 +20,10 @@ before_install:
 install:
 - npm install
 script:
-- mv ./readme.njk ./node_modules/hexo-theme-next/layout/
 - hexo clean
 - hexo generate
 - hexo issue
+- hexo issue2readme
 after_success:
 - ".travis/deploy.sh"
 env:

@@ -96,12 +96,6 @@ search:
   format: html
   limit: 10000
 
-generator_readme:
-  categories:
-    前端: 1
-    软件: 2
-  order_by: -date
-
 auto_issue:
   owner: buxuku
   repo: github-api
@@ -112,3 +106,10 @@ auto_issue:
      {{_content}}
     labels: |-
       {{ tags.data|join(',', 'name') }},{{ categories.data|join(',', 'name') }}
+
+issue2readme:
+  owner: buxuku
+  repo: github-api
+  labels:
+    - 前端
+    - 软件
