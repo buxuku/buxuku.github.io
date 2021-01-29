@@ -13,6 +13,7 @@ git fetch origin
 git checkout -b gh-pages origin/gh-pages
 cp -R .git/ ../public/
 cd ../public
+cp ../README.md ./
 
 git add .
 
@@ -24,7 +25,7 @@ rsync -rav --exclude '.git' -e ssh ./ aliyun:/data/blog
 cd ../.deploy_git
 # master分支更新readme文件
 git checkout master
-cp ../public/README.md ./
+cp ../README.md ./
 git add README.md
 git commit -m "[ci skip] README updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push origin master:master --force
