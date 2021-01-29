@@ -98,7 +98,7 @@ search:
 
 auto_issue:
   owner: buxuku
-  repo: github-api
+  repo: buxuku.github.io
   userAgent: hexo-auto-iissue
   withGitalk: true
   template:
@@ -109,7 +109,7 @@ auto_issue:
 
 issue2readme:
   owner: buxuku
-  repo: github-api
+  repo: buxuku.github.io
   labels:
     - 前端
     - 软件
