@@ -14,7 +14,6 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: "20"
-          token: ${{ secrets.TOKEN }}
       - name: Install node dependencies
         run: yarn
       - name: Run node script
