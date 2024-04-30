@@ -1,5 +1,5 @@
 import rss from './rss.mjs'
-import discussions from './discussions.mjs'
+import discussions from './discussion.mjs'
 
 async function postbuild() {
   await rss()
