@@ -25,9 +25,14 @@ jobs:
         run: git diff --quiet && git diff --staged --quiet || git commit -am '[BOT] Update readme' && git push
 
       - name: push to profile repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'buxuku/buxuku'
+          token: ${{ secrets.TOKEN }}
+          path: 'buxuku'
+      - name: Copy README.md to profile repo
+        run: cp ./profile.md ./buxuku/README.md
+      - name: Commit and push to profile repo
         run: |
-          git clone https://github.com/buxuku/buxuku.git
-          cp ./profile.md ./buxuku/README.md
           cd buxuku
-          git diff --quiet && git diff --staged --quiet || git commit -am '[BOT] Update readme' && git push
-
+          git diff --quiet && git diff --staged --quiet || git commit -am '[BOT] Update readme' && git push https://${{ secrets.TOKEN }}@github.com/buxuku/buxuku.git
