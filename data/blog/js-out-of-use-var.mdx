@@ -1,0 +1,162 @@
+---
+title: 不使用var就不是声明变量
+date: 2016-05-17T14:29:39.000Z
+tags:
+  - javascript
+---
+
+我们知道,在js中采用`var`就可以声明一个变量了,同时我们也可能会很自豪地告诉自己,如果不使用`var`就会在全局变量中声明一个全局变量.
+
+可是问题真的是如此吗?正如本文的标题一样,我们来一次大胆的尝试:没有使用`var`就不是声明变量!!!
+
+
+
+关于不使用`var`的方式实现的效果相信都知道了,这里就不演示了,我们主要来说明他不是在声明一个变量.
+
+### 理由一:没有变量声明提升
+
+我们知道,js引擎会对声明进行提升,如果不使用`var`的话,我们可以当作是在全局执行环境中进行的变量声明,那它也应该进行变量声明提升了.我们来测试:
+
+```javascript
+console.log(a);//undefined
+console.log(b);//ReferenceError
+
+b = 10;
+var a = 10;
+```
+我们发现,打印a是`undefined`,说明变量a是正常提升了的,但b呢,是`ReferenceError`,引用错误,说明b的声明并没有提升.
+
+我们先假设一下,b在这里并不是在进行变量声明.
+
+### 理由二:拥有了`delete`特性
+
+我们知道,变量是不是被删除了,而对象的属性是可以被删除的.我们再来测试:
+
+```javascript
+b = 10;
+console.log(delete b);//true
+console.log(b);//ReferenceError
+```
+我们发现,这里的变量b是可以被删除的.那么再添加一个声明呢:
+
+```javascript
+b = 10;
+console.log(delete b);//false
+console.log(b);//10
+var b;
+```
+我们发现,仅仅是多了这么一句声明,变量b就不能被删除了.
+
+这里我们可以看得出,不使用`var`不仅仅是在全局作用域中创建变量那么简单.
+
+```javascript
+b = 10;
+console.log(window.b);//10
+console.log(delete window.b);//true
+console.log(b);//ReferenceError
+```
+通过上面这个代码,我们发现,变量b可以通过全局变量window的一个属性来访问,而它也可以通过删除window这样的一个属性来删除它.
+
+因此,我们有理由相信: 
+
+*不使用`var`并不是在声明一个变量,而是在为全局变量window添加一个对应的属性!*
+
+### 注意点一
+
+我们看以下代码
+
+```javascript
+function foo(){
+  a = 10;
+  console.log(delete a);
+  console.log(a);
+}
+foo();//false,10
+var a = 20;
+```
+
+虽然foo函数声明以及执行都在var之前,但因为存在变量提升的原因,所以foo内部的a只是在进行重新赋值了.
+
+我们再看
+
+```javascript
+boo();//false , 20
+foo();//ture  , ReferenceError
+function foo(){
+  a = 10;
+  console.log(delete a);
+  console.log(a);
+}
+function boo(){
+  var a = 20;
+  console.log(delete a);
+  console.log(a);
+}
+```
+因为boo里面的var声明只是在boo这个函数的内部执行环境中,所以并不会影响到foo函数.
+
+我们再来测试
+```javascript
+foo();//false  , 20
+function foo(){
+  var a = 10;
+  function boo(){
+    a = 20;
+    console.log(delete a);
+    console.log(a);
+  }
+  boo();
+}
+```
+通过变量作用域名相信我们是能够很容易理解上面这段代码的执行结果的.
+
+继续coding
+
+```javascript
+var foo = {
+  name : "javascript",
+  change:function(){
+    name = "php";
+    console.log(delete window.name);
+    console.log(name);
+  }
+};
+foo.change();//ture , ReferenceError
+```
+我们发现,对象里面的方法,不使用`var`的话也是在window对象上面添加属性来实现的.
+
+如果在闭包中，又会是怎样的呢?
+
+```javascript
+function foo(){
+  var a = 10;
+  function bar(){
+  	console.log(a);
+    a=20;
+    console.log(delete a);
+    console.log(a);
+  }
+  return bar;
+}
+var boo = foo();
+boo();//10 , false , 20
+```
+我们发现，在闭包中，因为bar中保留对foo的引用，所以虽然在外部执行了bar函数，但闭包中对a的引用会保留`var a = 10`的有效性的。
+
+### 注意二
+
+我们知道,我们可以利用`eval`来进行变量欺骗,那如果我们用`eval`来进行变量声明,会怎样呢呢
+
+```javascript
+eval("var a = 10");
+console.log(window.a);//10
+console.log(delete window.a);//true
+console.log(a);//ReferenceError
+```
+我们发现,通过eval声明的变量,是拥有delete特性呢.我们来测试代码:
+
+```javascript
+console.log(a);//ReferenceError
+eval("var a = 10");
+```
+我们发现eval里面的变量声明,是不会进行声明提升的.因为引擎发初始化的时候,是不会扫描里面的具体的内容的,只有当执行到这一步的时候,才会执行里面具体的代码.也许这种情况下声明的变量也不应该叫作真正的变量声明吧.具体的原因还需要进一步深入了解.

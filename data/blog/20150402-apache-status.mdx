@@ -1,0 +1,48 @@
+---
+title: apache开启status监控
+date: 2015-04-02T11:09:40.000Z
+tags:
+  - linux
+  - apache
+---
+
+# 一.开启模块
+
+```
+LoadModule status_module modules/mod_status.so #去掉这个模块前面的#
+```
+如果没有这个模块,则需要编译安装这个模块
+
+# 二.增加配置
+
+在httpd.conf中添加如下配置
+
+```
+<Location /server-status>
+  SetHandler server-status
+  Order Deny,Allow
+ #Deny from all
+  Allow from 60.195.252.106 60.195.252.108
+</Location>
+ExtendedStatus On
+
+```
+说明,其中`Location /server-status`里面的`server-status`是设置显示状态的页面
+
+Deny from all开启的话则是禁止所有的访问,这个时候如果访问没有在Allow里面,则会出现没有权限访问
+
+Allow from 则是配置可以访问的客户端IP,测试不能使用域名,使用花生壳把域名解析成客户机IP也不能访问,Allow需要和Deny配合使用才行.
+
+该配置是全局配置,不能配置在某一个虚拟网站之中.
+
+# 三.配置相关
+
+我在使用该配置中,一直出现空白页面,后检查配置文件发现,
+该apache有三个虚拟主机,其中两个是tomcat,使用了ajp转发,另外一个是apache直接管理的静态资源,发现只能通过静态资源那个网址才能访问,本服务器的情况是
+
+>www.car91.cn/server-status (tomcat)不能访问,报错404
+>we.car91.cn/server-status  (tomcat)不能访问,报错404
+>static.car91.cn/server-status (apache)能够访问
+
+尝试再新建一个apache管理的虚拟主机,js.car91.cn,发现js.car91.cn/server-status依然可以访问,看来不能访问的原因是tomcat的ajp转发上.
+

@@ -1,0 +1,80 @@
+---
+title: 理解js中函数参数是按值传递而非按引用传递
+date: 2016-05-02T15:43:16.000Z
+tags:
+  - javascript
+---
+在javascript中的函数参数传值中,对于基本数字类型,我们都能够很好理解,它是按值传递的.比如下面这样:
+
+```javascript
+	var num = 10;
+	function add(num){
+		return num+1;
+	}
+	console.log(add(num));//11
+	console.log(num);//10
+```
+
+而对于对象的传递,我们可能就不太好理解了,因为如果是同基本类型一样,按值传递,但其实际表现又像引用类型一样.比如下面这样
+
+情形一:
+```javascript
+	var a=[],
+		b={},
+		c={};
+	function change(a,b,c){
+		a.push(1);
+		b.name = "my name";
+		c.age = 23;
+	}
+	change(a,b,c);
+	console.log(a);//[1]
+	console.log(b);// Object { name="my name"}
+	console.log(c.age);//23
+```
+如果是按值传递,为什么函数把外面的值给改变了呢?我们又继续看下面这个例子:
+情形二:
+```javascript
+	var a=[],
+		b={},
+		c={};
+	function change(a,b,c){
+		a = [1];
+		b = [2];
+		c = {age:3}
+	}
+	change(a,b,c);
+	console.log(a);//[]
+	console.log(b);//object
+	console.log(c.age);//undefined
+```
+同样是进行操作,为什么这次又 没有任何变化呢?
+
+其实深入理解,我们必须相信的是,在javascript中,函数的参数确实是按值传递的.对于以上现象,我们可以这样理解:
+
+变量a保存的是一个对象,而我们又知道,对象类型的变化保存的其实是对象引用的一个地址,当把变化a传递的函数的参数a的时候,函数参数a复制了变量a,实际上也就是复制了变量a引用对象的地址,因为是同一个地址,所以指向的是同一个变量.所以对函数中变量a进行的操作,都会反映到这个地址引用的对象上面.这就是情形1的执行结果.
+
+而在函数中,当我们把变量a赋值给另外一个对象后,它保存的就是另外一个对象的引用地址,所以对它进行任何操作,都不会反映到最开始变量a的对象上面.
+
+通过以上两种情形,我们就能够很好地理解下面这种情况了:
+
+```javascript
+	var person ={
+		name : "my name"
+	}
+	function change(person){
+		person.name = "your name";
+		person = {
+			name : "her name"
+		}
+	}
+	change(person);
+	console.log(person.name);//your name
+```
+这里画一张图,不知道能不能加深我们的理解:
+![函数参数按值传递][1]
+
+所以,当有一天,我们能够改变`var person`里面的引用地址的时候,我们才敢说是按照引用传值的.
+
+
+  [1]: http://7te946.com1.z0.glb.clouddn.com/arguments.png

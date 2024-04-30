@@ -1,0 +1,728 @@
+---
+title: 实例 通过违章查询 优化json数据应用及实现历史记录功能
+date: 2015-04-10T13:58:32.000Z
+tags:
+  - json
+  - javascript
+  - cookie
+---
+
+实例应用：汽车点修网违章查询
+应用地址：http://www.car91.cn
+实现效果：对接聚合数据，实现违章查询功能，并对查询记录通过cookie保存，方便下次直接点击查询
+
+### code-v1代码：
+
+```javascript
+define(["jquery", 'config', 'jquery.cookie'], function($, config) {
+    return {
+        wzInit: function() {
+            var history = $.cookie("queryHistory");
+            if (history) {
+                var historyJson = eval("(" + history + ")");
+                if (historyJson.length > 0) {//因为是采用前置插入的方式，所以在插入前先判断是否已经插入过，避免多次运行重复生成的情况
+                    if ($(".quick-wz").length > 0) {
+                        $(".quick-wz").remove();
+                    }
+                    var list = "<div class='quick-wz'><p class='quick-wz__tit'>快速查询</p><ul class='quick-wz__list clearfix'>";
+                    for (var i = 0; i < historyJson.length; i++) {
+                        list = list + "<li class='query' data-index='" + i + "'>" + decodeURIComponent(historyJson[i].hphm) + " " + decodeURIComponent(historyJson[i].cityName) + "</li>";
+                    }
+                    list = list + "</ul></div>"
+                    $("#wzForm").before(list);
+                    $(".query").on("click", function() {
+                        var index = $(this).data("index");
+                        $.ajax({
+                            type: "POST",
+                            dataType: "jsonp",
+                            url: config.wzQuery,
+                            data: {
+                                "city": historyJson[index].city,
+                                "hpzl": historyJson[index].hpzl,
+                                "car_province": historyJson[index].car_province,
+                                "hphm2": historyJson[index].hphm2,
+                                "engineno": historyJson[index].engineno,
+                                "classno": historyJson[index].classno,
+                                "registno": historyJson[index].registno,
+                                "hphm": historyJson[index].hphm
+                            },
+                            success: function(e) {
+                                //var e=eval("("+e+")");
+                                var resultcode = e.resultcode;
+                                var info = e.reason;
+                                if (resultcode == '200') {
+                                    var html = '<table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2">';
+                                    html += '<tr>' + '<td height="40">&nbsp;时间</td>' + '<td>&nbsp;地点</td>' + '<td>&nbsp;违章事项</td>' + '<td>&nbsp;违章代码</td>' + '<td>&nbsp;扣分</td>' + '<td>&nbsp;罚款</td>' + '<td>&nbsp;是否处理</td>' + '</tr>';
+                                    var list = e.result.lists;
+                                    if (list.length > 0) {
+                                        for (var i in list) {
+                                            html += '<tr>' + '<td height="40" width="120">&nbsp;' + list[i].date + '</td>' + '<td width="150">&nbsp;' + list[i].area + '</td>' + '<td width="280">&nbsp;' + list[i].act + '</td>' + '<td width="60">&nbsp;' + list[i].code + '</td>' + '<td width="30">&nbsp;' + list[i].fen + '</td>' + '<td width="30">&nbsp;' + list[i].money + '</td>' + '<td width="30">&nbsp;' + list[i].handled + '</td>' + '</tr>';
+                                        }
+                                    } else {
+                                        html += '<tr><td colspan=7 height="40">查询不到该车辆的违章记录</td></tr>';
+                                    }
+                                    html += '</table>';
+                                    $(".wz-result").html(html);
+                                } else if (resultcode == '210') {
+                                    alert(resultcode + ":" + info);
+                                } else {
+                                    alert(resultcode + ":" + info);
+                                }
+                                $(".wz-btn").val('违章查询').removeAttr("disabled");
+                            }
+                        })
+                    })
+                }
+            }
+            var queryHistory = function() {
+                    var city = $("select[name='city']").val();
+                    var hpzl = $("select[name='hpzl']").val();
+                    var car_province = $("select[name='car_province']").val();
+                    var hphm2 = $("input[name='hphm2']").val();
+                    var engineno = $("input[name='engineno']").val();
+                    var classno = $("input[name='classno']").val();
+                    var registno = $("input[name='registno']").val();
+                    var hphm = $("#hphm").val();
+                    var cityName = $(".selectCitys option:selected").text();
+                    cityName = encodeURIComponent(cityName);
+                    var len = 0;
+                    var canAdd = true;
+                    if (history) {
+                        len = historyJson.length;
+                        $(historyJson).each(function() {
+                            if (this.city == city && this.hphm == hphm) {//判断相同车牌号及相同城市的查询
+                                canAdd = false;
+                                return false;
+                            }
+                        })
+                    }
+                    if (canAdd == true) {
+                        var newCookie = "[";
+                        var start = 0;
+                        if (len > 2) {//最多记录三条历史记录
+                            start = 1;
+                        }
+                        for (var i = start; i < len; i++) {
+                            newCookie = newCookie + "{\"city\":\"" + historyJson[i].city + "\",\"hpzl\":\"" + historyJson[i].hpzl + "\",\"car_province\":\"" + historyJson[i].car_province + "\",\"hphm2\":\"" + historyJson[i].hphm2 + "\",\"engineno\":\"" + historyJson[i].engineno + "\",\"classno\":\"" + historyJson[i].classno + "\",\"registno\":\"" + historyJson[i].registno + "\",\"hphm\":\"" + historyJson[i].hphm + "\",\"cityName\":\"" + historyJson[i].cityName + "\"},";
+                        }
+                        newCookie = newCookie + "{\"city\":\"" + city + "\",\"hpzl\":\"" + hpzl + "\",\"car_province\":\"" + car_province + "\",\"hphm2\":\"" + hphm2 + "\",\"engineno\":\"" + engineno + "\",\"classno\":\"" + classno + "\",\"registno\":\"" + registno + "\",\"hphm\":\"" + hphm + "\",\"cityName\":\"" + cityName + "\"}]";
+                        $.cookie("queryHistory", newCookie, {
+                            expires: 1,
+                            path: "/"
+                        });
+                    }
+                }
+
+            $.ajax({
+                type: "POST",
+                dataType: "jsonp",
+                url: config.wzCity,
+                data: "",
+                success: function(e) {
+                    $(".selectProvince").empty();
+                    var html = '<option value="">请选择城市</option>';
+                    var ev = e['result'];
+                    for (i in ev) {
+                        html += "<option value='" + ev[i].province_code + "'>" + ev[i].province + "</option>";
+                        //alert(e[i].city_name);
+                        //$(".selectCitys").append("<option value='"+e[i].city_code+"'>"+e[i].city_name+"</option>");
+                    }
+                    $(".selectProvince").append(html);
+                }
+            })
+            var evc;
+            $("#selectProvince").change(function() {
+                var province = $(".selectProvince").val();
+                $(".selectCitys").empty().append("<option>loading...</option>");
+                $.ajax({
+                    type: "POST",
+                    dataType: "jsonp",
+                    url: config.wzCity,
+                    data: "province=" + encodeURIComponent(province),
+                    success: function(e) {
+                        $(".selectCitys").empty();
+                        var html = '<option value="">请选择城市</option>';
+                        ev = e['result'];
+                        $.each(ev, function(k, v) {
+                            evc=v;
+                            $.each(v['citys'], function(kk, vv) {
+                                html += "<option value='" + vv.city_code + "' engine='"+vv.engine+"' engineno='"+vv.engineno+"' abbr='" + vv.abbr + "' eclass='" + vv.class + "' eclassno='" + vv.classno + "'>" + vv.city_name + "</option>";
+                            })
+                            $(".selectCitys").append(html);
+                        })
+                    }
+                })
+            })
+            $(".selectCitys").change(function() {
+                var province = $(".selectProvince").val();
+                var index=$(this).get(0).selectedIndex-1;
+                console.log(evc['citys'][index]);
+                var qinfo=evc['citys'][index];
+                console.log(qinfo.abbr);
+                var city = $(this).val();
+                var abbr = $(".selectCitys").find("option:selected").attr("abbr");
+                var engine = $(".selectCitys").find("option:selected").attr("engine");
+                var engineno = $(".selectCitys").find("option:selected").attr("engineno");
+                var eclass = $(".selectCitys").find("option:selected").attr("eclass");
+                var eclassno = $(".selectCitys").find("option:selected").attr("eclassno");
+                if (typeof(abbr) != "undefined") {
+                    $("#car_province").val(abbr);
+                }
+                if (engine == '1') {
+                    if (engineno == '0') {
+                        var engineinfo = '全部发动机号';
+                    } else {
+                        var engineinfo = '发动机号后' + engineno + '位';
+                    }
+                    $("input[name=engineno]").attr("placeholder", engineinfo);
+                    $("#engineno").css({
+                        display: ""
+                    });
+                } else {
+                    $("#engineno").css({
+                        display: "none"
+                    });
+                }
+                if (eclass == '1') {
+                    if (eclassno == '0') {
+                        var classinfo = '全部车架号';
+                    } else {
+                        var classinfo = '车架号后' + eclassno + '位';
+                    }
+                    $("input[name=classno]").attr("placeholder", classinfo);
+                    $("#classno").css({
+                        display: ""
+                    });
+                } else {
+                    $("#classno").css({
+                        display: "none"
+                    });
+                }
+            })
+            $(".wz-btn").click(function() {
+                $(".wz-btn").val('查询中...').attr("disabled", "disabled");
+                $(".wz-result").html('正在查询中....');
+                var hphm = $("#car_province").val() + $(".onlyhm").val();
+                hphm = encodeURIComponent(hphm);
+                $("#hphm").val(hphm);
+                queryHistory();
+                $.ajax({
+                    type: "POST",
+                    //用POST方式传输
+                    dataType: "jsonp",
+                    //数据格式:JSON
+                    url: config.wzQuery,
+                    //目标地址
+                    data: {
+                        "city": $("select[name='city']").val(),
+                        "hpzl": $("select[name='hpzl']").val(),
+                        "car_province": $("select[name='car_province']").val(),
+                        "hphm2": $("input[name='hphm2']").val(),
+                        "engineno": $("input[name='engineno']").val(),
+                        "classno": $("input[name='classno']").val(),
+                        "registno": $("input[name='registno']").val(),
+                        "hphm": hphm
+                    },
+                    success: function(e) {
+                        //var e=eval("("+e+")");
+                        console.log("ok");
+                        var resultcode = e.resultcode;
+                        var info = e.reason;
+                        if (resultcode == '200') {
+                            var html = '<table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2">';
+                            html += '<tr>' + '<td height="40">&nbsp;时间</td>' + '<td>&nbsp;地点</td>' + '<td>&nbsp;违章事项</td>' + '<td>&nbsp;违章代码</td>' + '<td>&nbsp;扣分</td>' + '<td>&nbsp;罚款</td>' + '<td>&nbsp;是否处理</td>' + '</tr>';
+                            var list = e.result.lists;
+                            if (list.length > 0) {
+                                for (var i in list) {
+                                    html += '<tr>' + '<td height="40" width="120">&nbsp;' + list[i].date + '</td>' + '<td width="150">&nbsp;' + list[i].area + '</td>' + '<td width="280">&nbsp;' + list[i].act + '</td>' + '<td width="60">&nbsp;' + list[i].code + '</td>' + '<td width="30">&nbsp;' + list[i].fen + '</td>' + '<td width="30">&nbsp;' + list[i].money + '</td>' + '<td width="30">&nbsp;' + list[i].handled + '</td>' + '</tr>';
+                                }
+                            } else {
+                                html += '<tr><td colspan=6 height="40">查询不到该车辆的违章记录</td></tr>';
+                            }
+                            html += '</table>';
+                            $(".wz-result").html(html);
+                        } else if (resultcode == '210') {
+                            alert(resultcode + ":" + info);
+                        } else {
+                            alert(resultcode + ":" + info);
+                        }
+                        $(".wz-btn").val('违章查询').removeAttr("disabled");
+                    }
+                })
+            })
+        }
+    }
+})
+
+```
+
+## 代码说明：
+
+1.该模块加载了jquery.cookie插件，主要是为了方便把json数据保存在cookie中。模块加载进来后，首先判断是存在历史记录，存在的话就进行相应的显示，在最开始书写的时间，生成历史记录图标，我是把所有需要的参数都通过data标签生成在DOM元素上的，例如
+```html
+list = list + "<li class='query' data-city='"+historyJson[i].city+"'>" + decodeURIComponent(historyJson[i].hphm) + " " + decodeURIComponent(historyJson[i].cityName) + "</li>";
+
+```
+然后在接下来的ajax发送数据的时候，则通过`$(this).data('city')`来获取数据，后来发现这样标签内容非常多，而我们在点击时候，其实只需要知道是点击的第一个标签，然后从原始的json数据中去获取对应的值就可以了，于是就产生了上面的data-index的写法，在获取数据时，采用historyJson[index].city就可以了。
+
+## 代码优化：
+
+1.在`$("#selectProvince").change(function()`函数中，通过ajax获取到应用城市的json数据，数据为多层，示例如下：
+```javascript
+jQuery19103159100429620594_1428636651525({
+    "resultcode": "200",
+    "reason": "成功的返回",
+    "result": {
+        "QH": {
+            "province": "青海",
+            "province_code": "QH",
+            "citys": [
+                {
+                    "city_name": "西宁",
+                    "city_code": "QH_XN",
+                    "abbr": "青",
+                    "engine": "0",
+                    "engineno": "0",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "海东",
+                    "city_code": "QH_HAIDONG",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "海西",
+                    "city_code": "QH_HAIXI",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "海南",
+                    "city_code": "QH_HAINAN",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "玉树",
+                    "city_code": "QH_YUSHU",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "黄南",
+                    "city_code": "QH_HUANGNAN",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "海北",
+                    "city_code": "QH_HAIBEI",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                },
+                {
+                    "city_name": "果洛",
+                    "city_code": "QH_GUOLUO",
+                    "abbr": "青",
+                    "engine": "1",
+                    "engineno": "6",
+                    "classa": "1",
+                    "class": "1",
+                    "classno": "0",
+                    "regist": "0",
+                    "registno": "0"
+                }
+            ]
+        }
+    },
+    "error_code": 0
+})
+```
+我需要获取到最底层每个城市的信息，原来的写法是通过`$.each`访求循环来获取，后来研究json格式时，明白了大括号表示对象，中括号表示数组，对象可以通过点的方式如obj.result或者key的方法如obj[result]的方法来获取，而数据则是通过下标来获取，如obj[0],上面的json中，每次选择一个省份后，只是返回一个该省份的数据，即result下面的对象只有一个，而且对象名可以通过select的值来获取，因此，不需要通过循环，直接通过下标就可以获取到值了。
+```javascript
+ev = e['result'];
+var evc=ev[province];
+```
+2.继续刚刚`$.each`里面的循环部分，我还是把返回的json数据写入到了dom标签中，这一步可以继续优化，因为我们可以通过`$(this).get(0).selectedIndex`获取到当前选中项的索引值，因为我们可以通过该索引值再去读取json中对应的值就可以了。于是有了上面代码中的初步测试部分
+
+```javascript
+var index=$(this).get(0).selectedIndex-1;
+console.log(evc['citys'][index]);
+var qinfo=evc['citys'][index];
+console.log(qinfo.abbr);
+```
+3.再来优化，上面第2条中的返回json数据我是通过定义一个全局变量`evc`来方便下面的`$(".selectCitys").change(function()`方法访问，我们来继续优化减少全局变量，把`$(".selectCitys").change(function()`封装成一个函数，把json返回值通过传值的方式来传递，于是便有了如下写法：
+```javascript
+function selectCitys(evc){
+    $(".selectCitys").change(function() {
+        var province = $(".selectProvince").val();
+        var city = $(this).val();
+        var index=$(this).get(0).selectedIndex-1;
+        var cityInfo=evc['citys'][index];
+        var abbr = cityInfo.abbr;
+        var engine = cityInfo.engine;
+        var engineno = cityInfo.engineno;
+        var eclass = cityInfo.class;
+        var eclassno = cityInfo.classno;
+        if (typeof(abbr) != "undefined") {
+            $("#car_province").val(abbr);
+        }
+        if (engine == '1') {
+            if (engineno == '0') {
+                var engineinfo = '全部发动机号';
+            } else {
+                var engineinfo = '发动机号后' + engineno + '位';
+            }
+            $("input[name=engineno]").attr("placeholder", engineinfo);
+            $("#engineno").css({
+                display: ""
+            });
+        } else {
+            $("#engineno").css({
+                display: "none"
+            });
+        }
+        if (eclass == '1') {
+            if (eclassno == '0') {
+                var classinfo = '全部车架号';
+            } else {
+                var classinfo = '车架号后' + eclassno + '位';
+            }
+            $("input[name=classno]").attr("placeholder", classinfo);
+            $("#classno").css({
+                display: ""
+            });
+        } else {
+            $("#classno").css({
+                display: "none"
+            });
+        }
+    })
+}
+```
+4.优化继续，我们发现在上面的代码中，记录cookie及查询的时候，两次手动读取了一样的数据，于是我们可以把这部分先独立出来，接下来传值即可。如果优化如下：
+```javascript
+$(".wz-btn").click(function() {
+    $(".wz-btn").val('查询中...').attr("disabled", "disabled");
+    $(".wz-result").html('正在查询中....');
+    var hphm = $("#car_province").val() + $(".onlyhm").val();
+    hphm = encodeURIComponent(hphm);
+    $("#hphm").val(hphm);
+    var carInfo={
+            "city": $("select[name='city']").val(),
+            "hpzl": $("select[name='hpzl']").val(),
+            "car_province": $("select[name='car_province']").val(),
+            "hphm2": $("input[name='hphm2']").val(),
+            "engineno": $("input[name='engineno']").val(),
+            "classno": $("input[name='classno']").val(),
+            "registno": $("input[name='registno']").val(),
+            "hphm": hphm
+        };
+    queryHistory(carInfo);
+    $.ajax({
+        type: "POST",
+        dataType: "jsonp",
+        url: config.wzQuery,
+        data: carInfo,
+        success: function(e) {
+            var resultcode = e.resultcode;
+            var info = e.reason;
+            if (resultcode == '200') {
+                var html = '<table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2">';
+                html += '<tr>' + '<td height="40">&nbsp;时间</td>' + '<td>&nbsp;地点</td>' + '<td>&nbsp;违章事项</td>' + '<td>&nbsp;违章代码</td>' + '<td>&nbsp;扣分</td>' + '<td>&nbsp;罚款</td>' + '<td>&nbsp;是否处理</td>' + '</tr>';
+                var list = e.result.lists;
+                if (list.length > 0) {
+                    for (var i in list) {
+                        html += '<tr>' + '<td height="40" width="120">&nbsp;' + list[i].date + '</td>' + '<td width="150">&nbsp;' + list[i].area + '</td>' + '<td width="280">&nbsp;' + list[i].act + '</td>' + '<td width="60">&nbsp;' + list[i].code + '</td>' + '<td width="30">&nbsp;' + list[i].fen + '</td>' + '<td width="30">&nbsp;' + list[i].money + '</td>' + '<td width="30">&nbsp;' + list[i].handled + '</td>' + '</tr>';
+                    }
+                } else {
+                    html += '<tr><td colspan=6 height="40">查询不到该车辆的违章记录</td></tr>';
+                }
+                html += '</table>';
+                $(".wz-result").html(html);
+            } else if (resultcode == '210') {
+                alert(resultcode + ":" + info);
+            } else {
+                alert(resultcode + ":" + info);
+            }
+            $(".wz-btn").val('违章查询').removeAttr("disabled");
+        }
+    })
+})
+```
+
+因此，最终优化完毕的全部代码如下：
+
+```javascript
+define(["jquery", 'config', 'jquery.cookie'], function($, config) {
+    return {
+        wzInit: function() {
+            var history = $.cookie("queryHistory");
+            if (history) {
+                var historyJson = eval("(" + history + ")");
+                if (historyJson.length > 0) {
+                    if ($(".quick-wz").length > 0) {
+                        $(".quick-wz").remove();
+                    }
+                    var list = "<div class='quick-wz'><p class='quick-wz__tit'>快速查询</p><ul class='quick-wz__list clearfix'>";
+                    for (var i = 0; i < historyJson.length; i++) {
+                        list = list + "<li class='query' data-index='" + i + "'>" + decodeURIComponent(historyJson[i].hphm) + " " + decodeURIComponent(historyJson[i].cityName) + "</li>";
+                    }
+                    list = list + "</ul></div>"
+                    $("#wzForm").before(list);
+                    $(".query").on("click", function() {
+                        var index = $(this).data("index");
+                        $.ajax({
+                            type: "POST",
+                            dataType: "jsonp",
+                            url: config.wzQuery,
+                            data: {
+                                "city": historyJson[index].city,
+                                "hpzl": historyJson[index].hpzl,
+                                "car_province": historyJson[index].car_province,
+                                "hphm2": historyJson[index].hphm2,
+                                "engineno": historyJson[index].engineno,
+                                "classno": historyJson[index].classno,
+                                "registno": historyJson[index].registno,
+                                "hphm": historyJson[index].hphm
+                            },
+                            success: function(e) {
+                                var resultcode = e.resultcode;
+                                var info = e.reason;
+                                if (resultcode == '200') {
+                                    var html = '<table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2">';
+                                    html += '<tr>' + '<td height="40">&nbsp;时间</td>' + '<td>&nbsp;地点</td>' + '<td>&nbsp;违章事项</td>' + '<td>&nbsp;违章代码</td>' + '<td>&nbsp;扣分</td>' + '<td>&nbsp;罚款</td>' + '<td>&nbsp;是否处理</td>' + '</tr>';
+                                    var list = e.result.lists;
+                                    if (list.length > 0) {
+                                        for (var i in list) {
+                                            html += '<tr>' + '<td height="40" width="120">&nbsp;' + list[i].date + '</td>' + '<td width="150">&nbsp;' + list[i].area + '</td>' + '<td width="280">&nbsp;' + list[i].act + '</td>' + '<td width="60">&nbsp;' + list[i].code + '</td>' + '<td width="30">&nbsp;' + list[i].fen + '</td>' + '<td width="30">&nbsp;' + list[i].money + '</td>' + '<td width="30">&nbsp;' + list[i].handled + '</td>' + '</tr>';
+                                        }
+                                    } else {
+                                        html += '<tr><td colspan=7 height="40">查询不到该车辆的违章记录</td></tr>';
+                                    }
+                                    html += '</table>';
+                                    $(".wz-result").html(html);
+                                } else if (resultcode == '210') {
+                                    alert(resultcode + ":" + info);
+                                } else {
+                                    alert(resultcode + ":" + info);
+                                }
+                                $(".wz-btn").val('违章查询').removeAttr("disabled");
+                            }
+                        })
+                    })
+                }
+            }
+            var queryHistory = function(carInfo) {
+                    var city = carInfo.city;
+                    var hpzl = carInfo.hpzl;
+                    var car_province = carInfo.car_province;
+                    var hphm2 = carInfo.hphm2;
+                    var engineno = carInfo.engineno;
+                    var classno = carInfo.classno;
+                    var registno = carInfo.registno;
+                    var hphm = $("#hphm").val();
+                    var cityName = $(".selectCitys option:selected").text();
+                    cityName = encodeURIComponent(cityName);
+                    var len = 0;
+                    var canAdd = true;
+                    if (history) {
+                        len = historyJson.length;
+                        $(historyJson).each(function() {
+                            if (this.city == city && this.hphm == hphm) {
+                                canAdd = false;
+                                return false;
+                            }
+                        })
+                    }
+                    if (canAdd == true) {
+                        var newCookie = "[";
+                        var start = 0;
+                        if (len > 2) {
+                            start = 1;
+                        }
+                        for (var i = start; i < len; i++) {
+                            newCookie = newCookie + "{\"city\":\"" + historyJson[i].city + "\",\"hpzl\":\"" + historyJson[i].hpzl + "\",\"car_province\":\"" + historyJson[i].car_province + "\",\"hphm2\":\"" + historyJson[i].hphm2 + "\",\"engineno\":\"" + historyJson[i].engineno + "\",\"classno\":\"" + historyJson[i].classno + "\",\"registno\":\"" + historyJson[i].registno + "\",\"hphm\":\"" + historyJson[i].hphm + "\",\"cityName\":\"" + historyJson[i].cityName + "\"},";
+                        }
+                        newCookie = newCookie + "{\"city\":\"" + city + "\",\"hpzl\":\"" + hpzl + "\",\"car_province\":\"" + car_province + "\",\"hphm2\":\"" + hphm2 + "\",\"engineno\":\"" + engineno + "\",\"classno\":\"" + classno + "\",\"registno\":\"" + registno + "\",\"hphm\":\"" + hphm + "\",\"cityName\":\"" + cityName + "\"}]";
+                        $.cookie("queryHistory", newCookie, {
+                            expires: 1,
+                            path: "/"
+                        });
+                    }
+                }
+            $.ajax({
+                type: "POST",
+                dataType: "jsonp",
+                url: config.wzCity,
+                data: "",
+                success: function(e) {
+                    $(".selectProvince").empty();
+                    var html = '<option value="">请选择城市</option>';
+                    var ev = e['result'];
+                    for (i in ev) {
+                        html += "<option value='" + ev[i].province_code + "'>" + ev[i].province + "</option>";
+                    }
+                    $(".selectProvince").append(html);
+                }
+            })
+            $("#selectProvince").change(function() {
+                var province = $(".selectProvince").val();
+                $(".selectCitys").empty().append("<option>loading...</option>");
+                $.ajax({
+                    type: "POST",
+                    dataType: "jsonp",
+                    url: config.wzCity,
+                    data: {"province" : encodeURIComponent(province)},
+                    success: function(e) {
+                        $(".selectCitys").empty();
+                        var html = '<option value="">请选择城市</option>';
+                        ev = e['result'];
+                        var evc=ev[province];
+                        $.each(evc['citys'], function(kk, vv) {
+                            html += "<option value='" + vv.city_code + "'>" + vv.city_name + "</option>";
+                        })
+                        $(".selectCitys").append(html);
+                        selectCitys(evc);
+                    }
+                })
+            })
+            function selectCitys(evc){
+                $(".selectCitys").change(function() {
+                    var province = $(".selectProvince").val();
+                    var city = $(this).val();
+                    var index=$(this).get(0).selectedIndex-1;
+                    var cityInfo=evc['citys'][index];
+                    var abbr = cityInfo.abbr;
+                    var engine = cityInfo.engine;
+                    var engineno = cityInfo.engineno;
+                    var eclass = cityInfo.class;
+                    var eclassno = cityInfo.classno;
+                    if (typeof(abbr) != "undefined") {
+                        $("#car_province").val(abbr);
+                    }
+                    if (engine == '1') {
+                        if (engineno == '0') {
+                            var engineinfo = '全部发动机号';
+                        } else {
+                            var engineinfo = '发动机号后' + engineno + '位';
+                        }
+                        $("input[name=engineno]").attr("placeholder", engineinfo);
+                        $("#engineno").css({
+                            display: ""
+                        });
+                    } else {
+                        $("#engineno").css({
+                            display: "none"
+                        });
+                    }
+                    if (eclass == '1') {
+                        if (eclassno == '0') {
+                            var classinfo = '全部车架号';
+                        } else {
+                            var classinfo = '车架号后' + eclassno + '位';
+                        }
+                        $("input[name=classno]").attr("placeholder", classinfo);
+                        $("#classno").css({
+                            display: ""
+                        });
+                    } else {
+                        $("#classno").css({
+                            display: "none"
+                        });
+                    }
+                })
+            }
+            $(".wz-btn").click(function() {
+                $(".wz-btn").val('查询中...').attr("disabled", "disabled");
+                $(".wz-result").html('正在查询中....');
+                var hphm = $("#car_province").val() + $(".onlyhm").val();
+                hphm = encodeURIComponent(hphm);
+                $("#hphm").val(hphm);
+                var carInfo={
+                        "city": $("select[name='city']").val(),
+                        "hpzl": $("select[name='hpzl']").val(),
+                        "car_province": $("select[name='car_province']").val(),
+                        "hphm2": $("input[name='hphm2']").val(),
+                        "engineno": $("input[name='engineno']").val(),
+                        "classno": $("input[name='classno']").val(),
+                        "registno": $("input[name='registno']").val(),
+                        "hphm": hphm
+                    };
+                queryHistory(carInfo);
+                $.ajax({
+                    type: "POST",
+                    dataType: "jsonp",
+                    url: config.wzQuery,
+                    data: carInfo,
+                    success: function(e) {
+                        var resultcode = e.resultcode;
+                        var info = e.reason;
+                        if (resultcode == '200') {
+                            var html = '<table width="98%" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #f2f2f2">';
+                            html += '<tr>' + '<td height="40">&nbsp;时间</td>' + '<td>&nbsp;地点</td>' + '<td>&nbsp;违章事项</td>' + '<td>&nbsp;违章代码</td>' + '<td>&nbsp;扣分</td>' + '<td>&nbsp;罚款</td>' + '<td>&nbsp;是否处理</td>' + '</tr>';
+                            var list = e.result.lists;
+                            if (list.length > 0) {
+                                for (var i in list) {
+                                    html += '<tr>' + '<td height="40" width="120">&nbsp;' + list[i].date + '</td>' + '<td width="150">&nbsp;' + list[i].area + '</td>' + '<td width="280">&nbsp;' + list[i].act + '</td>' + '<td width="60">&nbsp;' + list[i].code + '</td>' + '<td width="30">&nbsp;' + list[i].fen + '</td>' + '<td width="30">&nbsp;' + list[i].money + '</td>' + '<td width="30">&nbsp;' + list[i].handled + '</td>' + '</tr>';
+                                }
+                            } else {
+                                html += '<tr><td colspan=6 height="40">查询不到该车辆的违章记录</td></tr>';
+                            }
+                            html += '</table>';
+                            $(".wz-result").html(html);
+                        } else if (resultcode == '210') {
+                            alert(resultcode + ":" + info);
+                        } else {
+                            alert(resultcode + ":" + info);
+                        }
+                        $(".wz-btn").val('违章查询').removeAttr("disabled");
+                    }
+                })
+            })
+        }
+    }
+})
+
+```

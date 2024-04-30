@@ -1,0 +1,39 @@
+---
+title: 轻松把代码部署到github上面
+date: 2016-03-21T23:07:00.000Z
+tags:
+  - git
+---
+我们使用git很多时候都是需要配合github同步使用的，当我们在本地使用了git管理代码，并进行修改，提交之后，接下来我们就想把代码部署到github上面去，整个流程也是非常简单的。
+
+
+
+首先，我们登录github之后，点击右上角的`new repository`,来新建一个分支，接下来就要求我们级分支起一个名字，这里比如我起一个`mytest`的名字，写上分支的描述，如下图
+![](http://7te946.com1.z0.glb.clouddn.com/16-3-21/53438101.jpg)
+
+接下来就是我最喜欢github的一点了，因为他已经非常直观地告诉了我们要怎么做了，如下图
+![](http://7te946.com1.z0.glb.clouddn.com/16-3-21/11795900.jpg)
+
+### …or create a new repository on the command line
+
+```
+echo "# mytest" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/buxuku/mytest.git
+git push -u origin master
+```
+
+这里教我们在本地创建一个新的仓库，并建立一个README.md的文件，然后提交并推送到github上面
+
+### …or push an existing repository from the command line
+
+```
+git remote add origin https://github.com/buxuku/mytest.git
+git push -u origin master
+```
+这里就是教我们在本地已经存在的仓库里面把这个远程地址添加进来，然后把代码提交上去。
+整个过程就是这么的简单。比如我提交的一份代码执行图：
+![](http://7te946.com1.z0.glb.clouddn.com/16-3-21/89223794.jpg)
+从图中也看到了，github有时候可能会出现网络不稳定或者被墙的情况。

@@ -9,7 +9,8 @@
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "update-readme": "contentlayer2 build --clearCache && node ./scripts/updateReadme.mjs"
   },
   "dependencies": {
     "@headlessui/react": "1.7.19",
@@ -20,6 +21,8 @@
     "contentlayer2": "0.4.4",
     "esbuild": "0.20.2",
     "github-slugger": "^2.0.0",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
     "gray-matter": "^4.0.2",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "1.0.0",
@@ -41,6 +44,7 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "tailwindcss": "^3.4.3",
+    "typed.js": "^2.1.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

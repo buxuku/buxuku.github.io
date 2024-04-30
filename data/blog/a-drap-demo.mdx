@@ -1,0 +1,127 @@
+---
+title: 用面向过程和面向对象写一个拖拽demo
+date: 2016-10-26T15:46:29.000Z
+tags:
+  - javascript
+  - 面向对象
+  - demo
+---
+
+很简单的一个拖拽效果，没有判断窗口溢出的现象，主要还是加深this的应用。
+
+## 面向过程
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #drag{
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      background-color: red;
+      cursor:pointer;;
+    }
+  </style>
+</head>
+<body>
+  <div id="drag">
+
+  </div>
+</body>
+<script>
+  var drag = document.getElementById("drag");
+  drag.onmousedown = function(ev){
+    var ev = ev || window.event;
+    var x = ev.clientX-this.offsetLeft;
+    var y = ev.clientY-this.offsetTop;
+    document.onmousemove = function(ev){
+      var ev = ev || window.event;
+      var nowx= ev.clientX-x;
+      var nowy= ev.clientY-y;
+      drag.style.left = nowx + 'px';
+      drag.style.top = nowy + 'px';
+    }
+    document.onmouseup = function(){
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+  }
+</script>
+</html>
+
+```
+
+[view code](http://jsbin.com/fadafan/edit?html,output)
+
+## 面向对象
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #drag{
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      background-color: red;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="drag">
+
+  </div>
+</body>
+<script>
+  function Drag(name){
+    this.drag =  document.getElementById(name);
+    this.x=0;
+    this.y=0;
+  }
+  Drag.prototype.init = function(){
+    var This = this;
+    this.drag.onmousedown = function(ev){
+      var ev = ev || window.event;
+      This.fnDown(ev);
+      return false;
+    }
+  }
+  Drag.prototype.fnDown = function(ev){
+    var This = this;
+    this.x = ev.clientX-this.drag.offsetLeft;
+    this.y = ev.clientY-this.drag.offsetTop;
+    document.onmousemove = function(ev){
+      var ev = ev || window.event;
+      This.fnMove(ev);
+    };
+    document.onmouseup = this.fnUp;
+  }
+  Drag.prototype.fnMove = function(ev){
+    var nowx= ev.clientX-this.x;
+    var nowy= ev.clientY-this.y;
+    this.drag.style.left = nowx + 'px';
+    this.drag.style.top = nowy + 'px';
+  }
+  Drag.prototype.fnUp = function(){
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
+  var drags = new Drag('drag');
+  drags.init();
+</script>
+</html>
+
+```
+[view code](http://jsbin.com/funudo/edit?html,output)

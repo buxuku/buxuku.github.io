@@ -1,0 +1,311 @@
+---
+title: webpack一步一步深入学习应用
+date: 2017-02-08T18:49:12.000Z
+tags:
+  - react
+  - webpack
+---
+
+## 准备工作
+
+全局安装webpack
+
+``` 
+npm i webpack -g 
+```
+
+## 第一步：最简使用
+
+
+``` 
+mkdir webpack-step //新建一个目录并初始化它
+cd webpack-step
+npm init -y //加y参数全部使用默认值快速初始化
+npm i webpack@1.14.0 -D //项目中再安装一次webpack,webpack现在已经有2.0版本了，有些配置文件修改了，还是先安装1.0以上的版本吧
+touch test.js //新建一个文件
+vi test.js //编辑文件 写入console.log("hello world");并保存
+webpack test.js bundle.js //运行webpack进行打包
+```
+执行到这一步，就会在项目中打包生成一个bundle.js的打包文件
+这就是webpack的最简使用方法了。
+
+
+## 第二步 开始使用webpack.config.js
+
+```
+touch webpack.config.js
+vi webpack.config.js
+```
+
+输入以下内容
+```javascript
+var webpack = require('webpack');//载入webpack模块
+
+module.exports = {
+	entry :['./test.js'],//设置打包入口文件
+	output :{
+		path:__dirname,//设置打包的输出文件夹
+		filename:'bundle.js'//打包后的文件
+	}
+}
+```
+这个时候再直接执行`webpack`命令就可以直接打包了。
+
+## 第三步 开始使用一个插件
+
+webpack有很多内置的插件及npm安装众多的插件，插件使用在webpack中的plugins配置项中,它是一个数组项，可以配置多个
+
+```javascript
+
+var webpack = require('webpack');//载入webpack模块
+
+module.exports = {
+	entry :['./test.js'],//设置打包入口文件
+	output :{
+		path:__dirname,//设置打包的输出文件夹
+		filename:'bundle.js'//打包后的文件
+	},
+	plugins :[
+		new Webpack.BannerPlugin("打包后文件的头部注释")//打包后文件的头部注释..
+	]
+}
+```
+
+执行打包后就会在bundle.js文件的头部生成一条注释信息
+
+## 第四步 开始作用loaders功能
+
+比如我们要编译es6到es5,我们就需要用到babel这个工具，首先需要至少安装它的插件
+
+```
+npm i babel-core -D //babel核心库
+npm i babel-loader -D //babel用于loader
+npm i babel-preset-es2015 -D //babel转码规则
+```
+
+```javascript
+
+var webpack = require('webpack');
+
+module.exports = {
+	entry :['./test.js'],
+	output :{
+		path:__dirname,
+		filename:'bundle.js'
+	},
+	module :{
+		loaders :[{
+				test:/\.js$/, //匹配js文件
+				loader:'babel-loader',//使用bable进行转码
+				query:{
+					presets:['es2015'] //转换成es5
+				}
+			}
+		]
+	},
+	plugins :[
+		new webpack.BannerPlugin("打包后文件的头部注释")//打包后文件的头部注释..
+	]
+}
+```
+
+修改一下test.js文件，写入一句es6的语法
+
+```
+let a = "hello world!";
+console.log(a);
+```
+
+运行webpack打包之后，打开bundle.js就会发现代码会转换成es5中的`var`方法了。
+
+这里的配置里面的'query'部分也可以提取出来，把它写入package.json中也可以。
+
+```
+{
+  "name": "webpack-step",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^1.14.0"
+  },
+    "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": []
+  }
+}
+```
+这样和新建一个`.babelrc`文件效果是一致的
+```
+{
+  "presets": [
+    "es2015"
+  ],
+  "plugins": []
+}
+```
+
+接下来就采用最后一种独立文件的方式吧，来得直观一些。
+
+## 第五步 使用npm脚本
+
+以上所有的运行我们都是使用webpack来运行的，接下来我们把它配置进npm的脚本中，以方便直接使用以及添加参数等
+
+在package.json中的scripts节点中新增脚本：
+
+```
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+```
+接下来运行`npm run build`就可以执行打包文件了
+
+比如我们在配置中添加`-w`参数，就可以让webpack自动监听文件的修改并重新打包了
+
+```
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -w"
+  },
+```
+
+## 第六步 使用webpack-dev-sever
+
+webpack-dev-server也升级到2.0以上了，安装2.0以上版本在package.json中不能使用脚本启动，所以还是先安装1.0以上的版本
+
+```
+npm i webpack-dev-server@1.16.2
+```
+然后在package.json中添加启动脚本
+```
+"server":"webpack-dev-server"
+```
+运行`npm run server`就会默认启动一个本地localhost:8080的服务
+
+让浏览器实现热加载，只需要给webpack-dev-server添加`--inline`参数就可以了
+
+是时候让我们新建一个html文件并引入bundle.js文件在这个index.html了，这个时候，打开控制台，修改test.js文件，就能看到自动刷新的效果。
+
+默认情况下，webpack-dev-server会采用webpack.config.js这个配置文件的，所以当文件修改之后，它会自动调用这个文件进行打包。
+
+webpack-dev-server可以以指定文件夹来运行服务，比如我们新建一个build文件夹，然后把index.html放进去，并删除bundle.js文件，在启动脚本中新增参数`--content-base build/`,变成如下：
+
+```
+"server": "webpack-dev-server --inline --content-base build/"
+```
+重新运行服务，会发现现在是从build目录启动服务了，这个时候并没有bundle.js文件，因为webpack-dev-server是把它打包在内存当中的。
+
+TODO
+我们修改之后，发现浏览器是全部刷新一次的，这个时候可以通过`--hot`参数来实现热加载功能。
+
+## 第七步 是时候react上场了
+
+首先安装React包
+
+```
+npm i react --save
+npm i react-dom --dave
+```
+安装babel插件
+```
+npm i babel-preset-react -D
+npm i babel-preset-react-hmre -D
+```
+在.babelrc中添加react转码
+```
+{
+  "presets": [
+    "es2015",
+    "react"
+  ],
+  "plugins": []
+}
+```
+
+修改test.js文件，写一个最简单的无状态组件
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function HelloComponent(props) {
+  return <div>Hello {props.name}</div>
+}
+ReactDOM.render(<HelloComponent name="12345" />, document.body)
+```
+
+运行一下，OK，我们的React也跑起来了。
+
+## 第八步 继续添加loaders
+
+webpack最强大的地方就是loaders，我们再来添加一个css-loader以支持在js中import css文件
+
+```
+npm i css-loader -D
+npm i style-loader -D
+```
+安装好这两个插件之后，再修改webpack.config.js配置文件
+```
+	module :{
+		loaders :[{
+				test:/\.js$/,
+				loader:'babel-loader'
+			},
+			{
+				test: /\.css$/, 
+				loader: 'style-loader!css-loader'
+			}
+		]
+	},
+```
+这个时候我们新建一个app.css的文件，里面写入一句背景颜色的设置
+```
+body{
+	background-color: red;
+}
+```
+在test.js中添加
+```
+import "./app.css";
+```
+运行一下，我们的css文件已效了。
+
+继续修改一个index.html文件，添加一个容器和输入框，容器用来放我们的react组件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<div id="container"></div>
+	<input type="text">
+</body>
+<script src="bundle.js"></script>
+</html>
+```
+稍微修改一下test.js里面的组件渲染位置
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import "./app.css";
+function HelloComponent(props) {
+  return <div>Hello {props.name}</div>
+}
+ReactDOM.render(<HelloComponent name="world" />, document.getElementById("container"))
+```
+运行之后，我们在输入框里面随便输入内容，然后修改一个app.css文件，发现热加载功能也生效了。
