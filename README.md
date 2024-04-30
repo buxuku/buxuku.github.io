@@ -1,12 +1,11 @@
-<h1 align="center"></h1>
+<h1 align="center">林晓东的个人博客</h1>
 <p align="center"><i>这是我的开源博客，希望能够在这里能够分享一些我的想法</i></p>
-
 <div align="center">
     <a href="https://github.com/buxuku/buxuku.github.io/stargazers"><img src="https://img.shields.io/github/stars/buxuku/buxuku.github.io" alt="Stars Badge"/></a>
     <a href="https://github.com/buxuku/buxuku.github.io/network/members"><img src="https://img.shields.io/github/forks/buxuku/buxuku.github.io" alt="Forks Badge"/></a>
     <a href="https://github.com/buxuku/buxuku.github.io/pulls"><img src="https://img.shields.io/github/issues-pr/buxuku/buxuku.github.io" alt="Pull Requests Badge"/></a>
     <a href="https://github.com/buxuku/buxuku.github.io/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/buxuku/buxuku.github.io?color=2b9348"></a>
-    <a href="https://github.com/buxuku/buxuku.github.io/blob/master/LICENSE"><img src="https://img.shields.io/github/license/buxuku/buxuku.github.io?color=2b9348" alt="License Badge"/></a>
+    <a href="https://github.com/buxuku/buxuku.github.io/blob/main/LICENSE"><img src="https://img.shields.io/github/license/buxuku/buxuku.github.io?color=2b9348" alt="License Badge"/></a>
 </div>
 <br>
 <p align="center"><i>喜欢这个博客？敬请访问 <a href="https://buxuku.linxiaodong.com">林晓东的个人博客</a></i></p>
@@ -67,11 +66,7 @@
 
 **📝 最近博客更新:**
 
-![update latest posts](https://github.com/buxuku/buxuku/workflows/update%20latest%20posts/badge.svg)
-
-
-
-
+[![update latest posts](https://github.com/buxuku/buxuku.github.io/actions/workflows/update-readme.yml/badge.svg)](https://github.com/buxuku/buxuku.github.io/actions/workflows/update-readme.yml)
 
 
 <!-- START -->

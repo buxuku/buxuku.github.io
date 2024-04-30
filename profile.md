@@ -44,11 +44,7 @@
 
 **📝 最近博客更新:**
 
-![update latest posts](https://github.com/buxuku/buxuku/workflows/update%20latest%20posts/badge.svg)
-
-
-
-
+[![update latest posts](https://github.com/buxuku/buxuku.github.io/actions/workflows/update-readme.yml/badge.svg)](https://github.com/buxuku/buxuku.github.io/actions/workflows/update-readme.yml)
 
 
 <!-- START -->
