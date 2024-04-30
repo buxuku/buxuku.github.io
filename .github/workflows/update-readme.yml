@@ -14,6 +14,7 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: "20"
+          token: ${{ secrets.TOKEN }}
       - name: Install node dependencies
         run: yarn
       - name: Run node script
@@ -24,8 +25,6 @@ jobs:
         run: git diff --quiet && git diff --staged --quiet || git commit -am '[BOT] Update readme' && git push
 
       - name: push to profile repo
-        with:
-          token: ${{ secrets.TOKEN }}
         run: |
           git clone https://github.com/buxuku/buxuku.git
           cp ./profile.md ./buxuku/README.md
