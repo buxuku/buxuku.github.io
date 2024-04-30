@@ -1,9 +1,10 @@
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
 import { createDiscussion, getDiscussions } from './github.mjs';
 import { sortPosts } from "pliny/utils/contentlayer.js";
+import { sleep } from "../utils/utils";
 
 const publishPosts = allBlogs.filter((post) => post.draft !== true)
-const sortedPosts = sortPosts(publishPosts)
+const sortedPosts = sortPosts(publishPosts).reverse();
 
 const allDiscussions = await getDiscussions();
 
@@ -18,7 +19,8 @@ const discussions = async () => {
         const note = `> [!NOTE]
 > 本文通过 \`mdx\` 编辑，部分效果可能无法在纯 \`markdown\` 下渲染，更完整的阅读体验，欢迎访问博客页面 [${article.title}](${article.structuredData.url})
 \n`
-        await createDiscussion(article.title, note + article.body.raw)
+        await createDiscussion(article.title, note + article.body.raw);
+        await sleep(5000); // 避免接口请求超频
     }
 }
 
