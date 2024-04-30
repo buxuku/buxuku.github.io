@@ -1,7 +1,7 @@
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
 import { createDiscussion, getDiscussions } from './github.mjs';
 import { sortPosts } from "pliny/utils/contentlayer.js";
-import { sleep } from "../utils/utils";
+import { sleep} from "./utils.mjs";
 
 const publishPosts = allBlogs.filter((post) => post.draft !== true)
 const sortedPosts = sortPosts(publishPosts).reverse();
