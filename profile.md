@@ -53,7 +53,9 @@
 
 
 
+
 <!-- START -->
+- [在 gitlab ci/cd 流程中集成 sonar 进行自动 Code Review](https://blog.linxiaodong.com/blog/gitlab-ci-with-sonarQube)
 - [正则表达式速记口诀](https://blog.linxiaodong.com/blog/regexp-memonic)
 - [mockjs使用的一些技巧](https://blog.linxiaodong.com/blog/mockjs-skills)
 - [使用git bisect进行二分法定位错误的提交](https://blog.linxiaodong.com/blog/git-bisect)
@@ -63,5 +65,4 @@
 - [利用git webhook 来同步更新代码](https://blog.linxiaodong.com/blog/use-git-webhook-to-update-website)
 - [webpack一步一步深入学习应用](https://blog.linxiaodong.com/blog/webpack-step-by-step)
 - [用几行原生js代码写的九九乘法表](https://blog.linxiaodong.com/blog/a-Multiplication-Table-demo)
-- [用面向过程和面向对象写一个拖拽demo](https://blog.linxiaodong.com/blog/a-drap-demo)
 <!-- END -->
