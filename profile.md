@@ -54,7 +54,9 @@
 
 
 
+
 <!-- START -->
+- [面试必挂，你所不知道的 Set 及 js 内部比较算法](https://blog.linxiaodong.com/blog/equality-comparisons-and-sameness)
 - [在 gitlab ci/cd 流程中集成 sonar 进行自动 Code Review](https://blog.linxiaodong.com/blog/gitlab-ci-with-sonarQube)
 - [正则表达式速记口诀](https://blog.linxiaodong.com/blog/regexp-memonic)
 - [mockjs使用的一些技巧](https://blog.linxiaodong.com/blog/mockjs-skills)
@@ -64,5 +66,4 @@
 - [react-route从v3迁移到v4(折腾+踩坑)](https://blog.linxiaodong.com/blog/Migrating-react-route-v3-to-v4)
 - [利用git webhook 来同步更新代码](https://blog.linxiaodong.com/blog/use-git-webhook-to-update-website)
 - [webpack一步一步深入学习应用](https://blog.linxiaodong.com/blog/webpack-step-by-step)
-- [用几行原生js代码写的九九乘法表](https://blog.linxiaodong.com/blog/a-Multiplication-Table-demo)
 <!-- END -->
