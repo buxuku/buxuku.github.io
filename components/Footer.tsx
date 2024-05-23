@@ -24,8 +24,12 @@ export default function Footer() {
           <Link href="/">{siteMetadata.title}</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
-            Tailwind Nextjs Theme
+          build with Next.js + tailwindcss + Vercel
+          <Link
+            href={siteMetadata.siteRepo}
+            className="ml-2 text-gray-500 underline underline-offset-4 dark:text-gray-400"
+          >
+            <span data-umami-event="view-source">View source</span>
           </Link>
         </div>
       </div>
