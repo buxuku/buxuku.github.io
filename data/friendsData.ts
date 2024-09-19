@@ -10,11 +10,6 @@ export const friendsData = [
     desc: 'sun的个人博客',
   },
   {
-    title: '91易搜',
-    href: 'https://www.91es.com',
-    desc: '阅读是一种生活方式',
-  },
-  {
     title: '子舒',
     href: 'https://www.zishu.me',
     desc: '喜欢折腾技术，研究各种奇怪的程序和网站',
