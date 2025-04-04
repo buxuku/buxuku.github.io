@@ -45,7 +45,7 @@ const projectsData: Project[] = [
 ]
 
 export const repos = [
-  'buxuku/video-subtitle-master',
+  'buxuku/SmartSub',
   'buxuku/VideoSubtitleGenerator',
   'buxuku/buxuku.github.io',
   'buxuku/ai-code-reviewer',
