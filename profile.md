@@ -63,7 +63,9 @@
 
 
 
+
 <!-- START -->
+- [找不到好用的视频生成字幕及翻译字幕软件，于是我开源了一款](https://blog.linxiaodong.com/blog/smartsub-open-source-experience)
 - [找不到好用的视频生成字幕及翻译字幕软件，于是我开源了一款](https://blog.linxiaodong.com/blog/video-subtitle-master)
 - [面试必挂，你所不知道的 Set 及 js 内部比较算法](https://blog.linxiaodong.com/blog/equality-comparisons-and-sameness)
 - [在 gitlab ci/cd 流程中集成 sonar 进行自动 Code Review](https://blog.linxiaodong.com/blog/gitlab-ci-with-sonarQube)
@@ -73,5 +75,4 @@
 - [在react-router v4中实现多个布局模板](https://blog.linxiaodong.com/blog/multiple-layouts-with-react-router-v4)
 - [react从v15升级到v16](https://blog.linxiaodong.com/blog/update-react-from-v15-to-v16)
 - [react-route从v3迁移到v4(折腾+踩坑)](https://blog.linxiaodong.com/blog/Migrating-react-route-v3-to-v4)
-- [利用git webhook 来同步更新代码](https://blog.linxiaodong.com/blog/use-git-webhook-to-update-website)
 <!-- END -->
