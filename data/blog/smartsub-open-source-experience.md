@@ -39,7 +39,7 @@ summary: 我通过 github 开源的一款音频视频生成字幕及字幕翻译
 
 开源后，我并没有对 Star 数量抱有太高期望，只希望能帮助到有同样需求的人。
 
-作为技术博客的忠实读者，我订阅了阮一峰老师的《科技爱好者周刊》。2024年3月1日，我抱着试一试的心态，在周刊的 Issue 中提交了自荐（https://github.com/ruanyf/weekly/issues/4393）。
+作为技术博客的忠实读者，我订阅了阮一峰老师的《科技爱好者周刊》。2024年3月1日，我抱着试一试的心态，在周刊的 Issue 中提交了自荐 [https://github.com/ruanyf/weekly/issues/4393](https://github.com/ruanyf/weekly/issues/4393)。
 
 提交后，项目开始零星收到几个 Star。真正的转折点是3月10日，阮一峰老师给我的 Issue 打上了 weekly 标签，意味着他会在周五的周刊中推荐我的工具。这一天，项目突然收获了几十个 Star，让我感受到了一峰老师的流量效应。
 
@@ -61,9 +61,9 @@ summary: 我通过 github 开源的一款音频视频生成字幕及字幕翻译
 
 ## 再次推广：持续的努力
 
-完成客户端工具后，我再次向阮一峰老师自荐（https://github.com/ruanyf/weekly/issues/4503），但可能因为与之前的命令行版本功能重复，没有获得 weekly 标签。
+完成客户端工具后，我再次向阮一峰老师自荐[https://github.com/ruanyf/weekly/issues/4503](https://github.com/ruanyf/weekly/issues/4503)，但可能因为与之前的命令行版本功能重复，没有获得 weekly 标签。
 
-2024年6月，我在 V2EX 上分享了这个工具（https://v2ex.com/t/1043476#reply42），也带来了一些流量，但效果不及阮一峰周刊的推荐。
+2024年6月，我在 V2EX 上分享了这个工具[https://v2ex.com/t/1043476#reply42](https://v2ex.com/t/1043476#reply42)，也带来了一些流量，但效果不及阮一峰周刊的推荐。
 
 此后，项目进入了稳定增长期，每天有2-3个 Star 的自然增长，主要来自搜索引擎的自然流量。
 
@@ -73,7 +73,7 @@ summary: 我通过 github 开源的一款音频视频生成字幕及字幕翻译
 
 2024年是 AI 大爆发的一年。9月，我为工具增加了 Ollama 和 OpenAI 的支持。当时 DeepSeek 注册用户赠送50万 token，我也将 DeepSeek 接入到了工具中。
 
-我还将项目提交到了 DeepSeek 的第三方集成应用列表（https://github.com/deepseek-ai/awesome-deepseek-integration/pull/40/）。当时列表中的应用并不多，我的工具是前几个被收录的应用之一。
+我还将项目提交到了 DeepSeek 的第三方集成应用列表 [https://github.com/deepseek-ai/awesome-deepseek-integration/pull/40/](https://github.com/deepseek-ai/awesome-deepseek-integration/pull/40/)。当时列表中的应用并不多，我的工具是前几个被收录的应用之一。
 
 ![Pasted image 20250328175347](https://static.linxiaodong.com/images/Pasted%20image%2020250328175347_20250404_UHAlvP.png)
 
