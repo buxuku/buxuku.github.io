@@ -64,8 +64,9 @@
 
 
 
+
 <!-- START -->
-- [找不到好用的视频生成字幕及翻译字幕软件，于是我开源了一款](https://blog.linxiaodong.com/blog/smartsub-open-source-experience)
+- [从 0 到 2K Star：我的开源之旅与成长](https://blog.linxiaodong.com/blog/smartsub-open-source-experience)
 - [找不到好用的视频生成字幕及翻译字幕软件，于是我开源了一款](https://blog.linxiaodong.com/blog/video-subtitle-master)
 - [面试必挂，你所不知道的 Set 及 js 内部比较算法](https://blog.linxiaodong.com/blog/equality-comparisons-and-sameness)
 - [在 gitlab ci/cd 流程中集成 sonar 进行自动 Code Review](https://blog.linxiaodong.com/blog/gitlab-ci-with-sonarQube)
