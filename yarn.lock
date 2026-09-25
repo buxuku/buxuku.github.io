@@ -4751,7 +4751,7 @@ __metadata:
     gray-matter: ^4.0.2
     hast-util-from-html-isomorphic: ^2.0.0
     husky: ^9.0.0
-    image-size: 1.0.0
+    image-size: 2.0.3
     lint-staged: ^13.0.0
     next: 15.5.24
     next-contentlayer2: 0.4.4
@@ -7583,14 +7583,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"image-size@npm:1.0.0":
-  version: 1.0.0
-  resolution: "image-size@npm:1.0.0"
-  dependencies:
-    queue: 6.0.2
+"image-size@npm:2.0.3":
+  version: 2.0.3
+  resolution: "image-size@npm:2.0.3"
   bin:
     image-size: bin/image-size.js
-  checksum: 2d9d1edc43c0fa8effd27c44cd2d1b02ecc963219e78a76ac80b9d363f69c5aa19990cc23a323959ea510742ff07667e231f0852fd57eba5dc5b55432b58106d
+  checksum: 2367928e16cebb913ce1cc8ec390fa994542755826454d6bc3e010fa3e40b3e7f53f506dac6d90475767ce8e0093cc6e39242174322817272e696e39551ba3b2
   languageName: node
   linkType: hard
 
@@ -10486,15 +10484,6 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
-  languageName: node
-  linkType: hard
-
-"queue@npm:6.0.2":
-  version: 6.0.2
-  resolution: "queue@npm:6.0.2"
-  dependencies:
-    inherits: ~2.0.3
-  checksum: ebc23639248e4fe40a789f713c20548e513e053b3dc4924b6cb0ad741e3f264dcff948225c8737834dd4f9ec286dbc06a1a7c13858ea382d9379f4303bcc0916
   languageName: node
   linkType: hard
 
